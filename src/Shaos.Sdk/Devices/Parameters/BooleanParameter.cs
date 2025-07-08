@@ -25,12 +25,20 @@
 namespace Shaos.Sdk.Devices.Parameters
 {
     /// <summary>
-    /// Represents a boolean parameter
+    /// Represents a <see cref="bool"/> parameter
     /// </summary>
     public class BoolParameter : BaseParameter
     {
         private bool _value;
 
+        /// <summary>
+        /// Create an instance of a <see cref="BoolParameter"/>
+        /// </summary>
+        /// <param name="id">The identifier</param>
+        /// <param name="value">The parameter value</param>
+        /// <param name="name">The parameter name</param>
+        /// <param name="units">The units</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/></param>
         public BoolParameter(int id,
                              bool value,
                               string? name,

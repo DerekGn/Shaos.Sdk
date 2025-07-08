@@ -25,12 +25,20 @@
 namespace Shaos.Sdk.Devices.Parameters
 {
     /// <summary>
-    /// Represents a string parameter
+    /// Represents a <see cref="string"/> parameter
     /// </summary>
     public class StringParameter : BaseParameter
     {
         private string _value;
 
+        /// <summary>
+        /// Create an instance of a <see cref="StringParameter"/>
+        /// </summary>
+        /// <param name="id">The identifier</param>
+        /// <param name="value">The parameter value</param>
+        /// <param name="name">The parameter name</param>
+        /// <param name="units">The units</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/></param>
         public StringParameter(int id,
                                string value,
                                string? name,

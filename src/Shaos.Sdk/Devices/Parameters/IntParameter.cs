@@ -25,12 +25,20 @@
 namespace Shaos.Sdk.Devices.Parameters
 {
     /// <summary>
-    /// Represents a counter parameter
+    /// Represents a <see cref="int"/> parameter
     /// </summary>
     public class IntParameter : BaseParameter
     {
         private int _value;
 
+        /// <summary>
+        /// Create an instance of a <see cref="IntParameter"/>
+        /// </summary>
+        /// <param name="id">The identifier</param>
+        /// <param name="value">The parameter value</param>
+        /// <param name="name">The parameter name</param>
+        /// <param name="units">The units</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/></param>
         public IntParameter(int id,
                             int value,
                               string? name,

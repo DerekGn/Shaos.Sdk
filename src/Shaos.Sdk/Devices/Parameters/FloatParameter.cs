@@ -25,12 +25,20 @@
 namespace Shaos.Sdk.Devices.Parameters
 {
     /// <summary>
-    /// Represents a float parameter
+    /// Represents a <see cref="float"/> parameter
     /// </summary>
     public class FloatParameter : BaseParameter
     {
         private float _value;
 
+        /// <summary>
+        /// Create an instance of a <see cref="FloatParameter"/>
+        /// </summary>
+        /// <param name="id">The identifier</param>
+        /// <param name="value">The parameter value</param>
+        /// <param name="name">The parameter name</param>
+        /// <param name="units">The units</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/></param>
         public FloatParameter(int id,
                               float value,
                               string? name,

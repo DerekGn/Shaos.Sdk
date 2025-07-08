@@ -25,12 +25,20 @@
 namespace Shaos.Sdk.Devices.Parameters
 {
     /// <summary>
-    /// Represents a uint parameter
+    /// Represents a <see cref="uint"/> parameter
     /// </summary>
     public class UIntParameter : BaseParameter
     {
         private uint _value;
 
+        /// <summary>
+        /// Create an instance of a <see cref="UIntParameter"/>
+        /// </summary>
+        /// <param name="id">The identifier</param>
+        /// <param name="value">The parameter value</param>
+        /// <param name="name">The parameter name</param>
+        /// <param name="units">The units</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/></param>
         public UIntParameter(int id,
                              uint value,
                              string? name,

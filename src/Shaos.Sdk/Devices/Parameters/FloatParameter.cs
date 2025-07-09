@@ -34,11 +34,11 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <summary>
         /// Create an instance of a <see cref="FloatParameter"/>
         /// </summary>
-        /// <param name="id">The identifier</param>
-        /// <param name="value">The parameter value</param>
-        /// <param name="name">The parameter name</param>
-        /// <param name="units">The units</param>
-        /// <param name="parameterType">The <see cref="ParameterType"/></param>
+        /// <param name="id">The identifier of the parameter</param>
+        /// <param name="value">The value of the parameter</param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
         public FloatParameter(int id,
                               float value,
                               string? name,
@@ -49,6 +49,11 @@ namespace Shaos.Sdk.Devices.Parameters
         }
 
         /// <summary>
+        /// Raised when the value of the parameter changes
+        /// </summary>
+        public event EventHandler<ParameterValueChangedEventArgs<float>>? ValueChanged;
+
+        /// <summary>
         /// The current <see cref="FloatParameter"/> value
         /// </summary>
         public float Value
@@ -56,9 +61,18 @@ namespace Shaos.Sdk.Devices.Parameters
             get => _value;
             set
             {
-#warning Trigger update event
                 _value = value;
+                OnValueChanged(new ParameterValueChangedEventArgs<float>() { Value = _value });
             }
+        }
+
+        /// <summary>
+        /// Raise the value changed event to subscribed listeners
+        /// </summary>
+        /// <param name="e">The <see cref="ParameterValueChangedEventArgs{T}"/></param>
+        protected virtual void OnValueChanged(ParameterValueChangedEventArgs<float> e)
+        {
+            ValueChanged?.Invoke(this, e);
         }
     }
 }

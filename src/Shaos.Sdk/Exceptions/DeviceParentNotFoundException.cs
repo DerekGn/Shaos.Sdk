@@ -22,51 +22,24 @@
 * SOFTWARE.
 */
 
-namespace Shaos.Sdk.Devices
+using Shaos.Sdk.Devices;
+using System.Diagnostics.CodeAnalysis;
+
+namespace Shaos.Sdk.Exceptions
 {
     /// <summary>
-    /// Represents a battery level for a <see cref="Device"/>
+    /// Thrown when the parent of a <see cref="Device"/> instance cannot be found
     /// </summary>
-    public class BatteryLevel
+    /// <remarks>
+    /// Create an instance of a <see cref="DeviceParentNotFoundException"/>
+    /// </remarks>
+    /// <param name="id">The identifier of the parent</param>
+    [ExcludeFromCodeCoverage]
+    public class DeviceParentNotFoundException(int id) : Exception
     {
         /// <summary>
-        /// The maximum value allowable for the <see cref="Level"/>
+        /// The identifier of the <see cref="Device"/> parent
         /// </summary>
-        public const uint Maximum = 100;
-
-        /// <summary>
-        /// The minimal value allowable for the <see cref="Level"/>
-        /// </summary>
-        public const uint Minimum = 0;
-
-        private readonly Device _device;
-        private uint _level;
-
-        /// <summary>
-        /// Create an instance of a <see cref="BatteryLevel"/>
-        /// </summary>
-        /// <param name="device">The parent <see cref="Device"/></param>
-        /// <param name="level">The battery level</param>
-        internal BatteryLevel(Device device, uint level)
-        {
-            _device = device;
-            Level = level;
-        }
-
-        /// <summary>
-        /// The battery level value
-        /// </summary>
-        /// <remarks>
-        /// Level is bounded from <see cref="Minimum"/> to <see cref="Maximum"/>
-        /// </remarks>
-        public uint Level
-        {
-            get => _level;
-            set
-            {
-                _level = value;
-                _device.BatteryLevelChanged(_level);
-            }
-        }
+        public int Id { get; } = id;
     }
 }

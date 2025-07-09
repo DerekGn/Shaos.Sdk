@@ -1,4 +1,4 @@
-﻿/*
+/*
 * MIT License
 *
 * Copyright (c) 2025 Derek Goslin https://github.com/DerekGn
@@ -23,24 +23,37 @@
 */
 
 using Shaos.Sdk.Devices;
-using System.Collections.ObjectModel;
+using Shaos.Sdk.Devices.Parameters;
 
-namespace Shaos.Sdk
+namespace Shaos.Sdk.UnitTests
 {
-    /// <summary>
-    /// Defines the interface for a PlugIn
-    /// </summary>
-    public interface IPlugIn : IDisposable
+    public class DeviceTests
     {
-        /// <summary>
-        /// The entry point of the<see cref="IPlugIn"/> instance
-        /// </summary>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to cancel the <see cref="IPlugIn"/> method execution</param>
-        Task ExecuteAsync(CancellationToken cancellationToken);
+        [Fact]
+        public void TestDeviceBatteryLevelChanged()
+        {
+            DeviceChangedEventArgs? eventArgs = null;
 
-        /// <summary>
-        /// The collection of <see cref="Device"/> instances a <see cref="IPlugIn"/> instance manages
-        /// </summary>
-        ObservableCollection<Device> Devices { get; }
+            Device device = new Device(1, "name", [], 100, 0);
+
+            EventHandler<DeviceChangedEventArgs> eventHandler = (s, e) =>
+            {
+                eventArgs = e;
+            };
+
+            try
+            {
+                device.DeviceChanged += eventHandler;
+
+                device.BatteryLevel!.Level = 1;
+
+                Assert.NotNull(eventArgs);
+                Assert.Equal((uint)1, eventArgs.BatteryLevel!.Value);
+            }
+            finally
+            {
+                device.DeviceChanged -= eventHandler;
+            }
+        }
     }
 }

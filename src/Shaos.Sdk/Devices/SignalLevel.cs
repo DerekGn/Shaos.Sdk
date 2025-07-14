@@ -65,7 +65,7 @@ namespace Shaos.Sdk.Devices
             get => _level;
             set
             {
-                if (_level <= Minimum && _level >= Maximum)
+                if (value >= Minimum && value <= Maximum)
                 {
                     _level = value;
                     _device.SignalLevelChanged(_level);

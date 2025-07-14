@@ -24,11 +24,14 @@
 
 using Shaos.Sdk.Devices;
 using Shaos.Sdk.Devices.Parameters;
+using System.Collections.Specialized;
 
 namespace Shaos.Sdk.UnitTests
 {
     public class DeviceTests
     {
+        private NotifyCollectionChangedEventArgs? _notifyCollectionChangedEventArgs = null;
+
         [Fact]
         public void TestDeviceBatteryLevelChanged()
         {
@@ -54,6 +57,89 @@ namespace Shaos.Sdk.UnitTests
             {
                 device.DeviceChanged -= eventHandler;
             }
+        }
+
+        [Fact]
+        public void TestDeviceParameterAdded()
+        {
+            Device device = new Device(1, "name", [], 100, 0);
+
+            try
+            {
+                device.Parameters.CollectionChanged += ParametersCollectionChanged;
+
+                device.Parameters.Add(CreateBoolParameter());
+
+                Assert.NotNull(_notifyCollectionChangedEventArgs);
+                Assert.Equal(NotifyCollectionChangedAction.Add, _notifyCollectionChangedEventArgs.Action);
+            }
+            finally
+            {
+                device.Parameters.CollectionChanged -= ParametersCollectionChanged;
+            }
+        }
+
+        [Fact]
+        public void TestDeviceParameterRemoved()
+        {
+            var parameters = new List<BaseParameter>()
+            {
+                CreateBoolParameter()
+            };
+
+            Device device = new Device(1, "name", parameters, 100, 0);
+
+            try
+            {
+                device.Parameters.CollectionChanged += ParametersCollectionChanged;
+
+                device.Parameters.RemoveAt(0);
+
+                Assert.NotNull(_notifyCollectionChangedEventArgs);
+                Assert.Equal(NotifyCollectionChangedAction.Remove, _notifyCollectionChangedEventArgs.Action);
+                Assert.Empty(device.Parameters);
+            }
+            finally
+            {
+                device.Parameters.CollectionChanged -= ParametersCollectionChanged;
+            }
+        }
+
+        [Fact]
+        public void TestDeviceSignalLevelChanged()
+        {
+            DeviceChangedEventArgs? eventArgs = null;
+
+            Device device = new Device(1, "name", [], 100, 0);
+
+            EventHandler<DeviceChangedEventArgs> eventHandler = (s, e) =>
+            {
+                eventArgs = e;
+            };
+
+            try
+            {
+                device.DeviceChanged += eventHandler;
+
+                device.SignalLevel!.Level = -10;
+
+                Assert.NotNull(eventArgs);
+                Assert.Equal(-10, eventArgs.SignalLevel!.Value);
+            }
+            finally
+            {
+                device.DeviceChanged -= eventHandler;
+            }
+        }
+
+        private static BoolParameter CreateBoolParameter()
+        {
+            return new BoolParameter(1, true, "name", "units", ParameterType.Iaq);
+        }
+
+        private void ParametersCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            _notifyCollectionChangedEventArgs = e;
         }
     }
 }

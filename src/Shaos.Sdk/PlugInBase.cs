@@ -33,7 +33,7 @@ namespace Shaos.Sdk
     /// <remarks>
     /// Implements the standard dispose pattern
     /// </remarks>
-    public abstract class PlugInBase : IDisposable, IPlugIn
+    public abstract class PlugInBase : IPlugIn
     {
         private readonly ObservableList<Device> _devices = new();
 

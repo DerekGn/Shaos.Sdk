@@ -22,9 +22,11 @@
 * SOFTWARE.
 */
 
+using System.Collections;
+
 namespace Shaos.Sdk.Collections.Generic
 {
-    public class ObservableList<T>
+    public class ObservableList<T> : IEnumerable<T>
     {
         private readonly IList<T> _items;
 
@@ -34,6 +36,15 @@ namespace Shaos.Sdk.Collections.Generic
         }
 
         public event AsyncEventHandler<ListChangedEventArgs<T>>? ListChanged;
+
+        /// <summary>
+        /// Adds an item to the <see cref="ObservableList{T}"/>
+        /// </summary>
+        /// <param name="item"></param>
+        public void Add(T item)
+        {
+            _items.Add(item);
+        }
 
         /// <summary>
         /// Adds an item to the <see cref="ObservableList{T}"/>
@@ -56,6 +67,16 @@ namespace Shaos.Sdk.Collections.Generic
             _items.Clear();
 
             await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Reset, values));
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _items.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         public async Task InsertAsync(int index, T item)

@@ -22,15 +22,16 @@
 * SOFTWARE.
 */
 
+using Shaos.Sdk.Collections.Generic;
 using Shaos.Sdk.Devices;
 using Shaos.Sdk.Devices.Parameters;
 using System.Collections.Specialized;
 
-namespace Shaos.Sdk.UnitTests
+namespace Shaos.Sdk.UnitTests.Devices
 {
     public class DeviceTests
     {
-        private NotifyCollectionChangedEventArgs? _notifyCollectionChangedEventArgs = null;
+        private ListChangedEventArgs<BaseParameter> _listChangedEventArgs;
 
         [Fact]
         public void TestDeviceBatteryLevelChanged()
@@ -60,27 +61,27 @@ namespace Shaos.Sdk.UnitTests
         }
 
         [Fact]
-        public void TestDeviceParameterAdded()
+        public async Task TestDeviceParameterAdded()
         {
             Device device = new Device("name", [], 100, 0);
 
             try
             {
-                device.Parameters.CollectionChanged += ParametersCollectionChanged;
+                device.Parameters.ListChanged += ParametersListChanged;
 
-                device.Parameters.Add(CreateBoolParameter());
+                await device.Parameters.AddAsync(CreateBoolParameter());
 
-                Assert.NotNull(_notifyCollectionChangedEventArgs);
-                Assert.Equal(NotifyCollectionChangedAction.Add, _notifyCollectionChangedEventArgs.Action);
+                Assert.NotNull(_listChangedEventArgs);
+                Assert.Equal(ListChangedAction.Add, _listChangedEventArgs.Action);
             }
             finally
             {
-                device.Parameters.CollectionChanged -= ParametersCollectionChanged;
+                device.Parameters.ListChanged += ParametersListChanged;
             }
         }
 
         [Fact]
-        public void TestDeviceParameterRemoved()
+        public async Task TestDeviceParameterRemoved()
         {
             var parameters = new List<BaseParameter>()
             {
@@ -91,17 +92,17 @@ namespace Shaos.Sdk.UnitTests
 
             try
             {
-                device.Parameters.CollectionChanged += ParametersCollectionChanged;
+                device.Parameters.ListChanged += ParametersListChanged;
 
-                device.Parameters.RemoveAt(0);
+                await device.Parameters.RemoveAtAsync(0);
 
-                Assert.NotNull(_notifyCollectionChangedEventArgs);
-                Assert.Equal(NotifyCollectionChangedAction.Remove, _notifyCollectionChangedEventArgs.Action);
+                Assert.NotNull(_listChangedEventArgs);
+                Assert.Equal(ListChangedAction.Remove, _listChangedEventArgs.Action);
                 Assert.Empty(device.Parameters);
             }
             finally
             {
-                device.Parameters.CollectionChanged -= ParametersCollectionChanged;
+                device.Parameters.ListChanged -= ParametersListChanged;
             }
         }
 
@@ -137,9 +138,11 @@ namespace Shaos.Sdk.UnitTests
             return new BoolParameter(true, "name", "units", ParameterType.Iaq);
         }
 
-        private void ParametersCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        private Task ParametersListChanged(object sender, ListChangedEventArgs<BaseParameter> e)
         {
-            _notifyCollectionChangedEventArgs = e;
+            _listChangedEventArgs = e;
+
+            return Task.CompletedTask;
         }
     }
 }

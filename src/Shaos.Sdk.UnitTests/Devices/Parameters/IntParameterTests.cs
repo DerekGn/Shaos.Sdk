@@ -22,22 +22,37 @@
 * SOFTWARE.
 */
 
-namespace Shaos.Sdk.Devices.Parameters
+using Shaos.Sdk.Devices.Parameters;
+
+namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
-    /// <summary>
-    /// Represents a <see cref="float"/> parameter
-    /// </summary>
-    /// <remarks>
-    /// Create an instance of a <see cref="FloatParameter"/>
-    /// </remarks>
-    /// <param name="value">The value of the parameter</param>
-    /// <param name="name">The name of the parameter</param>
-    /// <param name="units">The units of this parameter</param>
-    /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-    public class FloatParameter(float value,
-                          string? name,
-                          string? units,
-                          ParameterType? parameterType) : BaseParameter<float>(value, name, units, parameterType)
+    public class IntParameterTests
     {
+        public readonly IntParameter _parameter;
+        private ParameterValueChangedEventArgs<int>? _eventArgs;
+
+        public IntParameterTests()
+        {
+            _parameter = new IntParameter(1, nameof(IntParameter), "Units", ParameterType.Level);
+
+            _parameter.ValueChanged += ParameterValueChanged;
+        }
+
+        [Fact]
+        public async Task TestValueChangedAsync()
+        {
+            await _parameter.WriteValueAsync(10);
+
+            Assert.NotNull(_eventArgs);
+            Assert.Equal(10, _eventArgs.Value);
+            Assert.Equal(10, _parameter.Value);
+        }
+
+        private async Task ParameterValueChanged(object sender, ParameterValueChangedEventArgs<int> e)
+        {
+            _eventArgs = e;
+
+            await Task.CompletedTask;
+        }
     }
 }

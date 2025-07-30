@@ -39,7 +39,7 @@ namespace Shaos.Sdk.Collections.Generic
         /// </summary>
         public ObservableList()
         {
-            _items = new List<T>();
+            _items = [];
         }
 
         /// <summary>

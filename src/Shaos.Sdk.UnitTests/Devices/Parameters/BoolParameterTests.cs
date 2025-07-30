@@ -29,15 +29,30 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
     public class BoolParameterTests
     {
         public readonly BoolParameter _parameter;
+        private ParameterValueChangedEventArgs<bool>? _eventArgs;
 
         public BoolParameterTests()
         {
             _parameter = new BoolParameter(false, nameof(BoolParameter), "Units", ParameterType.Level);
+
+            _parameter.ValueChanged += ParameterValueChanged;
         }
 
-        public void TestValueChanged()
+        [Fact]
+        public async Task TestValueChangedAsync()
         {
-            _parameter.Value = true;
+            await _parameter.WriteValueAsync(true);
+
+            Assert.NotNull(_eventArgs);
+            Assert.True(_eventArgs.Value);
+            Assert.True(_parameter.Value);
+        }
+
+        private async Task ParameterValueChanged(object sender, ParameterValueChangedEventArgs<bool> e)
+        {
+            _eventArgs = e;
+
+            await Task.CompletedTask;
         }
     }
 }

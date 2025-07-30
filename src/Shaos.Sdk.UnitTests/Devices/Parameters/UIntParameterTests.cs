@@ -22,25 +22,37 @@
 * SOFTWARE.
 */
 
-using Shaos.Sdk.Collections.Generic;
-using Shaos.Sdk.Devices;
+using Shaos.Sdk.Devices.Parameters;
 
-namespace Shaos.Sdk
+namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
-    /// <summary>
-    /// Defines the interface for a PlugIn
-    /// </summary>
-    public interface IPlugIn : IDisposable
+    public class UIntParameterTests
     {
-        /// <summary>
-        /// The entry point of the<see cref="IPlugIn"/> instance
-        /// </summary>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to cancel the <see cref="IPlugIn"/> method execution</param>
-        Task ExecuteAsync(CancellationToken cancellationToken);
+        public readonly UIntParameter _parameter;
+        private ParameterValueChangedEventArgs<uint>? _eventArgs;
 
-        /// <summary>
-        /// The collection of <see cref="Device"/> instances a <see cref="IPlugIn"/> instance manages
-        /// </summary>
-        ObservableList<Device> Devices { get; }
+        public UIntParameterTests()
+        {
+            _parameter = new UIntParameter(0, nameof(UIntParameter), "Units", ParameterType.Level);
+
+            _parameter.ValueChanged += ParameterValueChanged;
+        }
+
+        [Fact]
+        public async Task TestValueChangedAsync()
+        {
+            await _parameter.WriteValueAsync(10);
+
+            Assert.NotNull(_eventArgs);
+            Assert.Equal((uint)10, _eventArgs.Value);
+            Assert.Equal((uint)10, _parameter.Value);
+        }
+
+        private async Task ParameterValueChanged(object sender, ParameterValueChangedEventArgs<uint> e)
+        {
+            _eventArgs = e;
+
+            await Task.CompletedTask;
+        }
     }
 }

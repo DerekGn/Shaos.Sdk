@@ -1,4 +1,4 @@
-/*
+﻿/*
 * MIT License
 *
 * Copyright (c) 2025 Derek Goslin https://github.com/DerekGn
@@ -22,38 +22,37 @@
 * SOFTWARE.
 */
 
-using Shaos.Sdk.Devices;
 using Shaos.Sdk.Devices.Parameters;
 
-namespace Shaos.Sdk.UnitTests
+namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
-    public class DeviceTests
+    public class IntParameterTests
     {
-        [Fact]
-        public void TestDeviceBatteryLevelChanged()
+        public readonly IntParameter _parameter;
+        private ParameterValueChangedEventArgs<int>? _eventArgs;
+
+        public IntParameterTests()
         {
-            DeviceChangedEventArgs? eventArgs = null;
+            _parameter = new IntParameter(1, nameof(IntParameter), "Units", ParameterType.Level);
 
-            Device device = new Device(1, "name", [], 100, 0);
+            _parameter.ValueChanged += ParameterValueChanged;
+        }
 
-            EventHandler<DeviceChangedEventArgs> eventHandler = (s, e) =>
-            {
-                eventArgs = e;
-            };
+        [Fact]
+        public async Task TestValueChangedAsync()
+        {
+            await _parameter.WriteValueAsync(10);
 
-            try
-            {
-                device.DeviceChanged += eventHandler;
+            Assert.NotNull(_eventArgs);
+            Assert.Equal(10, _eventArgs.Value);
+            Assert.Equal(10, _parameter.Value);
+        }
 
-                device.BatteryLevel!.Level = 1;
+        private async Task ParameterValueChanged(object sender, ParameterValueChangedEventArgs<int> e)
+        {
+            _eventArgs = e;
 
-                Assert.NotNull(eventArgs);
-                Assert.Equal((uint)1, eventArgs.BatteryLevel!.Value);
-            }
-            finally
-            {
-                device.DeviceChanged -= eventHandler;
-            }
+            await Task.CompletedTask;
         }
     }
 }

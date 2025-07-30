@@ -22,8 +22,8 @@
 * SOFTWARE.
 */
 
+using Shaos.Sdk.Collections.Generic;
 using Shaos.Sdk.Devices;
-using System.Collections.ObjectModel;
 
 namespace Shaos.Sdk
 {
@@ -35,12 +35,12 @@ namespace Shaos.Sdk
     /// </remarks>
     public abstract class PlugInBase : IDisposable, IPlugIn
     {
-        private readonly ObservableCollection<Device> _devices = [];
+        private readonly ObservableList<Device> _devices = new();
 
         private bool _disposedValue;
 
         /// <inheritdoc/>
-        public ObservableCollection<Device> Devices => _devices;
+        public ObservableList<Device> Devices => _devices;
 
         /// <inheritdoc/>
         public void Dispose()

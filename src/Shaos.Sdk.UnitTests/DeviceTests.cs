@@ -37,7 +37,7 @@ namespace Shaos.Sdk.UnitTests
         {
             DeviceChangedEventArgs? eventArgs = null;
 
-            Device device = new Device(1, "name", [], 100, 0);
+            Device device = new Device("name", [], 100, 0);
 
             EventHandler<DeviceChangedEventArgs> eventHandler = (s, e) =>
             {
@@ -62,7 +62,7 @@ namespace Shaos.Sdk.UnitTests
         [Fact]
         public void TestDeviceParameterAdded()
         {
-            Device device = new Device(1, "name", [], 100, 0);
+            Device device = new Device("name", [], 100, 0);
 
             try
             {
@@ -87,7 +87,7 @@ namespace Shaos.Sdk.UnitTests
                 CreateBoolParameter()
             };
 
-            Device device = new Device(1, "name", parameters, 100, 0);
+            Device device = new Device("name", parameters, 100, 0);
 
             try
             {
@@ -110,7 +110,7 @@ namespace Shaos.Sdk.UnitTests
         {
             DeviceChangedEventArgs? eventArgs = null;
 
-            Device device = new Device(1, "name", [], 100, 0);
+            Device device = new Device("name", [], 100, 0);
 
             EventHandler<DeviceChangedEventArgs> eventHandler = (s, e) =>
             {
@@ -134,7 +134,7 @@ namespace Shaos.Sdk.UnitTests
 
         private static BoolParameter CreateBoolParameter()
         {
-            return new BoolParameter(1, true, "name", "units", ParameterType.Iaq);
+            return new BoolParameter(true, "name", "units", ParameterType.Iaq);
         }
 
         private void ParametersCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)

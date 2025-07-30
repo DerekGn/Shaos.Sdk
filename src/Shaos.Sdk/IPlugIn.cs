@@ -22,8 +22,8 @@
 * SOFTWARE.
 */
 
+using Shaos.Sdk.Collections.Generic;
 using Shaos.Sdk.Devices;
-using System.Collections.ObjectModel;
 
 namespace Shaos.Sdk
 {
@@ -41,6 +41,6 @@ namespace Shaos.Sdk
         /// <summary>
         /// The collection of <see cref="Device"/> instances a <see cref="IPlugIn"/> instance manages
         /// </summary>
-        ObservableCollection<Device> Devices { get; }
+        ObservableList<Device> Devices { get; }
     }
 }

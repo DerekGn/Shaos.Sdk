@@ -48,6 +48,28 @@ namespace Shaos.Sdk.Collections.Generic
         public event AsyncEventHandler<ListChangedEventArgs<T>>? ListChanged;
 
         /// <summary>
+        /// Gets the number of elements contained in the <see cref="ObservableList{T}"/>
+        /// </summary>
+        public int Count { get; }
+
+        /// <summary>
+        /// Gets or sets the element at the specified index.
+        /// </summary>
+        /// <param name="index">The zero-based index of the element to get or set.</param>
+        /// <returns>The element at the specified index.</returns>
+        public T this[int index]
+        {
+            get
+            {
+                return _items[index];
+            }
+            set
+            {
+                _items[index] = value;
+            }
+        }
+
+        /// <summary>
         /// Adds an item to the <see cref="ObservableList{T}"/>
         /// </summary>
         /// <param name="item"></param>

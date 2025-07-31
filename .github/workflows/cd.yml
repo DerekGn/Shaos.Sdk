@@ -31,6 +31,6 @@ jobs:
         uses: softprops/action-gh-release@v2.0.8
         with:
           files: |
-            /home/runner/work/Shaos.Sdk/Shaos.Sdk/bin/Release/Shaos.Sdk.nupkg
+            /home/runner/work/Shaos.Sdk/Shaos.Sdk/src/Shaos.Sdk/bin/Release/Shaos.Sdk.*.nupkg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

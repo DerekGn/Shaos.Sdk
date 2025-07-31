@@ -4,6 +4,10 @@ on:
   release:
     types: [published]
 
+defaults:
+  run:
+    working-directory: ./src
+
 jobs:
   release:
     name: Release
@@ -27,6 +31,6 @@ jobs:
         uses: softprops/action-gh-release@v2.0.8
         with:
           files: |
-            /home/runner/work/HexIO/HexIO/HexIO/bin/Release/HexIO*.nupkg
+            /home/runner/work/Shaos.Sdk/Shaos.Sdk/bin/Release/Shaos.Sdk.nupkg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

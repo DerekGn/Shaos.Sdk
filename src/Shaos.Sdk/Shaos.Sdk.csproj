@@ -5,23 +5,25 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<Authors>Derek Goslin</Authors>
-		<Company>Derek Goslin</Company>
-		<Copyright>Copyright © Derek Goslin 2025</Copyright>
-		<Description>
-		</Description>
-		<FileVersion>1.0.0.0</FileVersion>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/DerekGn/Shaos.Sdk</PackageProjectUrl>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageReleaseNotes>
-		</PackageReleaseNotes>
-		<RepositoryUrl>https://github.com/DerekGn/Shaos.Sdk</RepositoryUrl>
-		<SignAssembly>true</SignAssembly>
-		<Version>1.0.0</Version>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <Authors>Derek Goslin</Authors>
+        <Company>Derek Goslin</Company>
+        <Copyright>Copyright © Derek Goslin 2025</Copyright>
+        <Description>
+            A .Net library for creating Shaos Plugins.
+        </Description>
+        <FileVersion>1.0.0.0</FileVersion>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/DerekGn/Shaos.Sdk</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageReleaseNotes>
+            v1.0.0 Initial release
+        </PackageReleaseNotes>
+        <RepositoryUrl>https://github.com/DerekGn/Shaos.Sdk</RepositoryUrl>
+        <SignAssembly>true</SignAssembly>
+        <Version>1.0.0</Version>
     </PropertyGroup>
 
     <ItemGroup>

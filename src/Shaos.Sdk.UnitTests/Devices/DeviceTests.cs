@@ -25,13 +25,12 @@
 using Shaos.Sdk.Collections.Generic;
 using Shaos.Sdk.Devices;
 using Shaos.Sdk.Devices.Parameters;
-using System.Collections.Specialized;
 
 namespace Shaos.Sdk.UnitTests.Devices
 {
     public class DeviceTests
     {
-        private ListChangedEventArgs<BaseParameter> _listChangedEventArgs;
+        private ListChangedEventArgs<BaseParameter>? _listChangedEventArgs;
 
         [Fact]
         public void TestDeviceBatteryLevelChanged()

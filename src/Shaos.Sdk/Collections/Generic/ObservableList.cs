@@ -50,7 +50,10 @@ namespace Shaos.Sdk.Collections.Generic
         /// <summary>
         /// Gets the number of elements contained in the <see cref="ObservableList{T}"/>
         /// </summary>
-        public int Count { get; }
+        public int Count
+        {
+            get { return _items.Count; }
+        }
 
         /// <summary>
         /// Gets or sets the element at the specified index.

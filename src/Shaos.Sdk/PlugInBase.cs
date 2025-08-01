@@ -35,7 +35,7 @@ namespace Shaos.Sdk
     /// </remarks>
     public abstract class PlugInBase : IPlugIn
     {
-        private readonly ObservableList<Device> _devices = new();
+        private readonly ObservableList<Device> _devices = [];
 
         private bool _disposedValue;
 

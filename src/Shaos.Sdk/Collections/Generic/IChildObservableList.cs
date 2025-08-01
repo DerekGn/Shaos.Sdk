@@ -22,23 +22,18 @@
 * SOFTWARE.
 */
 
-using Shaos.Sdk.Collections.Generic;
-
-namespace Shaos.Sdk.Devices
+namespace Shaos.Sdk.Collections.Generic
 {
     /// <summary>
-    /// The <see cref="Device"/> see parameter list
+    /// A child observable list
     /// </summary>
-    /// <typeparam name="T">The type of <see cref="DeviceParameterList{T}"/></typeparam>
-    /// <remarks>
-    /// Create an instance of a <see cref="DeviceParameterList{T}"/>
-    /// </remarks>
-    /// <param name="device">The parent <see cref="Device"/></param>
-    public class DeviceParameterList<T>(Device device) : ObservableList<T>
+    /// <typeparam name="T">The type of the elements of this <see cref="ObservableList{T}"/></typeparam>
+    /// <typeparam name="TParent">The type of the parent</typeparam>
+    public interface IChildObservableList<T, TParent> : IObservableList<T>
     {
         /// <summary>
-        /// The parent <see cref="Device"/> instance
+        /// The parent of the <see cref="IChildObservableList{T, TParent}"/>
         /// </summary>
-        public Device Device { get; private set; } = device;
+        TParent Parent { get; }
     }
 }

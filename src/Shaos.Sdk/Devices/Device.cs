@@ -48,7 +48,7 @@ namespace Shaos.Sdk.Devices
             BatteryLevel = batteryLevel != null ? new BatteryLevel(this, (uint)batteryLevel) : null;
             SignalLevel = signalLevel != null ? new SignalLevel(this, (int)signalLevel) : null;
 
-            Parameters = new DeviceParameterList<BaseParameter>(this);
+            Parameters = new ChildObservableList<BaseParameter, Device>(this);
 
             foreach (var parameter in parameters)
             {
@@ -85,7 +85,7 @@ namespace Shaos.Sdk.Devices
         /// <summary>
         /// The set of <see cref="Device"/> <see cref="BaseParameter"/>
         /// </summary>
-        public DeviceParameterList<BaseParameter> Parameters { get; }
+        public IChildObservableList<BaseParameter, Device> Parameters { get; }
 
         /// <summary>
         /// The <see cref="SignalLevel"/> for this device

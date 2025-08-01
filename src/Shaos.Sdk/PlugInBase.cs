@@ -40,7 +40,7 @@ namespace Shaos.Sdk
         private bool _disposedValue;
 
         /// <inheritdoc/>
-        public ObservableList<Device> Devices => _devices;
+        public IObservableList<Device> Devices => _devices;
 
         /// <inheritdoc/>
         public void Dispose()

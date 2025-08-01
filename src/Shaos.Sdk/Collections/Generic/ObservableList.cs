@@ -30,7 +30,7 @@ namespace Shaos.Sdk.Collections.Generic
     /// An observable list of <typeparamref name="T"/>
     /// </summary>
     /// <typeparam name="T">The type of the elements of this <see cref="ObservableList{T}"/></typeparam>
-    public class ObservableList<T> : IEnumerable<T>
+    public class ObservableList<T> : IObservableList<T>
     {
         private readonly IList<T> _items;
 
@@ -42,24 +42,16 @@ namespace Shaos.Sdk.Collections.Generic
             _items = [];
         }
 
-        /// <summary>
-        /// An event that is raised when the contents of the <see cref="ObservableList{T}"/> changes
-        /// </summary>
+        /// <inheritdoc/>
         public event AsyncEventHandler<ListChangedEventArgs<T>>? ListChanged;
 
-        /// <summary>
-        /// Gets the number of elements contained in the <see cref="ObservableList{T}"/>
-        /// </summary>
+        /// <inheritdoc/>
         public int Count
         {
             get { return _items.Count; }
         }
 
-        /// <summary>
-        /// Gets or sets the element at the specified index.
-        /// </summary>
-        /// <param name="index">The zero-based index of the element to get or set.</param>
-        /// <returns>The element at the specified index.</returns>
+        /// <inheritdoc/>
         public T this[int index]
         {
             get
@@ -72,19 +64,13 @@ namespace Shaos.Sdk.Collections.Generic
             }
         }
 
-        /// <summary>
-        /// Adds an item to the <see cref="ObservableList{T}"/>
-        /// </summary>
-        /// <param name="item"></param>
+        /// <inheritdoc/>
         public void Add(T item)
         {
             _items.Add(item);
         }
 
-        /// <summary>
-        /// Adds an item to the <see cref="ObservableList{T}"/>
-        /// </summary>
-        /// <param name="item">The object to add to the <see cref="ObservableList{T}"/></param>
+        /// <inheritdoc/>
         public async Task AddAsync(T item)
         {
             _items.Add(item);
@@ -92,9 +78,7 @@ namespace Shaos.Sdk.Collections.Generic
             await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Add, [item]));
         }
 
-        /// <summary>
-        /// Removes all items from the <see cref="ObservableList{T}"/>
-        /// </summary>
+        /// <inheritdoc/>
         public async Task ClearAsync()
         {
             T[] values = [.. _items];
@@ -104,29 +88,19 @@ namespace Shaos.Sdk.Collections.Generic
             await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Reset, values));
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection.
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         public IEnumerator<T> GetEnumerator()
         {
             return _items.GetEnumerator();
         }
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the collection.
-        /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
 
-        /// <summary>
-        /// Insert an instance of <typeparamref name="T"/> into the <see cref="ObservableList{T}"/>
-        /// </summary>
-        /// <param name="index">The insert index</param>
-        /// <param name="item">The item of <typeparamref name="T"/> to insert</param>
+        /// <inheritdoc/>
         public async Task InsertAsync(int index, T item)
         {
             _items.Insert(index, item);
@@ -134,13 +108,7 @@ namespace Shaos.Sdk.Collections.Generic
             await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Add, [item]));
         }
 
-        /// <summary>
-        /// Removes the first occurrence of a specific object from the <see cref="ObservableList{T}"/>
-        /// </summary>
-        /// <param name="item">The object to remove from the <see cref="ObservableList{T}"/></param>
-        /// <returns> true if item was successfully removed from the <see cref="ObservableList{T}"/> otherwise, false.
-        /// This method also returns false if item is not found in the original <see cref="ObservableList{T}"/>
-        /// </returns>
+        /// <inheritdoc/>
         public async Task<bool> RemoveAsync(T item)
         {
             var removed = _items.Remove(item);
@@ -153,10 +121,7 @@ namespace Shaos.Sdk.Collections.Generic
             return removed;
         }
 
-        /// <summary>
-        /// Removes the <see cref="ObservableList{T}"/> item at the specified index.
-        /// </summary>
-        /// <param name="index">The zero-based index of the item to remove.</param>
+        /// <inheritdoc/>
         public async Task RemoveAtAsync(int index)
         {
             var item = _items[index];
@@ -169,10 +134,7 @@ namespace Shaos.Sdk.Collections.Generic
             }
         }
 
-        /// <summary>
-        /// Raise the <see cref="ListChanged"/> event
-        /// </summary>
-        /// <param name="eventArgs">The <see cref="ListChangedEventArgs{T}"/></param>
+        /// <inheritdoc/>
         protected virtual async Task OnListChangedAsync(ListChangedEventArgs<T> eventArgs)
         {
             if (ListChanged != null)

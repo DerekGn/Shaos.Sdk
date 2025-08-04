@@ -46,6 +46,7 @@ namespace Shaos.Sdk.UnitTests.Collections.Generic
             Assert.NotNull(_eventArgs);
             Assert.Equal(ListChangedAction.Add, _eventArgs.Action);
             Assert.Single(_eventArgs.Items);
+            Assert.Equal(1, _observableList.Count);
         }
 
         [Fact]

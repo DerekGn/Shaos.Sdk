@@ -29,7 +29,7 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <summary>
     /// A device <see cref="BaseParameter{T}"/>
     /// </summary>
-    public abstract class BaseParameter<T> : BaseParameter
+    public abstract class BaseParameter<T> : BaseParameter , IBaseParameter<T>
     {
         private T _value;
 

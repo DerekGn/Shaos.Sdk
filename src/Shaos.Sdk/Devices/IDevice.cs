@@ -22,40 +22,53 @@
 * SOFTWARE.
 */
 
-namespace Shaos.Sdk.Devices.Parameters
+using Shaos.Sdk.Collections.Generic;
+using Shaos.Sdk.Devices.Parameters;
+
+namespace Shaos.Sdk.Devices
 {
     /// <summary>
-    /// A device <see cref="BaseParameter"/>
+    /// Represents a device
     /// </summary>
-    /// <remarks>
-    /// Create an instance of a <see cref="BaseParameter"/>
-    /// </remarks>
-    /// <param name="name">The name of the parameter</param>
-    /// <param name="units">The units of this parameter</param>
-    /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-    public abstract class BaseParameter(string? name,
-                                        string? units,
-                                        ParameterType? parameterType) : IBaseParameter
+    public interface IDevice
     {
+        /// <summary>
+        /// Raised when the <see cref="Device"/> changes
+        /// </summary>
+        event EventHandler<DeviceChangedEventArgs>? DeviceChanged;
 
         /// <summary>
-        /// The <see cref="BaseParameter"/> identifier
+        /// The <see cref="BatteryLevel"/> for this device
         /// </summary>
-        public int Id { get; internal set; }
+        /// <remarks>
+        /// A <see cref="Device"/> optional battery level
+        /// </remarks>
+        BatteryLevel? BatteryLevel { get; }
 
         /// <summary>
-        /// The <see cref="BaseParameter{T}"/> name
+        /// The device identifier
         /// </summary>
-        public string? Name { get; } = name;
+        int Id { get; }
 
         /// <summary>
-        /// The <see cref="ParameterType"/>
+        /// The device name
         /// </summary>
-        public ParameterType? ParameterType { get; } = parameterType;
+        /// <remarks>
+        /// An optional <see cref="Device"/> name
+        /// </remarks>
+        string Name { get; }
 
         /// <summary>
-        /// The <see cref="BaseParameter{T}"/> units
+        /// The set of <see cref="Device"/> <see cref="BaseParameter"/>
         /// </summary>
-        public string? Units { get; } = units;
+        IChildObservableList<IBaseParameter, IDevice> Parameters { get; }
+
+        /// <summary>
+        /// The <see cref="SignalLevel"/> for this device
+        /// </summary>
+        /// <remarks>
+        /// A <see cref="Device"/> optional signal level
+        /// </remarks>
+        SignalLevel? SignalLevel { get; }
     }
 }

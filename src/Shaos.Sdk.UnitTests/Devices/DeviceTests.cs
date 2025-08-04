@@ -30,7 +30,9 @@ namespace Shaos.Sdk.UnitTests.Devices
 {
     public class DeviceTests
     {
-        private ListChangedEventArgs<BaseParameter>? _listChangedEventArgs;
+        private const string Name = "name";
+
+        private ListChangedEventArgs<IBaseParameter>? _listChangedEventArgs;
 
         [Fact]
         public void TestDeviceBatteryLevelChanged()
@@ -106,6 +108,15 @@ namespace Shaos.Sdk.UnitTests.Devices
         }
 
         [Fact]
+        public void TestDeviceProperties()
+        {
+            Device device = new Device(Name, [], 100, 0);
+
+            Assert.Equal(0, device.Id);
+            Assert.Equal(Name, device.Name);
+        }
+
+        [Fact]
         public void TestDeviceSignalLevelChanged()
         {
             DeviceChangedEventArgs? eventArgs = null;
@@ -137,7 +148,7 @@ namespace Shaos.Sdk.UnitTests.Devices
             return new BoolParameter(true, "name", "units", ParameterType.Iaq);
         }
 
-        private Task ParametersListChanged(object sender, ListChangedEventArgs<BaseParameter> e)
+        private Task ParametersListChanged(object sender, ListChangedEventArgs<IBaseParameter> e)
         {
             _listChangedEventArgs = e;
 

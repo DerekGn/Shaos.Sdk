@@ -25,37 +25,28 @@
 namespace Shaos.Sdk.Devices.Parameters
 {
     /// <summary>
-    /// A device <see cref="BaseParameter"/>
+    /// A base parameter
     /// </summary>
-    /// <remarks>
-    /// Create an instance of a <see cref="BaseParameter"/>
-    /// </remarks>
-    /// <param name="name">The name of the parameter</param>
-    /// <param name="units">The units of this parameter</param>
-    /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-    public abstract class BaseParameter(string? name,
-                                        string? units,
-                                        ParameterType? parameterType) : IBaseParameter
+    public interface IBaseParameter
     {
-
         /// <summary>
         /// The <see cref="BaseParameter"/> identifier
         /// </summary>
-        public int Id { get; internal set; }
+        int Id { get; }
 
         /// <summary>
         /// The <see cref="BaseParameter{T}"/> name
         /// </summary>
-        public string? Name { get; } = name;
+        string? Name { get; }
 
         /// <summary>
         /// The <see cref="ParameterType"/>
         /// </summary>
-        public ParameterType? ParameterType { get; } = parameterType;
+        ParameterType? ParameterType { get; }
 
         /// <summary>
         /// The <see cref="BaseParameter{T}"/> units
         /// </summary>
-        public string? Units { get; } = units;
+        string? Units { get; }
     }
 }

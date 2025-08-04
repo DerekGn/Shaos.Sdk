@@ -22,40 +22,29 @@
 * SOFTWARE.
 */
 
+
 namespace Shaos.Sdk.Devices.Parameters
 {
     /// <summary>
-    /// A device <see cref="BaseParameter"/>
+    /// Represents a typed base parameter
     /// </summary>
-    /// <remarks>
-    /// Create an instance of a <see cref="BaseParameter"/>
-    /// </remarks>
-    /// <param name="name">The name of the parameter</param>
-    /// <param name="units">The units of this parameter</param>
-    /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-    public abstract class BaseParameter(string? name,
-                                        string? units,
-                                        ParameterType? parameterType) : IBaseParameter
+    /// <typeparam name="T">The parameter type</typeparam>
+    public interface IBaseParameter<T>
     {
+        /// <summary>
+        /// The <see cref="BaseParameter{T}"/> current value
+        /// </summary>
+        T Value { get; }
 
         /// <summary>
-        /// The <see cref="BaseParameter"/> identifier
+        /// Raised when the value of the parameter changes
         /// </summary>
-        public int Id { get; internal set; }
+        event AsyncEventHandler<ParameterValueChangedEventArgs<T>>? ValueChanged;
 
         /// <summary>
-        /// The <see cref="BaseParameter{T}"/> name
+        /// Update the <see cref="IBaseParameter{T}"/> value
         /// </summary>
-        public string? Name { get; } = name;
-
-        /// <summary>
-        /// The <see cref="ParameterType"/>
-        /// </summary>
-        public ParameterType? ParameterType { get; } = parameterType;
-
-        /// <summary>
-        /// The <see cref="BaseParameter{T}"/> units
-        /// </summary>
-        public string? Units { get; } = units;
+        /// <param name="value">The value to assign to <see cref="Value"/></param>
+        Task WriteValueAsync(T value);
     }
 }

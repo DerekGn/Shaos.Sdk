@@ -30,7 +30,7 @@ namespace Shaos.Sdk.UnitTests.Devices
 {
     public class DeviceTests
     {
-        private ListChangedEventArgs<BaseParameter>? _listChangedEventArgs;
+        private ListChangedEventArgs<IBaseParameter>? _listChangedEventArgs;
 
         [Fact]
         public void TestDeviceBatteryLevelChanged()
@@ -137,7 +137,7 @@ namespace Shaos.Sdk.UnitTests.Devices
             return new BoolParameter(true, "name", "units", ParameterType.Iaq);
         }
 
-        private Task ParametersListChanged(object sender, ListChangedEventArgs<BaseParameter> e)
+        private Task ParametersListChanged(object sender, ListChangedEventArgs<IBaseParameter> e)
         {
             _listChangedEventArgs = e;
 

@@ -28,9 +28,9 @@ using Shaos.Sdk.Devices.Parameters;
 namespace Shaos.Sdk.Devices
 {
     /// <summary>
-    /// Represents a <see cref="Device"/>
+    /// An implementation of an <see cref="IDevice"/>
     /// </summary>
-    public class Device
+    public class Device : IDevice
     {
         /// <summary>
         /// Create an instance of a <see cref="Device"/>
@@ -48,7 +48,7 @@ namespace Shaos.Sdk.Devices
             BatteryLevel = batteryLevel != null ? new BatteryLevel(this, (uint)batteryLevel) : null;
             SignalLevel = signalLevel != null ? new SignalLevel(this, (int)signalLevel) : null;
 
-            Parameters = new ChildObservableList<BaseParameter, Device>(this);
+            Parameters = new ChildObservableList<IBaseParameter, IDevice>(this);
 
             foreach (var parameter in parameters)
             {
@@ -56,43 +56,22 @@ namespace Shaos.Sdk.Devices
             }
         }
 
-        /// <summary>
-        /// Raised when the <see cref="Device"/> changes
-        /// </summary>
+        /// <inheritdoc/>
         public event EventHandler<DeviceChangedEventArgs>? DeviceChanged;
 
-        /// <summary>
-        /// The <see cref="BatteryLevel"/> for this device
-        /// </summary>
-        /// <remarks>
-        /// A <see cref="Device"/> optional battery level
-        /// </remarks>
+        /// <inheritdoc/>
         public BatteryLevel? BatteryLevel { get; }
 
-        /// <summary>
-        /// The device identifier
-        /// </summary>
+        /// <inheritdoc/>
         public int Id { get; internal set; }
 
-        /// <summary>
-        /// The device name
-        /// </summary>
-        /// <remarks>
-        /// An optional <see cref="Device"/> name
-        /// </remarks>
+        /// <inheritdoc/>
         public string Name { get; }
 
-        /// <summary>
-        /// The set of <see cref="Device"/> <see cref="BaseParameter"/>
-        /// </summary>
-        public IChildObservableList<BaseParameter, Device> Parameters { get; }
+        /// <inheritdoc/>
+        public IChildObservableList<IBaseParameter, IDevice> Parameters { get; }
 
-        /// <summary>
-        /// The <see cref="SignalLevel"/> for this device
-        /// </summary>
-        /// <remarks>
-        /// A <see cref="Device"/> optional signal level
-        /// </remarks>
+        /// <inheritdoc/>
         public SignalLevel? SignalLevel { get; }
 
         /// <summary>

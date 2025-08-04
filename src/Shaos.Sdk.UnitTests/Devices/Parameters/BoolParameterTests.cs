@@ -42,8 +42,10 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public void TestParameterProperties()
         {
+            _parameter.SetId(10);
+
             Assert.NotNull(_parameter);
-            Assert.Equal(0, _parameter.Id);
+            Assert.Equal(10, _parameter.Id);
             Assert.Equal(nameof(BoolParameter), _parameter.Name);
             Assert.Equal(ParameterType.Level, _parameter.ParameterType);
             Assert.Equal(Units, _parameter.Units);

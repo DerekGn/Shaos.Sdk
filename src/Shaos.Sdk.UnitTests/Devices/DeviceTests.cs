@@ -112,7 +112,9 @@ namespace Shaos.Sdk.UnitTests.Devices
         {
             Device device = new Device(Name, [], 100, 0);
 
-            Assert.Equal(0, device.Id);
+            device.SetId(10);
+
+            Assert.Equal(10, device.Id);
             Assert.Equal(Name, device.Name);
         }
 

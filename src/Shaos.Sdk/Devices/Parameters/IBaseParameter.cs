@@ -48,5 +48,11 @@ namespace Shaos.Sdk.Devices.Parameters
         /// The <see cref="BaseParameter{T}"/> units
         /// </summary>
         string? Units { get; }
+
+        /// <summary>
+        /// Set the identifier of the <see cref="IBaseParameter"/>
+        /// </summary>
+        /// <param name="id">The identifier to set</param>
+        public void SetId(int id);
     }
 }

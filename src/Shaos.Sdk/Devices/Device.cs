@@ -74,13 +74,10 @@ namespace Shaos.Sdk.Devices
         /// <inheritdoc/>
         public SignalLevel? SignalLevel { get; }
 
-        /// <summary>
-        /// Raise the value changed event to subscribed listeners
-        /// </summary>
-        /// <param name="e">The <see cref="ParameterValueChangedEventArgs{T}"/></param>
-        protected virtual void OnDeviceChanged(DeviceChangedEventArgs e)
+        /// <inheritdoc/>
+        public void SetId(int id)
         {
-            DeviceChanged?.Invoke(this, e);
+            Id = id;
         }
 
         internal void BatteryLevelChanged(uint level)
@@ -91,6 +88,15 @@ namespace Shaos.Sdk.Devices
         internal void SignalLevelChanged(int level)
         {
             OnDeviceChanged(new DeviceChangedEventArgs() { SignalLevel = level });
+        }
+
+        /// <summary>
+        /// Raise the value changed event to subscribed listeners
+        /// </summary>
+        /// <param name="e">The <see cref="ParameterValueChangedEventArgs{T}"/></param>
+        protected virtual void OnDeviceChanged(DeviceChangedEventArgs e)
+        {
+            DeviceChanged?.Invoke(this, e);
         }
     }
 }

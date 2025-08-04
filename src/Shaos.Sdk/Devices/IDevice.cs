@@ -70,5 +70,11 @@ namespace Shaos.Sdk.Devices
         /// A <see cref="Device"/> optional signal level
         /// </remarks>
         SignalLevel? SignalLevel { get; }
+
+        /// <summary>
+        /// Set the identifier of the <see cref="IDevice"/>
+        /// </summary>
+        /// <param name="id">The identifier to set</param>
+        public void SetId(int id);
     }
 }

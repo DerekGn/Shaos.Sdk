@@ -37,25 +37,22 @@ namespace Shaos.Sdk.Devices.Parameters
                                         string? units,
                                         ParameterType? parameterType) : IBaseParameter
     {
-
-        /// <summary>
-        /// The <see cref="BaseParameter"/> identifier
-        /// </summary>
+        /// <inheritdoc/>
         public int Id { get; internal set; }
 
-        /// <summary>
-        /// The <see cref="BaseParameter{T}"/> name
-        /// </summary>
+        /// <inheritdoc/>
         public string? Name { get; } = name;
 
-        /// <summary>
-        /// The <see cref="ParameterType"/>
-        /// </summary>
+        /// <inheritdoc/>
         public ParameterType? ParameterType { get; } = parameterType;
 
-        /// <summary>
-        /// The <see cref="BaseParameter{T}"/> units
-        /// </summary>
+        /// <inheritdoc/>
         public string? Units { get; } = units;
+
+        /// <inheritdoc/>
+        public void SetId(int id)
+        {
+            Id = id;
+        }
     }
 }

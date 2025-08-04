@@ -30,6 +30,8 @@ namespace Shaos.Sdk.UnitTests.Devices
 {
     public class DeviceTests
     {
+        private const string Name = "name";
+
         private ListChangedEventArgs<IBaseParameter>? _listChangedEventArgs;
 
         [Fact]
@@ -103,6 +105,15 @@ namespace Shaos.Sdk.UnitTests.Devices
             {
                 device.Parameters.ListChanged -= ParametersListChanged;
             }
+        }
+
+        [Fact]
+        public void TestDeviceProperties()
+        {
+            Device device = new Device(Name, [], 100, 0);
+
+            Assert.Equal(0, device.Id);
+            Assert.Equal(Name, device.Name);
         }
 
         [Fact]

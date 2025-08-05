@@ -40,7 +40,7 @@ namespace Shaos.Sdk.Devices
         /// <param name="batteryLevel">The optional battery level if the <see cref="Device"/> instance is battery powered</param>
         /// <param name="signalLevel">The optional signal level if the <see cref="Device"/> is wireless</param>
         public Device(string name,
-                      IList<BaseParameter> parameters,
+                      IList<IBaseParameter> parameters,
                       uint? batteryLevel,
                       int? signalLevel)
         {

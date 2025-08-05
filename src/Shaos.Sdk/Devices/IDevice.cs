@@ -35,7 +35,7 @@ namespace Shaos.Sdk.Devices
         /// <summary>
         /// Raised when the <see cref="Device"/> changes
         /// </summary>
-        event EventHandler<DeviceChangedEventArgs>? DeviceChanged;
+        event AsyncEventHandler<DeviceChangedEventArgs>? DeviceChanged;
 
         /// <summary>
         /// The <see cref="BatteryLevel"/> for this device

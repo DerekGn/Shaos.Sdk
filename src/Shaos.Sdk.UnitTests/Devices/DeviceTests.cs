@@ -84,7 +84,7 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public async Task TestDeviceParameterRemoved()
         {
-            var parameters = new List<BaseParameter>()
+            var parameters = new List<IBaseParameter>()
             {
                 CreateBoolParameter()
             };

@@ -5,14 +5,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <AssemblyVersion>0.7.1.0</AssemblyVersion>
+        <AssemblyVersion>0.7.2.0</AssemblyVersion>
         <Authors>Derek Goslin</Authors>
         <Company>Derek Goslin</Company>
         <Copyright>Copyright © Derek Goslin 2025</Copyright>
         <Description>
             A .Net library for creating Shaos Plugins.
         </Description>
-        <FileVersion>0.7.1.0</FileVersion>
+        <FileVersion>0.7.2.0</FileVersion>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -27,10 +27,11 @@
             v0.6.0 Added device and parameter identifier set
             v0.7.0 Updated device constructor
             v0.7.1 Updated PlugIn device collection
+            v0.7.2 Updated Parameter inheritance
         </PackageReleaseNotes>
         <RepositoryUrl>https://github.com/DerekGn/Shaos.Sdk</RepositoryUrl>
         <SignAssembly>true</SignAssembly>
-        <Version>0.7.1-beta</Version>
+        <Version>0.7.2-beta</Version>
     </PropertyGroup>
 
     <ItemGroup>

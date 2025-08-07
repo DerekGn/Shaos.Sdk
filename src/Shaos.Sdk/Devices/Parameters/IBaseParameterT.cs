@@ -29,7 +29,7 @@ namespace Shaos.Sdk.Devices.Parameters
     /// Represents a typed base parameter
     /// </summary>
     /// <typeparam name="T">The parameter type</typeparam>
-    public interface IBaseParameter<T>
+    public interface IBaseParameter<T> : IBaseParameter
     {
         /// <summary>
         /// The <see cref="BaseParameter{T}"/> current value

@@ -35,12 +35,12 @@ namespace Shaos.Sdk
     /// </remarks>
     public abstract class PlugInBase : IPlugIn
     {
-        private readonly ObservableList<Device> _devices = [];
+        private readonly ObservableList<IDevice> _devices = [];
 
         private bool _disposedValue;
 
         /// <inheritdoc/>
-        public IObservableList<Device> Devices => _devices;
+        public IObservableList<IDevice> Devices => _devices;
 
         /// <inheritdoc/>
         public void Dispose()

@@ -33,9 +33,14 @@ namespace Shaos.Sdk.Devices
     public interface IDevice
     {
         /// <summary>
-        /// Raised when the <see cref="Device"/> changes
+        /// Raised when the <see cref="Device"/> battery level changes
         /// </summary>
-        event AsyncEventHandler<DeviceChangedEventArgs>? DeviceChanged;
+        event AsyncEventHandler<BatteryLevelChangedEventArgs>? BatteryLevelChanged;
+
+        /// <summary>
+        /// Raised when the <see cref="Device"/> battery level changes
+        /// </summary>
+        event AsyncEventHandler<SignalLevelChangedEventArgs>? SignalLevelChanged;
 
         /// <summary>
         /// The <see cref="BatteryLevel"/> for this device

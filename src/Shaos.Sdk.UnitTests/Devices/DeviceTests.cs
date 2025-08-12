@@ -37,11 +37,11 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public void TestDeviceBatteryLevelChanged()
         {
-            DeviceChangedEventArgs? eventArgs = null;
+            BatteryLevelChangedEventArgs? eventArgs = null;
 
             Device device = new Device("name", [], 100, 0);
 
-            AsyncEventHandler<DeviceChangedEventArgs> eventHandler = (s, e) =>
+            AsyncEventHandler<BatteryLevelChangedEventArgs> eventHandler = (s, e) =>
             {
                 eventArgs = e;
 
@@ -50,16 +50,16 @@ namespace Shaos.Sdk.UnitTests.Devices
 
             try
             {
-                device.DeviceChanged += eventHandler;
+                device.BatteryLevelChanged += eventHandler;
 
                 device.BatteryLevel!.Level = 1;
 
                 Assert.NotNull(eventArgs);
-                Assert.Equal((uint)1, eventArgs.BatteryLevel!.Value);
+                Assert.Equal((uint)1, eventArgs.BatteryLevel);
             }
             finally
             {
-                device.DeviceChanged -= eventHandler;
+                device.BatteryLevelChanged -= eventHandler;
             }
         }
 
@@ -123,11 +123,11 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public void TestDeviceSignalLevelChanged()
         {
-            DeviceChangedEventArgs? eventArgs = null;
+            SignalLevelChangedEventArgs? eventArgs = null;
 
             Device device = new Device("name", [], 100, 0);
 
-            AsyncEventHandler<DeviceChangedEventArgs> eventHandler = (s, e) =>
+            AsyncEventHandler<SignalLevelChangedEventArgs> eventHandler = (s, e) =>
             {
                 eventArgs = e;
 
@@ -136,16 +136,16 @@ namespace Shaos.Sdk.UnitTests.Devices
 
             try
             {
-                device.DeviceChanged += eventHandler;
+                device.SignalLevelChanged += eventHandler;
 
                 device.SignalLevel!.Level = -10;
 
                 Assert.NotNull(eventArgs);
-                Assert.Equal(-10, eventArgs.SignalLevel!.Value);
+                Assert.Equal(-10, eventArgs.SignalLevel);
             }
             finally
             {
-                device.DeviceChanged -= eventHandler;
+                device.SignalLevelChanged -= eventHandler;
             }
         }
 

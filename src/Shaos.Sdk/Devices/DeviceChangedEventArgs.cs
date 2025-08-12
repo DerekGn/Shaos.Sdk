@@ -38,5 +38,10 @@ namespace Shaos.Sdk.Devices
         /// The signal level
         /// </summary>
         public int? SignalLevel { get; init; }
+
+        /// <summary>
+        /// The time stamp of the event
+        /// </summary>
+        public DateTime TimeStamp { get; } = DateTime.UtcNow;
     }
 }

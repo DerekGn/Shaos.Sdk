@@ -25,19 +25,14 @@
 namespace Shaos.Sdk.Devices
 {
     /// <summary>
-    /// Raised when a <see cref="Device"/> properties change
+    /// Raised when a <see cref="Device"/> signal level changes
     /// </summary>
-    public class DeviceChangedEventArgs : EventArgs
+    public class SignalLevelChangedEventArgs : EventArgs
     {
-        /// <summary>
-        /// The battery level
-        /// </summary>
-        public uint? BatteryLevel { get; init; }
-
         /// <summary>
         /// The signal level
         /// </summary>
-        public int? SignalLevel { get; init; }
+        public int SignalLevel { get; init; }
 
         /// <summary>
         /// The time stamp of the event

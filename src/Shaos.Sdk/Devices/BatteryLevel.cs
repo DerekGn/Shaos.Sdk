@@ -65,7 +65,7 @@ namespace Shaos.Sdk.Devices
             set
             {
                 _level = value;
-                _device.BatteryLevelChanged(_level);
+                _device.RaiseBatteryLevelChanged(_level);
             }
         }
     }

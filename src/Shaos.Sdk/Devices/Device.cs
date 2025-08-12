@@ -57,7 +57,10 @@ namespace Shaos.Sdk.Devices
         }
 
         /// <inheritdoc/>
-        public event AsyncEventHandler<DeviceChangedEventArgs>? DeviceChanged;
+        public event AsyncEventHandler<BatteryLevelChangedEventArgs>? BatteryLevelChanged;
+
+        /// <inheritdoc/>
+        public event AsyncEventHandler<SignalLevelChangedEventArgs>? SignalLevelChanged;
 
         /// <inheritdoc/>
         public BatteryLevel? BatteryLevel { get; }
@@ -80,23 +83,32 @@ namespace Shaos.Sdk.Devices
             Id = id;
         }
 
-        internal void BatteryLevelChanged(uint level)
+        internal void RaiseBatteryLevelChanged(uint level)
         {
-            OnDeviceChanged(new DeviceChangedEventArgs() { BatteryLevel = level });
+            OnBatteryLevelChanged(new BatteryLevelChangedEventArgs() { BatteryLevel = level });
         }
 
-        internal void SignalLevelChanged(int level)
+        internal void RaiseSignalLevelChanged(int level)
         {
-            OnDeviceChanged(new DeviceChangedEventArgs() { SignalLevel = level });
+            OnSignalLevelChanged(new SignalLevelChangedEventArgs() { SignalLevel = level });
         }
 
         /// <summary>
-        /// Raise the value changed event to subscribed listeners
+        /// Raise the <see cref="BatteryLevelChanged"/>
         /// </summary>
-        /// <param name="e">The <see cref="ParameterValueChangedEventArgs{T}"/></param>
-        protected virtual void OnDeviceChanged(DeviceChangedEventArgs e)
+        /// <param name="e">The <see cref="BatteryLevelChangedEventArgs"/></param>
+        protected virtual void OnBatteryLevelChanged(BatteryLevelChangedEventArgs e)
         {
-            DeviceChanged?.Invoke(this, e);
+            BatteryLevelChanged?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Raise the <see cref="SignalLevelChanged"/>
+        /// </summary>
+        /// <param name="e">The <see cref="SignalLevelChangedEventArgs"/></param>
+        protected virtual void OnSignalLevelChanged(SignalLevelChangedEventArgs e)
+        {
+            SignalLevelChanged?.Invoke(this, e);
         }
     }
 }

@@ -41,9 +41,11 @@ namespace Shaos.Sdk.UnitTests.Devices
 
             Device device = new Device("name", [], 100, 0);
 
-            EventHandler<DeviceChangedEventArgs> eventHandler = (s, e) =>
+            AsyncEventHandler<DeviceChangedEventArgs> eventHandler = (s, e) =>
             {
                 eventArgs = e;
+
+                return Task.CompletedTask;
             };
 
             try
@@ -125,9 +127,11 @@ namespace Shaos.Sdk.UnitTests.Devices
 
             Device device = new Device("name", [], 100, 0);
 
-            EventHandler<DeviceChangedEventArgs> eventHandler = (s, e) =>
+            AsyncEventHandler<DeviceChangedEventArgs> eventHandler = (s, e) =>
             {
                 eventArgs = e;
+
+                return Task.CompletedTask;
             };
 
             try

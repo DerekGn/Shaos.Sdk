@@ -57,7 +57,7 @@ namespace Shaos.Sdk.Devices
         }
 
         /// <inheritdoc/>
-        public event EventHandler<DeviceChangedEventArgs>? DeviceChanged;
+        public event AsyncEventHandler<DeviceChangedEventArgs>? DeviceChanged;
 
         /// <inheritdoc/>
         public BatteryLevel? BatteryLevel { get; }

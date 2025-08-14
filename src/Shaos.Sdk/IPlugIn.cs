@@ -33,14 +33,19 @@ namespace Shaos.Sdk
     public interface IPlugIn : IDisposable
     {
         /// <summary>
+        /// The collection of <see cref="Device"/> instances a <see cref="IPlugIn"/> instance manages
+        /// </summary>
+        IObservableList<IDevice> Devices { get; }
+
+        /// <summary>
+        /// The system assigned identifier for this <see cref="IPlugIn"/> instance
+        /// </summary>
+        int Id { get; }
+
+        /// <summary>
         /// The entry point of the<see cref="IPlugIn"/> instance
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to cancel the <see cref="IPlugIn"/> method execution</param>
         Task ExecuteAsync(CancellationToken cancellationToken);
-
-        /// <summary>
-        /// The collection of <see cref="Device"/> instances a <see cref="IPlugIn"/> instance manages
-        /// </summary>
-        IObservableList<IDevice> Devices { get; }
     }
 }

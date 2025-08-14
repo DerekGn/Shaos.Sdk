@@ -43,6 +43,9 @@ namespace Shaos.Sdk
         public IObservableList<IDevice> Devices => _devices;
 
         /// <inheritdoc/>
+        public int Id { get; private set; }
+
+        /// <inheritdoc/>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

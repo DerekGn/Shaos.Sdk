@@ -29,7 +29,7 @@ namespace Shaos.Sdk.Collections.Generic
     /// </summary>
     /// <typeparam name="T">The type of the elements of this <see cref="ObservableList{T}"/></typeparam>
     /// <typeparam name="TParent">The type of the parent</typeparam>
-    public interface IChildObservableList<T, TParent> : IObservableList<T>
+    public interface IChildObservableList<TParent, T> : IObservableList<T>
     {
         /// <summary>
         /// The parent of the <see cref="IChildObservableList{T, TParent}"/>

@@ -30,10 +30,10 @@ namespace Shaos.Sdk.Collections.Generic
     /// <typeparam name="T">The type of the elements of this <see cref="ObservableList{T}"/></typeparam>
     /// <typeparam name="TParent">The type of the parent</typeparam>
     /// <remarks>
-    /// Create an instance of a <see cref="ChildObservableList{T, TParent}"/>
+    /// Create an instance of a <see cref="ChildObservableList{TParent, T}"/>
     /// </remarks>
     /// <param name="parent">The parent of this collection</param>
-    public class ChildObservableList<T, TParent>(TParent parent) : ObservableList<T>, IChildObservableList<T, TParent>
+    public class ChildObservableList<TParent, T>(TParent parent) : ObservableList<T>, IChildObservableList<TParent, T>
     {
         /// <summary>
         /// The parent type of this collection

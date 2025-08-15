@@ -24,6 +24,7 @@
 
 using Shaos.Sdk.Collections.Generic;
 using Shaos.Sdk.Devices;
+using Shaos.Sdk.Devices.Parameters;
 
 namespace Shaos.Sdk
 {
@@ -35,12 +36,20 @@ namespace Shaos.Sdk
     /// </remarks>
     public abstract class PlugInBase : IPlugIn
     {
-        private readonly ObservableList<IDevice> _devices = [];
+        private readonly ChildObservableList<IPlugIn, IDevice> _devices;
+
+        /// <summary>
+        /// The <see cref="PlugInBase"/> constructor
+        /// </summary>
+        protected PlugInBase()
+        {
+            _devices = new ChildObservableList<IPlugIn, IDevice>(this);
+        }
 
         private bool _disposedValue;
 
         /// <inheritdoc/>
-        public IObservableList<IDevice> Devices => _devices;
+        public IChildObservableList<IPlugIn, IDevice> Devices => _devices;
 
         /// <inheritdoc/>
         public int Id { get; private set; }

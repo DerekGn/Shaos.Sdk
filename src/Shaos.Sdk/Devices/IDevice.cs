@@ -66,7 +66,7 @@ namespace Shaos.Sdk.Devices
         /// <summary>
         /// The set of <see cref="Device"/> <see cref="BaseParameter"/>
         /// </summary>
-        IChildObservableList<IBaseParameter, IDevice> Parameters { get; }
+        IChildObservableList<IDevice, IBaseParameter> Parameters { get; }
 
         /// <summary>
         /// The <see cref="SignalLevel"/> for this device

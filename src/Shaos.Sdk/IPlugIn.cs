@@ -35,7 +35,7 @@ namespace Shaos.Sdk
         /// <summary>
         /// The collection of <see cref="Device"/> instances a <see cref="IPlugIn"/> instance manages
         /// </summary>
-        IObservableList<IDevice> Devices { get; }
+        IChildObservableList<IPlugIn, IDevice> Devices { get; }
 
         /// <summary>
         /// The system assigned identifier for this <see cref="IPlugIn"/> instance

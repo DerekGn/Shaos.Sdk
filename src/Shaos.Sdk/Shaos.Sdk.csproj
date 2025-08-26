@@ -5,14 +5,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <AssemblyVersion>0.7.9.0</AssemblyVersion>
+        <AssemblyVersion>0.8.0.0</AssemblyVersion>
         <Authors>Derek Goslin</Authors>
         <Company>Derek Goslin</Company>
         <Copyright>Copyright © Derek Goslin 2025</Copyright>
         <Description>
             A .Net library for creating Shaos PlugIns.
         </Description>
-        <FileVersion>0.7.9.0</FileVersion>
+        <FileVersion>0.8.0.0</FileVersion>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -35,10 +35,11 @@
             v0.7.7 Added PlugIn configuration classes
             v0.7.8 Made PlugIn attribute properties required
             v0.7.9 Updated PlugIn attribute added constructor
+            v0.8.0 Updated PlugIn description attribute
         </PackageReleaseNotes>
         <RepositoryUrl>https://github.com/DerekGn/Shaos.Sdk</RepositoryUrl>
         <SignAssembly>true</SignAssembly>
-        <Version>0.7.9-beta</Version>
+        <Version>0.8.0-beta</Version>
     </PropertyGroup>
 
     <ItemGroup>

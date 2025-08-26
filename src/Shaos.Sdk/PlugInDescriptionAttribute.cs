@@ -36,11 +36,11 @@ namespace Shaos.Sdk
         /// <summary>
         /// A description for this <see cref="IPlugIn"/> instance
         /// </summary>
-        public string? Description { get; init; }
+        public required string Description { get; init; }
 
         /// <summary>
         /// The name of this <see cref="IPlugIn"/> instance
         /// </summary>
-        public string? Name { get; init; }
+        public required string Name { get; init; }
     }
 }

@@ -50,11 +50,11 @@ namespace Shaos.Sdk
         /// <summary>
         /// A description for this <see cref="IPlugIn"/> instance
         /// </summary>
-        public required string Description { get; init; }
+        public string Description { get; }
 
         /// <summary>
         /// The name of this <see cref="IPlugIn"/> instance
         /// </summary>
-        public required string Name { get; init; }
+        public string Name { get; }
     }
 }

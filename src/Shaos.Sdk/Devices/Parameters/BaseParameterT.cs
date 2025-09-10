@@ -72,7 +72,7 @@ namespace Shaos.Sdk.Devices.Parameters
         {
             _value = value;
 
-            await OnValueChangedAsync(new ParameterValueChangedEventArgs<T>() { Value = value });
+            await OnValueChangedAsync(new ParameterValueChangedEventArgs<T>(value));
         }
 
         /// <summary>

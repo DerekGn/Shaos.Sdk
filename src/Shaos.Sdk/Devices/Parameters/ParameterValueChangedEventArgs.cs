@@ -31,8 +31,23 @@ namespace Shaos.Sdk.Devices.Parameters
     public class ParameterValueChangedEventArgs<T> : EventArgs
     {
         /// <summary>
+        /// Create an instance of a <see cref="ParameterValueChangedEventArgs{T}"/>
+        /// </summary>
+        /// <param name="value"></param>
+        public ParameterValueChangedEventArgs(T value)
+        {
+            Value = value;
+            TimeStamp = DateTime.UtcNow;
+        }
+
+        /// <summary>
+        /// The timestamp of the event
+        /// </summary>
+        public DateTime TimeStamp { get; }
+
+        /// <summary>
         /// The changed value
         /// </summary>
-        public required T Value { get; set; }
+        public T Value { get; }
     }
 }

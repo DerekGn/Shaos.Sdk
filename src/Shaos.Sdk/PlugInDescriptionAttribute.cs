@@ -34,13 +34,27 @@ namespace Shaos.Sdk
     public class PlugInDescriptionAttribute : Attribute
     {
         /// <summary>
+        /// Create an instance of a <see cref="PlugInDescriptionAttribute"/>
+        /// </summary>
+        /// <param name="name">The <see cref="IPlugIn"/> instance name</param>
+        /// <param name="description">The <see cref="IPlugIn"/> instance description</param>
+        public PlugInDescriptionAttribute(string name, string description)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(name);
+            ArgumentException.ThrowIfNullOrWhiteSpace(description);
+
+            Name = name;
+            Description = description;
+        }
+
+        /// <summary>
         /// A description for this <see cref="IPlugIn"/> instance
         /// </summary>
-        public required string Description { get; init; }
+        public string Description { get; }
 
         /// <summary>
         /// The name of this <see cref="IPlugIn"/> instance
         /// </summary>
-        public required string Name { get; init; }
+        public string Name { get; }
     }
 }

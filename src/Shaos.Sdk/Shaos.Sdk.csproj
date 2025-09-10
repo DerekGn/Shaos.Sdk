@@ -5,41 +5,42 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
-        <AssemblyVersion>0.8.0.0</AssemblyVersion>
+        <AssemblyVersion>0.8.1.0</AssemblyVersion>
         <Authors>Derek Goslin</Authors>
         <Company>Derek Goslin</Company>
         <Copyright>Copyright © Derek Goslin 2025</Copyright>
         <Description>
             A .Net library for creating Shaos PlugIns.
         </Description>
-        <FileVersion>0.8.0.0</FileVersion>
+        <FileVersion>0.8.1.0</FileVersion>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/DerekGn/Shaos.Sdk</PackageProjectUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageReleaseNotes>
-            v0.1.0 Initial release
-            v0.2.0 Added Indexer
-            v0.3.0 Added Device parameter
-            v0.4.0 Updated Observable collections to interface type
-            v0.5.0 Added device and parameter interfaces
-            v0.6.0 Added device and parameter identifier set
-            v0.7.0 Updated device constructor
-            v0.7.1 Updated PlugIn device collection
-            v0.7.2 Updated Parameter inheritance
-            v0.7.3 Added device time stamp
-            v0.7.4 Separated device battery and signal level
-            v0.7.5 Added Id to PlugIn interface
-            v0.7.6 Refactored PlugIn devices collection
-            v0.7.7 Added PlugIn configuration classes
-            v0.7.8 Made PlugIn attribute properties required
-            v0.7.9 Updated PlugIn attribute added constructor
-            v0.8.0 Updated PlugIn description attribute
-        </PackageReleaseNotes>
+			v0.1.0 Initial release
+			v0.2.0 Added Indexer
+			v0.3.0 Added Device parameter
+			v0.4.0 Updated Observable collections to interface type
+			v0.5.0 Added device and parameter interfaces
+			v0.6.0 Added device and parameter identifier set
+			v0.7.0 Updated device constructor
+			v0.7.1 Updated PlugIn device collection
+			v0.7.2 Updated Parameter inheritance
+			v0.7.3 Added device time stamp
+			v0.7.4 Separated device battery and signal level
+			v0.7.5 Added Id to PlugIn interface
+			v0.7.6 Refactored PlugIn devices collection
+			v0.7.7 Added PlugIn configuration classes
+			v0.7.8 Made PlugIn attribute properties required
+			v0.7.9 Updated PlugIn attribute added constructor
+			v0.8.0 Updated PlugIn description attribute
+			v0.8.1 Added timestamp to ParameterValueChangedEventArgs
+		</PackageReleaseNotes>
         <RepositoryUrl>https://github.com/DerekGn/Shaos.Sdk</RepositoryUrl>
         <SignAssembly>true</SignAssembly>
-        <Version>0.8.0-beta</Version>
+        <Version>0.8.1-beta</Version>
     </PropertyGroup>
 
     <ItemGroup>

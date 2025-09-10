@@ -48,6 +48,6 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <summary>
         /// The changed value
         /// </summary>
-        public required T Value { get; init; }
+        public T Value { get; }
     }
 }

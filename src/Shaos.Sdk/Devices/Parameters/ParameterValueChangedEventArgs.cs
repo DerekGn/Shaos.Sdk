@@ -34,5 +34,10 @@ namespace Shaos.Sdk.Devices.Parameters
         /// The changed value
         /// </summary>
         public required T Value { get; set; }
+
+        /// <summary>
+        /// The time stamp of the event
+        /// </summary>
+        public DateTime TimeStamp { get; } = DateTime.UtcNow;
     }
 }

@@ -91,7 +91,7 @@ namespace Shaos.Sdk.UnitTests.Devices
                 CreateBoolParameter()
             };
 
-            Device device = new Device(Name, DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered, []);
+            Device device = new Device(Name, DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered, parameters);
 
             try
             {

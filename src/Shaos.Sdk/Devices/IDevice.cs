@@ -53,7 +53,7 @@ namespace Shaos.Sdk.Devices
         /// <summary>
         /// The features of this device
         /// </summary>
-        public DeviceFeatures Features { get; }
+        DeviceFeatures Features { get; }
 
         /// <summary>
         /// The device identifier
@@ -85,6 +85,6 @@ namespace Shaos.Sdk.Devices
         /// Set the identifier of the <see cref="IDevice"/>
         /// </summary>
         /// <param name="id">The identifier to set</param>
-        public void SetId(int id);
+        void SetId(int id);
     }
 }

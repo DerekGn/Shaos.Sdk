@@ -73,7 +73,7 @@ namespace Shaos.Sdk.Devices
         public BatteryLevel? BatteryLevel { get; }
 
         /// <inheritdoc/>
-        public DeviceFeatures Features { get; init; }
+        public DeviceFeatures Features { get; }
 
         /// <inheritdoc/>
         public int Id { get; internal set; }

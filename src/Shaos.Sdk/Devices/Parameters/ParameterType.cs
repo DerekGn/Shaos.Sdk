@@ -29,16 +29,13 @@ namespace Shaos.Sdk.Devices.Parameters
     /// </summary>
     public enum ParameterType
     {
-        /// <summary>
-        /// The absolute active energy
-        /// </summary>
         AbsoluteActiveEnergy,
         /// <summary>
         /// The absolute reactive energy
         /// </summary>
         AbsoluteReactiveEnergy,
         /// <summary>
-        /// The active power of the phase
+        /// The absolute active energy
         /// </summary>
         ActivePower,
         /// <summary>
@@ -58,7 +55,7 @@ namespace Shaos.Sdk.Devices.Parameters
         /// </summary>
         EtOH,
         /// <summary>
-        /// Flow rate
+        /// The flow rate of a liquid or gas
         /// </summary>
         FlowRate,
         /// <summary>
@@ -70,7 +67,7 @@ namespace Shaos.Sdk.Devices.Parameters
         /// </summary>
         ForwardReactiveEnergy,
         /// <summary>
-        /// Frequency
+        /// The frequency of a signal
         /// </summary>
         Frequency,
         /// <summary>
@@ -82,37 +79,45 @@ namespace Shaos.Sdk.Devices.Parameters
         /// </summary>
         Level,
         /// <summary>
-        /// The phase angle of a phase
+        /// The phase angle
         /// </summary>
         PhaseAngle,
         /// <summary>
-        /// The power factor of a phase
+        /// The power factor
         /// </summary>
         PowerFactor,
         /// <summary>
-        /// The pressure
+        /// The pressure of a liquid or a gas
         /// </summary>
         Pressure,
         /// <summary>
-        /// Reactive power
+        /// The Reactive power
         /// </summary>
         ReactivePower,
         /// <summary>
-        /// Real power
+        /// The real power
         /// </summary>
         RealPower,
         /// <summary>
-        /// Relative humidity
+        /// The relative humidity
         /// </summary>
         RelativeHumidity,
         /// <summary>
-        /// The reverse active power of a phase
+        /// The revers active energy
         /// </summary>
         ReverseActiveEnergy,
         /// <summary>
-        /// The reverse reactive power of a phase
+        /// The reverse reactive energy
         /// </summary>
         ReverseReactiveEnergy,
+        /// <summary>
+        /// The rotation speed
+        /// </summary>
+        RotationSpeed,
+        /// <summary>
+        /// The Received Signal Strength Indicator
+        /// </summary>
+        Rssi,
         /// <summary>
         /// The temperature
         /// </summary>
@@ -122,16 +127,12 @@ namespace Shaos.Sdk.Devices.Parameters
         /// </summary>
         TVOC,
         /// <summary>
-        /// The voltage
+        /// The voltage level
         /// </summary>
         Voltage,
         /// <summary>
-        /// A voltage
+        /// The volume of a gas or liquid
         /// </summary>
-        Volume,
-        /// <summary>
-        /// Rotational speed
-        /// </summary>
-        RotationSpeed
+        Volume
     }
 }

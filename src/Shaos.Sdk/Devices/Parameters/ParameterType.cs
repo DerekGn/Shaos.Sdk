@@ -103,7 +103,7 @@ namespace Shaos.Sdk.Devices.Parameters
         /// </summary>
         RelativeHumidity,
         /// <summary>
-        /// The revers active energy
+        /// The reverse active energy
         /// </summary>
         ReverseActiveEnergy,
         /// <summary>

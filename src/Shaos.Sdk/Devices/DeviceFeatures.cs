@@ -33,14 +33,14 @@ namespace Shaos.Sdk.Devices
         /// <summary>
         /// No specific features
         /// </summary>
-        None,
+        None = 0,
         /// <summary>
         /// Device is wireless
         /// </summary>
-        Wireless,
+        Wireless = 1,
         /// <summary>
         /// Device is battery powered
         /// </summary>
-        BatteryPowered
+        BatteryPowered = 2
     }
 }

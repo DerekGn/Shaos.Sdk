@@ -39,7 +39,7 @@ namespace Shaos.Sdk.UnitTests.Devices
         {
             BatteryLevelChangedEventArgs? eventArgs = null;
 
-            Device device = new Device("name", [], 100, 0);
+            Device device = new Device(Name, DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered, []);
 
             AsyncEventHandler<BatteryLevelChangedEventArgs> eventHandler = (s, e) =>
             {
@@ -66,7 +66,7 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public async Task TestDeviceParameterAdded()
         {
-            Device device = new Device("name", [], 100, 0);
+            Device device = new Device(Name, DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered, []);
 
             try
             {
@@ -91,7 +91,7 @@ namespace Shaos.Sdk.UnitTests.Devices
                 CreateBoolParameter()
             };
 
-            Device device = new Device("name", parameters, 100, 0);
+            Device device = new Device(Name, DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered, parameters);
 
             try
             {
@@ -112,7 +112,7 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public void TestDeviceProperties()
         {
-            Device device = new Device(Name, [], 100, 0);
+            Device device = new Device(Name, DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered, []);
 
             device.SetId(10);
 
@@ -125,7 +125,7 @@ namespace Shaos.Sdk.UnitTests.Devices
         {
             SignalLevelChangedEventArgs? eventArgs = null;
 
-            Device device = new Device("name", [], 100, 0);
+            Device device = new Device(Name, DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered, []);
 
             AsyncEventHandler<SignalLevelChangedEventArgs> eventHandler = (s, e) =>
             {
@@ -151,7 +151,7 @@ namespace Shaos.Sdk.UnitTests.Devices
 
         private static BoolParameter CreateBoolParameter()
         {
-            return new BoolParameter(true, "name", "units", ParameterType.Iaq);
+            return new BoolParameter(true, Name, "units", ParameterType.Iaq);
         }
 
         private Task ParametersListChanged(object sender, ListChangedEventArgs<IBaseParameter> e)

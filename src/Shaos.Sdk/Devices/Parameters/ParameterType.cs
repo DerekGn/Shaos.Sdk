@@ -29,6 +29,9 @@ namespace Shaos.Sdk.Devices.Parameters
     /// </summary>
     public enum ParameterType
     {
+        /// <summary>
+        /// Absolute active energy
+        /// </summary>
         AbsoluteActiveEnergy,
         /// <summary>
         /// The absolute reactive energy

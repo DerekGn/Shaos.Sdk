@@ -36,17 +36,24 @@ namespace Shaos.Sdk.Devices
         /// Create an instance of a <see cref="Device"/>
         /// </summary>
         /// <param name="name">The device name</param>
+        /// <param name="features">The device features <see cref="DeviceFeatures"/></param>
         /// <param name="parameters">The set of <see cref="BaseParameter"/> instances for this <see cref="Device"/></param>
-        /// <param name="batteryLevel">The optional battery level if the <see cref="Device"/> instance is battery powered</param>
-        /// <param name="signalLevel">The optional signal level if the <see cref="Device"/> is wireless</param>
         public Device(string name,
-                      IList<IBaseParameter> parameters,
-                      uint? batteryLevel,
-                      int? signalLevel)
+                      DeviceFeatures features,
+                      IList<IBaseParameter> parameters)
         {
             Name = name;
-            BatteryLevel = batteryLevel != null ? new BatteryLevel(this, (uint)batteryLevel) : null;
-            SignalLevel = signalLevel != null ? new SignalLevel(this, (int)signalLevel) : null;
+            Features = features;
+
+            if ((features & DeviceFeatures.BatteryPowered) == DeviceFeatures.BatteryPowered)
+            {
+                BatteryLevel = new BatteryLevel(this, 0);
+            }
+
+            if ((features & DeviceFeatures.Wireless) == DeviceFeatures.Wireless)
+            {
+                SignalLevel = new SignalLevel(this, -100);
+            }
 
             Parameters = new ChildObservableList<IDevice, IBaseParameter>(this);
 
@@ -64,6 +71,9 @@ namespace Shaos.Sdk.Devices
 
         /// <inheritdoc/>
         public BatteryLevel? BatteryLevel { get; }
+
+        /// <inheritdoc/>
+        public DeviceFeatures Features { get; }
 
         /// <inheritdoc/>
         public int Id { get; internal set; }

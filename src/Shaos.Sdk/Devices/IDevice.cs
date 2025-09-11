@@ -51,6 +51,11 @@ namespace Shaos.Sdk.Devices
         BatteryLevel? BatteryLevel { get; }
 
         /// <summary>
+        /// The features of this device
+        /// </summary>
+        public DeviceFeatures Features { get; }
+
+        /// <summary>
         /// The device identifier
         /// </summary>
         int Id { get; }

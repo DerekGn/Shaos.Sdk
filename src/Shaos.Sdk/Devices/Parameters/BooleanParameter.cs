@@ -35,9 +35,9 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <param name="units">The units of this parameter</param>
     /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
     public class BoolParameter(bool value,
-                         string? name,
-                         string? units,
-                         ParameterType? parameterType) : BaseParameter<bool>(value, name, units, parameterType)
+                               string? name,
+                               string? units,
+                               ParameterType? parameterType) : BaseParameter<bool>(value, name, units, parameterType)
     {
     }
 }

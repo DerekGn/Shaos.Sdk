@@ -30,14 +30,27 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <remarks>
     /// Create an instance of a <see cref="FloatParameter"/>
     /// </remarks>
-    /// <param name="value">The value of the parameter</param>
+    /// <param name="value">The value of the <see cref="FloatParameter"/></param>
+    /// <param name="min">The minimum value for the <see cref="FloatParameter"/></param>
+    /// <param name="max">The maximum value for the <see cref="FloatParameter"/></param>
     /// <param name="name">The name of the parameter</param>
     /// <param name="units">The units of this parameter</param>
     /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
     public class FloatParameter(float value,
-                          string? name,
-                          string? units,
-                          ParameterType? parameterType) : BaseParameter<float>(value, name, units, parameterType)
+                                float min,
+                                float max,
+                                string? name,
+                                string? units,
+                                ParameterType? parameterType) : BaseParameter<float>(value, name, units, parameterType)
     {
+        /// <summary>
+        /// The maximum value for the <see cref="FloatParameter"/>
+        /// </summary>
+        public float Max { get; } = max;
+
+        /// <summary>
+        /// The minimum value for the <see cref="FloatParameter"/>
+        /// </summary>
+        public float Min { get; } = min;
     }
 }

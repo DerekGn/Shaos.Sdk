@@ -33,7 +33,12 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 
         public IntParameterTests()
         {
-            _parameter = new IntParameter(1, nameof(IntParameter), "Units", ParameterType.Level);
+            _parameter = new IntParameter(1,
+                                          -1,
+                                          10,
+                                          nameof(IntParameter),
+                                          "Units",
+                                          ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;
         }

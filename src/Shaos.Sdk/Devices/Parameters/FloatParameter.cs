@@ -31,8 +31,8 @@ namespace Shaos.Sdk.Devices.Parameters
     /// Create an instance of a <see cref="FloatParameter"/>
     /// </remarks>
     /// <param name="value">The value of the <see cref="FloatParameter"/></param>
-    /// <param name="min">The maximum value for the <see cref="FloatParameter"/></param>
-    /// <param name="max">The minimum value for the <see cref="FloatParameter"/></param>
+    /// <param name="min">The minimum value for the <see cref="FloatParameter"/></param>
+    /// <param name="max">The maximum value for the <see cref="FloatParameter"/></param>
     /// <param name="name">The name of the parameter</param>
     /// <param name="units">The units of this parameter</param>
     /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>

@@ -31,13 +31,26 @@ namespace Shaos.Sdk.Devices.Parameters
     /// Create an instance of a <see cref="IntParameter"/>
     /// </remarks>
     /// <param name="value">The value of the parameter</param>
+    /// <param name="min">The minimum value for the <see cref="IntParameter"/></param>
+    /// <param name="max">The maximum value for the <see cref="IntParameter"/></param>
     /// <param name="name">The name of the parameter</param>
     /// <param name="units">The units of this parameter</param>
     /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
     public class IntParameter(int value,
-                        string? name,
-                        string? units,
-                        ParameterType? parameterType) : BaseParameter<int>(value, name, units, parameterType)
+                              int min,
+                              int max,
+                              string? name,
+                              string? units,
+                              ParameterType? parameterType) : BaseParameter<int>(value, name, units, parameterType)
     {
+        /// <summary>
+        /// The maximum value for the <see cref="IntParameter"/>
+        /// </summary>
+        public int Max { get; } = max;
+
+        /// <summary>
+        /// The minimum value for the <see cref="IntParameter"/>
+        /// </summary>
+        public int Min { get; } = min;
     }
 }

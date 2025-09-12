@@ -33,7 +33,12 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 
         public FloatParameterTests()
         {
-            _parameter = new FloatParameter(1.0f, nameof(FloatParameter), "Units", ParameterType.Level);
+            _parameter = new FloatParameter(1.0f,
+                                            0f,
+                                            1.0f,
+                                            nameof(FloatParameter),
+                                            "Units",
+                                            ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;
         }

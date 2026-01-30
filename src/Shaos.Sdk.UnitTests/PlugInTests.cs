@@ -2,13 +2,6 @@
 {
     public class PlugInTests
     {
-        private TestPlugIn _plugIn;
-
-        public PlugInTests()
-        {
-            _plugIn = new TestPlugIn();
-        }
-
         [Fact]
         public void TestPlugInAttribute()
         {
@@ -23,11 +16,16 @@
         }
 
         [Fact]
-        public void TestPlugInProperties()
+        public void TestPlugInPropertiesAndDispose()
         {
-            _plugIn.Id = 10;
+            {
+                using var plugIn = new TestPlugIn();
 
-            Assert.Equal(10, _plugIn.Id);
+                plugIn.Id = 10;
+
+                Assert.NotNull(plugIn.Devices);
+                Assert.Equal(10, plugIn.Id);
+            }
         }
     }
 }

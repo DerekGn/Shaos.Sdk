@@ -40,7 +40,7 @@ namespace Shaos.Sdk
         /// <summary>
         /// The system assigned identifier for this <see cref="IPlugIn"/> instance
         /// </summary>
-        int Id { get; }
+        int Id { get; set; }
 
         /// <summary>
         /// The entry point of the<see cref="IPlugIn"/> instance

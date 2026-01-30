@@ -51,7 +51,7 @@ namespace Shaos.Sdk
         public IChildObservableList<IPlugIn, IDevice> Devices => _devices;
 
         /// <inheritdoc/>
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         /// <inheritdoc/>
         public void Dispose()

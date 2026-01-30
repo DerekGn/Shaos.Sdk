@@ -26,10 +26,9 @@ using Shaos.Sdk.Devices.Parameters;
 
 namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
-    public class BoolParameterTests
+    public class BoolParameterTests : BaseParameterTests
     {
         public readonly BoolParameter _parameter;
-        private const string Units = "Units";
         private ParameterValueChangedEventArgs<bool>? _eventArgs;
 
         public BoolParameterTests()
@@ -63,6 +62,9 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             Assert.NotNull(_eventArgs);
             Assert.True(_eventArgs.Value);
             Assert.True(_parameter.Value);
+            Assert.Equal(DateTime.UtcNow,
+                         _eventArgs.TimeStamp,
+                         TimeSpan.FromSeconds(1));
         }
 
         private async Task ParameterValueChanged(object sender,

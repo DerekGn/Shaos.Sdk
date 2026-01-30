@@ -46,7 +46,8 @@ namespace Shaos.Sdk.Devices.Parameters
                                 string name,
                                 string units,
                                 bool canWrite,
-                                ParameterType? parameterType) : base(name, units, parameterType)
+                                ParameterType? parameterType) 
+            : base(name, units, parameterType)
         {
             _value = value;
             _canWrite = canWrite;

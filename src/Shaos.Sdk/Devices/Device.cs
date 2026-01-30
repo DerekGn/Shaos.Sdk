@@ -55,11 +55,13 @@ namespace Shaos.Sdk.Devices
                 SignalLevel = new SignalLevel(this, -100);
             }
 
-            Parameters = new ChildObservableList<IDevice, IBaseParameter>(this);
+            var childList = new ChildObservableList<IDevice, IBaseParameter>(this);
+
+            Parameters = childList;
 
             foreach (var parameter in parameters)
             {
-                Parameters.Add(parameter);
+                childList.Add(parameter);
             }
         }
 

@@ -57,7 +57,12 @@ namespace Shaos.Sdk.UnitTests.Devices
                 device.BatteryLevel!.Level = 1;
 
                 Assert.NotNull(eventArgs);
+
                 Assert.Equal((uint)1, eventArgs.BatteryLevel);
+
+                Assert.Equal(DateTime.UtcNow,
+                             eventArgs.TimeStamp,
+                             TimeSpan.FromSeconds(1));
             }
             finally
             {
@@ -126,10 +131,15 @@ namespace Shaos.Sdk.UnitTests.Devices
 
             device.SetId(10);
 
-            Assert.Equal(10,
-                         device.Id);
-            Assert.Equal(Name,
-                         device.Name);
+            Assert.Equal(10, device.Id);
+            Assert.Equal(Name, device.Name);
+            Assert.NotNull(device.SignalLevel);
+            Assert.Equal(-100, device.SignalLevel.Level);
+            Assert.NotNull(device.BatteryLevel);
+            Assert.Equal(0u, device.BatteryLevel.Level);
+
+            Assert.Equal(DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
+                         device.Features);
         }
 
         [Fact]
@@ -155,8 +165,13 @@ namespace Shaos.Sdk.UnitTests.Devices
                 device.SignalLevel!.Level = -10;
 
                 Assert.NotNull(eventArgs);
+
                 Assert.Equal(-10,
                              eventArgs.SignalLevel);
+
+                Assert.Equal(DateTime.UtcNow,
+                             eventArgs.TimeStamp,
+                             TimeSpan.FromSeconds(1));
             }
             finally
             {

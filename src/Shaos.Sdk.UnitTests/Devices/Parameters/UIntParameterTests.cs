@@ -26,7 +26,7 @@ using Shaos.Sdk.Devices.Parameters;
 
 namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
-    public class UIntParameterTests
+    public class UIntParameterTests : BaseParameterTests
     {
         public readonly UIntParameter _parameter;
         private ParameterValueChangedEventArgs<uint>? _eventArgs;
@@ -45,6 +45,20 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         }
 
         [Fact]
+        public void TestParameterProperties()
+        {
+            _parameter.SetId(10);
+
+            Assert.NotNull(_parameter);
+            Assert.Equal(10, _parameter.Id);
+            Assert.Equal(10u, _parameter.Max);
+            Assert.Equal(0u, _parameter.Min);
+            Assert.Equal(nameof(UIntParameter), _parameter.Name);
+            Assert.Equal(ParameterType.Level, _parameter.ParameterType);
+            Assert.Equal(Units, _parameter.Units);
+        }
+
+        [Fact]
         public async Task TestValueChangedAsync()
         {
             await _parameter.NotifyValueChangedAsync(10);
@@ -52,6 +66,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             Assert.NotNull(_eventArgs);
             Assert.Equal((uint)10, _eventArgs.Value);
             Assert.Equal((uint)10, _parameter.Value);
+            Assert.Equal(DateTime.UtcNow, _eventArgs.TimeStamp, TimeSpan.FromSeconds(1));
         }
 
         private async Task ParameterValueChanged(object sender,

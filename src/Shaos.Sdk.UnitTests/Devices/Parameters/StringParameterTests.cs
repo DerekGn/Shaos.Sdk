@@ -33,7 +33,11 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 
         public StringParameterTests()
         {
-            _parameter = new StringParameter(string.Empty, nameof(StringParameter), "Units", ParameterType.Level);
+            _parameter = new StringParameter(string.Empty,
+                                             nameof(StringParameter),
+                                             "Units",
+                                             false,
+                                             ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;
         }
@@ -48,7 +52,8 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             Assert.Equal("X", _parameter.Value);
         }
 
-        private async Task ParameterValueChanged(object sender, ParameterValueChangedEventArgs<string> e)
+        private async Task ParameterValueChanged(object sender,
+                                                 ParameterValueChangedEventArgs<string> e)
         {
             _eventArgs = e;
 

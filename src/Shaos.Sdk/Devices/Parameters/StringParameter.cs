@@ -33,11 +33,14 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <param name="value">The value of the parameter</param>
     /// <param name="name">The name of the parameter</param>
     /// <param name="units">The units of this parameter</param>
+    /// <param name="canWrite">Indicates if the parameter can be written</param>
     /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
     public class StringParameter(string value,
-                           string? name,
-                           string? units,
-                           ParameterType? parameterType) : BaseParameter<string>(value, name, units, parameterType)
+                                 string name,
+                                 string units,
+                                 bool canWrite = false,
+                                 ParameterType? parameterType = default) 
+        : BaseParameter<string>(value, name, units, canWrite, parameterType)
     {
     }
 }

@@ -29,8 +29,6 @@ namespace Shaos.Sdk.Devices
     /// </summary>
     public class SignalLevel
     {
-        private int _level;
-
         /// <summary>
         /// The maximum value allowable for the <see cref="Level"/>
         /// </summary>
@@ -42,13 +40,15 @@ namespace Shaos.Sdk.Devices
         public const int Minimum = -100;
 
         private readonly Device _device;
+        private int _level;
 
         /// <summary>
         /// Create an instance of a <see cref="SignalLevel"/>
         /// </summary>
         /// <param name="device">The parent <see cref="Device"/></param>
         /// <param name="level">The signal level</param>
-        internal SignalLevel(Device device, int level)
+        internal SignalLevel(Device device,
+                             int level)
         {
             _device = device;
             Level = level;

@@ -98,7 +98,8 @@ namespace Shaos.Sdk.UnitTests.Collections.Generic
             Assert.Equal(10, _eventArgs.Items[0]);
         }
 
-        private Task ObservableListChanged(object sender, ListChangedEventArgs<int> e)
+        private Task ObservableListChanged(object sender,
+                                           ListChangedEventArgs<int> e)
         {
             _eventArgs = e;
 

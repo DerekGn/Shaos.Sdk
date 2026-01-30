@@ -47,7 +47,8 @@ namespace Shaos.Sdk.Devices
         /// </summary>
         /// <param name="device">The parent <see cref="Device"/></param>
         /// <param name="level">The battery level</param>
-        internal BatteryLevel(Device device, uint level)
+        internal BatteryLevel(Device device,
+                              uint level)
         {
             _device = device;
             Level = level;

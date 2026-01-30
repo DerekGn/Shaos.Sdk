@@ -31,6 +31,7 @@ namespace Shaos.Sdk.Devices.Parameters
     /// </summary>
     public abstract class BaseParameter<T> : BaseParameter, IBaseParameter<T>
     {
+        private readonly bool _canWrite;
         private T _value;
 
         /// <summary>
@@ -39,23 +40,25 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="value"></param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
+        /// <param name="canWrite">Indicates if the parameter can be written</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
         protected BaseParameter(T value,
-                                string? name,
-                                string? units,
+                                string name,
+                                string units,
+                                bool canWrite,
                                 ParameterType? parameterType) : base(name, units, parameterType)
         {
             _value = value;
+            _canWrite = canWrite;
         }
 
-        /// <summary>
-        /// Raised when the value of the parameter changes
-        /// </summary>
+        /// <inheritdoc/>
         public event AsyncEventHandler<ParameterValueChangedEventArgs<T>>? ValueChanged;
 
-        /// <summary>
-        /// The <see cref="BaseParameter{T}"/> current value
-        /// </summary>
+        /// <inheritdoc/>
+        public bool CanWrite => _canWrite;
+
+        /// <inheritdoc/>
         public T Value
         {
             get
@@ -64,15 +67,18 @@ namespace Shaos.Sdk.Devices.Parameters
             }
         }
 
-        /// <summary>
-        /// Update the <see cref="BaseParameter{T}"/> value
-        /// </summary>
-        /// <param name="value">The value to assign to <see cref="Value"/></param>
+        /// <inheritdoc/>
         public async Task NotifyValueChangedAsync(T value)
         {
             _value = value;
 
             await OnValueChangedAsync(new ParameterValueChangedEventArgs<T>(value));
+        }
+
+        /// <inheritdoc/>
+        public Task WriteAsync(T value)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

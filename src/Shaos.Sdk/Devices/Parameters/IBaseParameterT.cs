@@ -22,7 +22,6 @@
 * SOFTWARE.
 */
 
-
 namespace Shaos.Sdk.Devices.Parameters
 {
     /// <summary>
@@ -32,19 +31,25 @@ namespace Shaos.Sdk.Devices.Parameters
     public interface IBaseParameter<T> : IBaseParameter
     {
         /// <summary>
-        /// The <see cref="BaseParameter{T}"/> current value
-        /// </summary>
-        T Value { get; }
-
-        /// <summary>
         /// Raised when the value of the parameter changes
         /// </summary>
         event AsyncEventHandler<ParameterValueChangedEventArgs<T>>? ValueChanged;
 
         /// <summary>
-        /// Notify <see cref="IBaseParameter{T}"/> value
+        /// The <see cref="BaseParameter{T}"/> current value
+        /// </summary>
+        T Value { get; }
+
+        /// <summary>
+        /// Notify <see cref="IBaseParameter{T}"/> value was changed
         /// </summary>
         /// <param name="value">The value to assign to <see cref="Value"/></param>
         Task NotifyValueChangedAsync(T value);
+
+        /// <summary>
+        /// Writes an updated value to the <see cref="IBaseParameter{T}"/>
+        /// </summary>
+        /// <param name="value">The value to write</param>
+        Task WriteAsync(T value);
     }
 }

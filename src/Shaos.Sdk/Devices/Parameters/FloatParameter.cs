@@ -35,13 +35,16 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <param name="max">The maximum value for the <see cref="FloatParameter"/></param>
     /// <param name="name">The name of the parameter</param>
     /// <param name="units">The units of this parameter</param>
+    /// <param name="canWrite">Indicates if the parameter can be written</param>
     /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
     public class FloatParameter(float value,
                                 float min,
                                 float max,
-                                string? name,
-                                string? units,
-                                ParameterType? parameterType) : BaseParameter<float>(value, name, units, parameterType)
+                                string name,
+                                string units,
+                                bool canWrite,
+                                ParameterType? parameterType)
+        : BaseParameter<float>(value, name, units, canWrite, parameterType)
     {
         /// <summary>
         /// The maximum value for the <see cref="FloatParameter"/>

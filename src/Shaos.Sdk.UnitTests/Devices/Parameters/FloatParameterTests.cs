@@ -38,6 +38,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                                             1.0f,
                                             nameof(FloatParameter),
                                             "Units",
+                                            false,
                                             ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;
@@ -53,7 +54,8 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             Assert.Equal(10.0f, _parameter.Value);
         }
 
-        private async Task ParameterValueChanged(object sender, ParameterValueChangedEventArgs<float> e)
+        private async Task ParameterValueChanged(object sender,
+                                                 ParameterValueChangedEventArgs<float> e)
         {
             _eventArgs = e;
 

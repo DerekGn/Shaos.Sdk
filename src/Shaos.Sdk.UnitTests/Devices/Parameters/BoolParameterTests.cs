@@ -34,7 +34,11 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 
         public BoolParameterTests()
         {
-            _parameter = new BoolParameter(false, nameof(BoolParameter), Units, ParameterType.Level);
+            _parameter = new BoolParameter(false,
+                                           nameof(BoolParameter),
+                                           Units,
+                                           false,
+                                           ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;
         }
@@ -61,7 +65,8 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             Assert.True(_parameter.Value);
         }
 
-        private async Task ParameterValueChanged(object sender, ParameterValueChangedEventArgs<bool> e)
+        private async Task ParameterValueChanged(object sender,
+                                                 ParameterValueChangedEventArgs<bool> e)
         {
             _eventArgs = e;
 

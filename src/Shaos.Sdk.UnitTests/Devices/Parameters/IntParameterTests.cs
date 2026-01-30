@@ -46,7 +46,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public async Task TestValueChangedAsync()
         {
-            await _parameter.WriteValueAsync(10);
+            await _parameter.NotifyValueChangedAsync(10);
 
             Assert.NotNull(_eventArgs);
             Assert.Equal(10, _eventArgs.Value);

@@ -42,9 +42,9 @@ namespace Shaos.Sdk.Devices.Parameters
         event AsyncEventHandler<ParameterValueChangedEventArgs<T>>? ValueChanged;
 
         /// <summary>
-        /// Update the <see cref="IBaseParameter{T}"/> value
+        /// Notify <see cref="IBaseParameter{T}"/> value
         /// </summary>
         /// <param name="value">The value to assign to <see cref="Value"/></param>
-        Task WriteValueAsync(T value);
+        Task NotifyValueChangedAsync(T value);
     }
 }

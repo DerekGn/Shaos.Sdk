@@ -65,10 +65,10 @@ namespace Shaos.Sdk.Devices.Parameters
         }
 
         /// <summary>
-        /// Update the <see cref="ObservableList{T}"/>
+        /// Update the <see cref="BaseParameter{T}"/> value
         /// </summary>
         /// <param name="value">The value to assign to <see cref="Value"/></param>
-        public async Task WriteValueAsync(T value)
+        public async Task NotifyValueChangedAsync(T value)
         {
             _value = value;
 

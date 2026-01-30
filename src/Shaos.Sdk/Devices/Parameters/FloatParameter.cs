@@ -42,8 +42,8 @@ namespace Shaos.Sdk.Devices.Parameters
                                 float max,
                                 string name,
                                 string units,
-                                bool canWrite,
-                                ParameterType? parameterType)
+                                bool canWrite = false,
+                                ParameterType? parameterType = default)
         : BaseParameter<float>(value, name, units, canWrite, parameterType)
     {
         /// <summary>

@@ -38,8 +38,8 @@ namespace Shaos.Sdk.Devices.Parameters
     public class BoolParameter(bool value,
                                string name,
                                string units,
-                               bool canWrite,
-                               ParameterType? parameterType) 
+                               bool canWrite = false,
+                               ParameterType? parameterType = default) 
         : BaseParameter<bool>(value, name, units, canWrite, parameterType)
     {
     }

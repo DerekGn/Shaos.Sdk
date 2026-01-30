@@ -22,8 +22,6 @@
 * SOFTWARE.
 */
 
-using Shaos.Sdk.Devices.Parameters;
-
 namespace Shaos.Sdk.Collections.Generic
 {
     /// <summary>

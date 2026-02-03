@@ -30,30 +30,52 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <remarks>
     /// Create an instance of a <see cref="FloatParameter"/>
     /// </remarks>
-    /// <param name="value">The value of the <see cref="FloatParameter"/></param>
-    /// <param name="min">The minimum value for the <see cref="FloatParameter"/></param>
-    /// <param name="max">The maximum value for the <see cref="FloatParameter"/></param>
-    /// <param name="name">The name of the parameter</param>
-    /// <param name="units">The units of this parameter</param>
-    /// <param name="canWrite">Indicates if the parameter can be written</param>
-    /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-    public class FloatParameter(float value,
-                                float min,
-                                float max,
-                                string name,
-                                string units,
-                                bool canWrite = false,
-                                ParameterType? parameterType = default)
-        : BaseParameter<float>(value, name, units, canWrite, parameterType)
+    public class FloatParameter : BaseParameter<float>
     {
         /// <summary>
         /// The maximum value for the <see cref="FloatParameter"/>
         /// </summary>
-        public float Max { get; } = max;
+        public float Max { get; }
 
         /// <summary>
         /// The minimum value for the <see cref="FloatParameter"/>
         /// </summary>
-        public float Min { get; } = min;
+        public float Min { get; }
+
+        /// <param name="value">The value of the <see cref="FloatParameter"/></param>
+        /// <param name="min">The minimum value for the <see cref="FloatParameter"/></param>
+        /// <param name="max">The maximum value for the <see cref="FloatParameter"/></param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
+        public FloatParameter(float value,
+                              float min,
+                              float max,
+                              string name,
+                              string units,
+                              ParameterType? parameterType = default) : base(value, name, units, parameterType)
+        {
+            Max = max;
+            Min = min;
+        }
+
+        /// <param name="value">The value of the <see cref="FloatParameter"/></param>
+        /// <param name="min">The minimum value for the <see cref="FloatParameter"/></param>
+        /// <param name="max">The maximum value for the <see cref="FloatParameter"/></param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="writeAsync">The function for writing the parameters value</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
+        public FloatParameter(float value,
+                              float min,
+                              float max,
+                              string name,
+                              string units,
+                              Func<int, float, Task> writeAsync,
+                              ParameterType? parameterType = default) : base(value, name, units, writeAsync, parameterType)
+        {
+            Max = max;
+            Min = min;
+        }
     }
 }

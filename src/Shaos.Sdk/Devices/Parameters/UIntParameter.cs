@@ -30,30 +30,52 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <remarks>
     /// Create an instance of a <see cref="UIntParameter"/>
     /// </remarks>
-    /// <param name="value">The value of the parameter</param>
-    /// <param name="min">The minimum value for the <see cref="UIntParameter"/></param>
-    /// <param name="max">The maximum value for the <see cref="UIntParameter"/></param>
-    /// <param name="name">The name of the parameter</param>
-    /// <param name="units">The units of this parameter</param>
-    /// <param name="canWrite">Indicates if the parameter can be written</param>
-    /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-    public class UIntParameter(uint value,
-                               uint min,
-                               uint max,
-                               string name,
-                               string units,
-                               bool canWrite = false,
-                               ParameterType? parameterType = default) 
-        : BaseParameter<uint>(value, name, units, canWrite, parameterType)
+    public class UIntParameter : BaseParameter<uint>
     {
         /// <summary>
         /// The maximum value for the <see cref="UIntParameter"/>
         /// </summary>
-        public uint Max { get; } = max;
+        public uint Max { get; }
 
         /// <summary>
         /// The minimum value for the <see cref="UIntParameter"/>
         /// </summary>
-        public uint Min { get; } = min;
+        public uint Min { get; }
+
+        /// <param name="value">The value of the parameter</param>
+        /// <param name="min">The minimum value for the <see cref="UIntParameter"/></param>
+        /// <param name="max">The maximum value for the <see cref="UIntParameter"/></param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
+        public UIntParameter(uint value,
+                             uint min,
+                             uint max,
+                             string name,
+                             string units,
+                             ParameterType? parameterType = default) : base(value, name, units, parameterType)
+        {
+            Max = max;
+            Min = min;
+        }
+
+        /// <param name="value">The value of the parameter</param>
+        /// <param name="min">The minimum value for the <see cref="UIntParameter"/></param>
+        /// <param name="max">The maximum value for the <see cref="UIntParameter"/></param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="writeAsync">The function for writing the parameters value</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
+        public UIntParameter(uint value,
+                             uint min,
+                             uint max,
+                             string name,
+                             string units,
+                             Func<int, uint, Task> writeAsync,
+                             ParameterType? parameterType = default) : base(value, name, units, writeAsync, parameterType)
+        {
+            Max = max;
+            Min = min;
+        }
     }
 }

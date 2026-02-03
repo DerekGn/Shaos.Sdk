@@ -30,6 +30,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
     {
         public readonly UIntParameter _parameter;
         private ParameterValueChangedEventArgs<uint>? _eventArgs;
+        private uint _updatedValue;
 
         public UIntParameterTests()
         {
@@ -38,7 +39,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                                            10,
                                            nameof(UIntParameter),
                                            "Units",
-                                           false,
+                                           WriteCallbackAsync,
                                            ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;
@@ -73,6 +74,13 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                                                  ParameterValueChangedEventArgs<uint> e)
         {
             _eventArgs = e;
+
+            await Task.CompletedTask;
+        }
+
+        private async Task WriteCallbackAsync(int id, uint value)
+        {
+            _updatedValue = value;
 
             await Task.CompletedTask;
         }

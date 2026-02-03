@@ -28,8 +28,9 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
     public class FloatParameterTests : BaseParameterTests
     {
-        public readonly FloatParameter _parameter;
+        private readonly FloatParameter _parameter;
         private ParameterValueChangedEventArgs<float>? _eventArgs;
+        private float _updatedValue;
 
         public FloatParameterTests()
         {
@@ -38,7 +39,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                                             1.0f,
                                             nameof(FloatParameter),
                                             "Units",
-                                            false,
+                                            WriteCallbackAsync,
                                             ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;
@@ -71,10 +72,27 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                          TimeSpan.FromSeconds(1));
         }
 
+        [Fact]
+        public async Task TestWriteValue()
+        {
+            await _parameter.WriteAsync(1.0f);
+
+            Assert.True(_parameter.CanWrite);
+            Assert.Equal(1.0f, _updatedValue);
+        }
+
         private async Task ParameterValueChanged(object sender,
                                                  ParameterValueChangedEventArgs<float> e)
         {
             _eventArgs = e;
+
+            await Task.CompletedTask;
+        }
+
+        private async Task WriteCallbackAsync(int id,
+                                              float value)
+        {
+            _updatedValue = value;
 
             await Task.CompletedTask;
         }

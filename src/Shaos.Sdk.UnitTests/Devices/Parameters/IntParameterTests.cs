@@ -28,8 +28,9 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
     public class IntParameterTests : BaseParameterTests
     {
-        public readonly IntParameter _parameter;
+        private readonly IntParameter _parameter;
         private ParameterValueChangedEventArgs<int>? _eventArgs;
+        private int _updatedValue;
 
         public IntParameterTests()
         {
@@ -38,7 +39,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                                           10,
                                           nameof(IntParameter),
                                           "Units",
-                                          false,
+                                          WriteCallbackAsync,
                                           ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;
@@ -71,10 +72,27 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                          TimeSpan.FromSeconds(1));
         }
 
+        [Fact]
+        public async Task TestWriteValue()
+        {
+            await _parameter.WriteAsync(1);
+
+            Assert.True(_parameter.CanWrite);
+            Assert.Equal(1.0, _updatedValue);
+        }
+
         private async Task ParameterValueChanged(object sender,
                                                  ParameterValueChangedEventArgs<int> e)
         {
             _eventArgs = e;
+
+            await Task.CompletedTask;
+        }
+
+        private async Task WriteCallbackAsync(int id,
+                                              int value)
+        {
+            _updatedValue = value;
 
             await Task.CompletedTask;
         }

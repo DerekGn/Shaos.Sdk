@@ -30,30 +30,52 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <remarks>
     /// Create an instance of a <see cref="IntParameter"/>
     /// </remarks>
-    /// <param name="value">The value of the parameter</param>
-    /// <param name="min">The minimum value for the <see cref="IntParameter"/></param>
-    /// <param name="max">The maximum value for the <see cref="IntParameter"/></param>
-    /// <param name="name">The name of the parameter</param>
-    /// <param name="units">The units of this parameter</param>
-    /// <param name="canWrite">Indicates if the parameter can be written</param>
-    /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-    public class IntParameter(int value,
-                              int min,
-                              int max,
-                              string name,
-                              string units,
-                              bool canWrite = false,
-                              ParameterType? parameterType = default) 
-        : BaseParameter<int>(value, name, units, canWrite, parameterType)
+    public class IntParameter : BaseParameter<int>
     {
         /// <summary>
         /// The maximum value for the <see cref="IntParameter"/>
         /// </summary>
-        public int Max { get; } = max;
+        public int Max { get; }
 
         /// <summary>
         /// The minimum value for the <see cref="IntParameter"/>
         /// </summary>
-        public int Min { get; } = min;
+        public int Min { get; }
+
+        /// <param name="value">The value of the parameter</param>
+        /// <param name="min">The minimum value for the <see cref="IntParameter"/></param>
+        /// <param name="max">The maximum value for the <see cref="IntParameter"/></param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
+        public IntParameter(int value,
+                            int min,
+                            int max,
+                            string name,
+                            string units,
+                            ParameterType? parameterType = default) : base(value, name, units, parameterType)
+        {
+            Max = max;
+            Min = min;
+        }
+
+        /// <param name="value">The value of the parameter</param>
+        /// <param name="min">The minimum value for the <see cref="IntParameter"/></param>
+        /// <param name="max">The maximum value for the <see cref="IntParameter"/></param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="writeAsync">The function for writing the parameters value</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
+        public IntParameter(int value,
+                            int min,
+                            int max,
+                            string name,
+                            string units,
+                            Func<int, int, Task> writeAsync,
+                            ParameterType? parameterType = default) : base(value, name, units, writeAsync, parameterType)
+        {
+            Max = max;
+            Min = min;
+        }
     }
 }

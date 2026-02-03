@@ -28,15 +28,16 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
     public class BoolParameterTests : BaseParameterTests
     {
-        public readonly BoolParameter _parameter;
+        private readonly BoolParameter _parameter;
         private ParameterValueChangedEventArgs<bool>? _eventArgs;
+        private bool _updatedValue;
 
         public BoolParameterTests()
         {
             _parameter = new BoolParameter(false,
                                            nameof(BoolParameter),
                                            Units,
-                                           false,
+                                           WriteCallbackAsync,
                                            ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;
@@ -48,10 +49,14 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             _parameter.SetId(10);
 
             Assert.NotNull(_parameter);
-            Assert.Equal(10, _parameter.Id);
-            Assert.Equal(nameof(BoolParameter), _parameter.Name);
-            Assert.Equal(ParameterType.Level, _parameter.ParameterType);
-            Assert.Equal(Units, _parameter.Units);
+            Assert.Equal(10,
+                         _parameter.Id);
+            Assert.Equal(nameof(BoolParameter),
+                         _parameter.Name);
+            Assert.Equal(ParameterType.Level,
+                         _parameter.ParameterType);
+            Assert.Equal(Units,
+                         _parameter.Units);
         }
 
         [Fact]
@@ -67,10 +72,27 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                          TimeSpan.FromSeconds(1));
         }
 
+        [Fact]
+        public async Task TestWriteValue()
+        {
+            await _parameter.WriteAsync(true);
+
+            Assert.True(_parameter.CanWrite);
+            Assert.True(_updatedValue);
+        }
+
         private async Task ParameterValueChanged(object sender,
                                                  ParameterValueChangedEventArgs<bool> e)
         {
             _eventArgs = e;
+
+            await Task.CompletedTask;
+        }
+
+        private async Task WriteCallbackAsync(int id,
+                                              bool value)
+        {
+            _updatedValue = value;
 
             await Task.CompletedTask;
         }

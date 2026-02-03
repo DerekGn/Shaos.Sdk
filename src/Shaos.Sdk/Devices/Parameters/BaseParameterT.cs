@@ -32,6 +32,7 @@ namespace Shaos.Sdk.Devices.Parameters
     public abstract class BaseParameter<T> : BaseParameter, IBaseParameter<T>
     {
         private readonly bool _canWrite;
+        private readonly Func<int, T, Task>? _writeAsync = null;
         private T _value;
 
         /// <summary>
@@ -40,17 +41,35 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="value"></param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
-        /// <param name="canWrite">Indicates if the parameter can be written</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
         protected BaseParameter(T value,
                                 string name,
                                 string units,
-                                bool canWrite,
-                                ParameterType? parameterType) 
+                                ParameterType? parameterType)
             : base(name, units, parameterType)
         {
             _value = value;
-            _canWrite = canWrite;
+            _canWrite = false;
+        }
+
+        /// <summary>
+        /// Create an instance of a <see cref="BaseParameter{T}"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="writeAsync">The function for writing the parameters value</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
+        protected BaseParameter(T value,
+                                string name,
+                                string units,
+                                Func<int, T, Task> writeAsync,
+                                ParameterType? parameterType)
+            : base(name, units, parameterType)
+        {
+            _value = value;
+            _writeAsync = writeAsync;
+            _canWrite = writeAsync != null;
         }
 
         /// <inheritdoc/>
@@ -77,9 +96,13 @@ namespace Shaos.Sdk.Devices.Parameters
         }
 
         /// <inheritdoc/>
-        public Task WriteAsync(T value)
+        public async Task WriteAsync(T value)
         {
-            throw new NotImplementedException();
+            if (_writeAsync != null)
+            {
+                await _writeAsync(Id,
+                                  value);
+            }
         }
 
         /// <summary>

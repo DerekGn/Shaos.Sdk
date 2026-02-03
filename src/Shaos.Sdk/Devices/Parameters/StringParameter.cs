@@ -30,17 +30,30 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <remarks>
     /// Create an instance of a <see cref="StringParameter"/>
     /// </remarks>
-    /// <param name="value">The value of the parameter</param>
-    /// <param name="name">The name of the parameter</param>
-    /// <param name="units">The units of this parameter</param>
-    /// <param name="canWrite">Indicates if the parameter can be written</param>
-    /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-    public class StringParameter(string value,
-                                 string name,
-                                 string units,
-                                 bool canWrite = false,
-                                 ParameterType? parameterType = default) 
-        : BaseParameter<string>(value, name, units, canWrite, parameterType)
+    public class StringParameter : BaseParameter<string>
     {
+        /// <param name="value">The value of the parameter</param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
+        public StringParameter(string value,
+                               string name,
+                               string units,
+                               ParameterType? parameterType = default) : base(value, name, units, parameterType)
+        {
+        }
+
+        /// <param name="value">The value of the parameter</param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="writeAsync">The function for writing the parameters value</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
+        public StringParameter(string value,
+                               string name,
+                               string units,
+                               Func<int, string, Task> writeAsync,
+                               ParameterType? parameterType = default) : base(value, name, units, writeAsync, parameterType)
+        {
+        }
     }
 }

@@ -39,7 +39,9 @@ namespace Shaos.Sdk.UnitTests.Devices
         {
             BatteryLevelChangedEventArgs? eventArgs = null;
 
-            Device device = new Device(Name, DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered, []);
+            Device device = new Device(Name,
+                                       DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
+                                       []);
 
             AsyncEventHandler<BatteryLevelChangedEventArgs> eventHandler = (s, e) =>
             {
@@ -55,7 +57,12 @@ namespace Shaos.Sdk.UnitTests.Devices
                 device.BatteryLevel!.Level = 1;
 
                 Assert.NotNull(eventArgs);
+
                 Assert.Equal((uint)1, eventArgs.BatteryLevel);
+
+                Assert.Equal(DateTime.UtcNow,
+                             eventArgs.TimeStamp,
+                             TimeSpan.FromSeconds(1));
             }
             finally
             {
@@ -66,7 +73,9 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public async Task TestDeviceParameterAdded()
         {
-            Device device = new Device(Name, DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered, []);
+            Device device = new Device(Name,
+                                       DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
+                                       []);
 
             try
             {
@@ -75,7 +84,8 @@ namespace Shaos.Sdk.UnitTests.Devices
                 await device.Parameters.AddAsync(CreateBoolParameter());
 
                 Assert.NotNull(_listChangedEventArgs);
-                Assert.Equal(ListChangedAction.Add, _listChangedEventArgs.Action);
+                Assert.Equal(ListChangedAction.Add,
+                             _listChangedEventArgs.Action);
             }
             finally
             {
@@ -91,7 +101,9 @@ namespace Shaos.Sdk.UnitTests.Devices
                 CreateBoolParameter()
             };
 
-            Device device = new Device(Name, DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered, parameters);
+            Device device = new Device(Name,
+                                       DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
+                                       parameters);
 
             try
             {
@@ -100,7 +112,8 @@ namespace Shaos.Sdk.UnitTests.Devices
                 await device.Parameters.RemoveAtAsync(0);
 
                 Assert.NotNull(_listChangedEventArgs);
-                Assert.Equal(ListChangedAction.Remove, _listChangedEventArgs.Action);
+                Assert.Equal(ListChangedAction.Remove,
+                             _listChangedEventArgs.Action);
                 Assert.Empty(device.Parameters);
             }
             finally
@@ -112,12 +125,21 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public void TestDeviceProperties()
         {
-            Device device = new Device(Name, DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered, []);
+            Device device = new Device(Name,
+                                       DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
+                                       []);
 
             device.SetId(10);
 
             Assert.Equal(10, device.Id);
             Assert.Equal(Name, device.Name);
+            Assert.NotNull(device.SignalLevel);
+            Assert.Equal(-100, device.SignalLevel.Level);
+            Assert.NotNull(device.BatteryLevel);
+            Assert.Equal(0u, device.BatteryLevel.Level);
+
+            Assert.Equal(DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
+                         device.Features);
         }
 
         [Fact]
@@ -125,7 +147,9 @@ namespace Shaos.Sdk.UnitTests.Devices
         {
             SignalLevelChangedEventArgs? eventArgs = null;
 
-            Device device = new Device(Name, DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered, []);
+            Device device = new Device(Name,
+                                       DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
+                                       []);
 
             AsyncEventHandler<SignalLevelChangedEventArgs> eventHandler = (s, e) =>
             {
@@ -141,7 +165,13 @@ namespace Shaos.Sdk.UnitTests.Devices
                 device.SignalLevel!.Level = -10;
 
                 Assert.NotNull(eventArgs);
-                Assert.Equal(-10, eventArgs.SignalLevel);
+
+                Assert.Equal(-10,
+                             eventArgs.SignalLevel);
+
+                Assert.Equal(DateTime.UtcNow,
+                             eventArgs.TimeStamp,
+                             TimeSpan.FromSeconds(1));
             }
             finally
             {
@@ -151,10 +181,14 @@ namespace Shaos.Sdk.UnitTests.Devices
 
         private static BoolParameter CreateBoolParameter()
         {
-            return new BoolParameter(true, Name, "units", ParameterType.Iaq);
+            return new BoolParameter(true,
+                                     Name,
+                                     "units",
+                                     ParameterType.Iaq);
         }
 
-        private Task ParametersListChanged(object sender, ListChangedEventArgs<IBaseParameter> e)
+        private Task ParametersListChanged(object sender,
+                                           ListChangedEventArgs<IBaseParameter> e)
         {
             _listChangedEventArgs = e;
 

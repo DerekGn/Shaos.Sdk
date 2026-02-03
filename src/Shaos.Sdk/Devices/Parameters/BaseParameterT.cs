@@ -31,6 +31,8 @@ namespace Shaos.Sdk.Devices.Parameters
     /// </summary>
     public abstract class BaseParameter<T> : BaseParameter, IBaseParameter<T>
     {
+        private readonly bool _canWrite;
+        private readonly Func<int, T, Task>? _writeAsync = null;
         private T _value;
 
         /// <summary>
@@ -41,21 +43,42 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="units">The units of this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
         protected BaseParameter(T value,
-                                string? name,
-                                string? units,
-                                ParameterType? parameterType) : base(name, units, parameterType)
+                                string name,
+                                string units,
+                                ParameterType? parameterType)
+            : base(name, units, parameterType)
         {
             _value = value;
+            _canWrite = false;
         }
 
         /// <summary>
-        /// Raised when the value of the parameter changes
+        /// Create an instance of a <see cref="BaseParameter{T}"/>
         /// </summary>
+        /// <param name="value"></param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="writeAsync">The function for writing the parameters value</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
+        protected BaseParameter(T value,
+                                string name,
+                                string units,
+                                Func<int, T, Task> writeAsync,
+                                ParameterType? parameterType)
+            : base(name, units, parameterType)
+        {
+            _value = value;
+            _writeAsync = writeAsync;
+            _canWrite = writeAsync != null;
+        }
+
+        /// <inheritdoc/>
         public event AsyncEventHandler<ParameterValueChangedEventArgs<T>>? ValueChanged;
 
-        /// <summary>
-        /// The <see cref="BaseParameter{T}"/> current value
-        /// </summary>
+        /// <inheritdoc/>
+        public bool CanWrite => _canWrite;
+
+        /// <inheritdoc/>
         public T Value
         {
             get
@@ -64,15 +87,22 @@ namespace Shaos.Sdk.Devices.Parameters
             }
         }
 
-        /// <summary>
-        /// Update the <see cref="ObservableList{T}"/>
-        /// </summary>
-        /// <param name="value">The value to assign to <see cref="Value"/></param>
-        public async Task WriteValueAsync(T value)
+        /// <inheritdoc/>
+        public async Task NotifyValueChangedAsync(T value)
         {
             _value = value;
 
             await OnValueChangedAsync(new ParameterValueChangedEventArgs<T>(value));
+        }
+
+        /// <inheritdoc/>
+        public async Task WriteAsync(T value)
+        {
+            if (_writeAsync != null)
+            {
+                await _writeAsync(Id,
+                                  value);
+            }
         }
 
         /// <summary>

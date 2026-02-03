@@ -52,30 +52,12 @@ namespace Shaos.Sdk.Collections.Generic
         }
 
         /// <inheritdoc/>
-        public T this[int index]
-        {
-            get
-            {
-                return _items[index];
-            }
-            set
-            {
-                _items[index] = value;
-            }
-        }
-
-        /// <inheritdoc/>
-        public void Add(T item)
-        {
-            _items.Add(item);
-        }
-
-        /// <inheritdoc/>
         public async Task AddAsync(T item)
         {
             _items.Add(item);
 
-            await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Add, [item]));
+            await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Add,
+                                                                 [item]));
         }
 
         /// <inheritdoc/>
@@ -85,7 +67,8 @@ namespace Shaos.Sdk.Collections.Generic
 
             _items.Clear();
 
-            await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Reset, values));
+            await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Reset,
+                                                                 values));
         }
 
         /// <inheritdoc/>
@@ -101,11 +84,13 @@ namespace Shaos.Sdk.Collections.Generic
         }
 
         /// <inheritdoc/>
-        public async Task InsertAsync(int index, T item)
+        public async Task InsertAsync(int index,
+                                      T item)
         {
             _items.Insert(index, item);
 
-            await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Add, [item]));
+            await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Add,
+                                                                 [item]));
         }
 
         /// <inheritdoc/>
@@ -115,7 +100,8 @@ namespace Shaos.Sdk.Collections.Generic
 
             if (removed)
             {
-                await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Remove, [item]));
+                await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Remove,
+                                                                     [item]));
             }
 
             return removed;
@@ -130,8 +116,14 @@ namespace Shaos.Sdk.Collections.Generic
 
             if (item != null)
             {
-                await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Remove, [item]));
+                await OnListChangedAsync(new ListChangedEventArgs<T>(ListChangedAction.Remove,
+                                                                     [item]));
             }
+        }
+
+        internal void Add(T item)
+        {
+            _items.Add(item);
         }
 
         /// <inheritdoc/>

@@ -33,21 +33,21 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <param name="name">The name of the parameter</param>
     /// <param name="units">The units of this parameter</param>
     /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-    public abstract class BaseParameter(string? name,
-                                        string? units,
+    public abstract class BaseParameter(string name,
+                                        string units,
                                         ParameterType? parameterType)
     {
         /// <inheritdoc/>
         public int Id { get; internal set; }
 
         /// <inheritdoc/>
-        public string? Name { get; } = name;
+        public string Name { get; } = name;
 
         /// <inheritdoc/>
         public ParameterType? ParameterType { get; } = parameterType;
 
         /// <inheritdoc/>
-        public string? Units { get; } = units;
+        public string Units { get; } = units;
 
         /// <inheritdoc/>
         public void SetId(int id)

@@ -17,19 +17,6 @@
         int Count { get; }
 
         /// <summary>
-        /// Gets or sets the element at the specified index.
-        /// </summary>
-        /// <param name="index">The zero-based index of the element to get or set.</param>
-        /// <returns>The element at the specified index.</returns>
-        T this[int index] { get; set; }
-
-        /// <summary>
-        /// Adds an item to the <see cref="ObservableList{T}"/>
-        /// </summary>
-        /// <param name="item"></param>
-        void Add(T item);
-
-        /// <summary>
         /// Adds an item to the <see cref="ObservableList{T}"/>
         /// </summary>
         /// <param name="item">The object to add to the <see cref="ObservableList{T}"/></param>
@@ -45,7 +32,8 @@
         /// </summary>
         /// <param name="index">The insert index</param>
         /// <param name="item">The item of <typeparamref name="T"/> to insert</param>
-        Task InsertAsync(int index, T item);
+        Task InsertAsync(int index,
+                         T item);
 
         /// <summary>
         /// Removes the first occurrence of a specific object from the <see cref="ObservableList{T}"/>

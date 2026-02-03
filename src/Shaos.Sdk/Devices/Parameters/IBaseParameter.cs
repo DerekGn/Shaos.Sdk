@@ -37,7 +37,7 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <summary>
         /// The <see cref="BaseParameter{T}"/> name
         /// </summary>
-        string? Name { get; }
+        string Name { get; }
 
         /// <summary>
         /// The <see cref="ParameterType"/>
@@ -47,12 +47,17 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <summary>
         /// The <see cref="BaseParameter{T}"/> units
         /// </summary>
-        string? Units { get; }
+        string Units { get; }
 
         /// <summary>
         /// Set the identifier of the <see cref="IBaseParameter"/>
         /// </summary>
         /// <param name="id">The identifier to set</param>
-        public void SetId(int id);
+        void SetId(int id);
+
+        /// <summary>
+        /// Indicates if a <see cref="IBaseParameter"/> can be written.
+        /// </summary>
+        bool CanWrite { get; }
     }
 }

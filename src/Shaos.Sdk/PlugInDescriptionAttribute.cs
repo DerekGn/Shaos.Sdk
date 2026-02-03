@@ -38,7 +38,8 @@ namespace Shaos.Sdk
         /// </summary>
         /// <param name="name">The <see cref="IPlugIn"/> instance name</param>
         /// <param name="description">The <see cref="IPlugIn"/> instance description</param>
-        public PlugInDescriptionAttribute(string name, string description)
+        public PlugInDescriptionAttribute(string name,
+                                          string description)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(name);
             ArgumentException.ThrowIfNullOrWhiteSpace(description);

@@ -12,7 +12,8 @@ namespace Shaos.Sdk.Collections.Generic
         /// </summary>
         /// <param name="action"></param>
         /// <param name="items"></param>
-        public ListChangedEventArgs(ListChangedAction action, IList<T> items)
+        public ListChangedEventArgs(ListChangedAction action,
+                                    IList<T> items)
         {
             Action = action;
             Items = items;

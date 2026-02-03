@@ -26,10 +26,11 @@ using Shaos.Sdk.Devices.Parameters;
 
 namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
-    public class UIntParameterTests
+    public class UIntParameterTests : BaseParameterTests
     {
         public readonly UIntParameter _parameter;
         private ParameterValueChangedEventArgs<uint>? _eventArgs;
+        private uint _updatedValue;
 
         public UIntParameterTests()
         {
@@ -38,24 +39,48 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                                            10,
                                            nameof(UIntParameter),
                                            "Units",
+                                           WriteCallbackAsync,
                                            ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;
         }
 
         [Fact]
+        public void TestParameterProperties()
+        {
+            _parameter.SetId(10);
+
+            Assert.NotNull(_parameter);
+            Assert.Equal(10, _parameter.Id);
+            Assert.Equal(10u, _parameter.Max);
+            Assert.Equal(0u, _parameter.Min);
+            Assert.Equal(nameof(UIntParameter), _parameter.Name);
+            Assert.Equal(ParameterType.Level, _parameter.ParameterType);
+            Assert.Equal(Units, _parameter.Units);
+        }
+
+        [Fact]
         public async Task TestValueChangedAsync()
         {
-            await _parameter.WriteValueAsync(10);
+            await _parameter.NotifyValueChangedAsync(10);
 
             Assert.NotNull(_eventArgs);
             Assert.Equal((uint)10, _eventArgs.Value);
             Assert.Equal((uint)10, _parameter.Value);
+            Assert.Equal(DateTime.UtcNow, _eventArgs.TimeStamp, TimeSpan.FromSeconds(1));
         }
 
-        private async Task ParameterValueChanged(object sender, ParameterValueChangedEventArgs<uint> e)
+        private async Task ParameterValueChanged(object sender,
+                                                 ParameterValueChangedEventArgs<uint> e)
         {
             _eventArgs = e;
+
+            await Task.CompletedTask;
+        }
+
+        private async Task WriteCallbackAsync(int id, uint value)
+        {
+            _updatedValue = value;
 
             await Task.CompletedTask;
         }

@@ -26,10 +26,11 @@ using Shaos.Sdk.Devices.Parameters;
 
 namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
-    public class FloatParameterTests
+    public class FloatParameterTests : BaseParameterTests
     {
-        public readonly FloatParameter _parameter;
+        private readonly FloatParameter _parameter;
         private ParameterValueChangedEventArgs<float>? _eventArgs;
+        private float _updatedValue;
 
         public FloatParameterTests()
         {
@@ -38,24 +39,60 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                                             1.0f,
                                             nameof(FloatParameter),
                                             "Units",
+                                            WriteCallbackAsync,
                                             ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;
         }
 
         [Fact]
+        public void TestParameterProperties()
+        {
+            _parameter.SetId(10);
+
+            Assert.NotNull(_parameter);
+            Assert.Equal(10, _parameter.Id);
+            Assert.Equal(1, _parameter.Max);
+            Assert.Equal(0, _parameter.Min);
+            Assert.Equal(nameof(FloatParameter), _parameter.Name);
+            Assert.Equal(ParameterType.Level, _parameter.ParameterType);
+            Assert.Equal(Units, _parameter.Units);
+        }
+
+        [Fact]
         public async Task TestValueChangedAsync()
         {
-            await _parameter.WriteValueAsync(10.0f);
+            await _parameter.NotifyValueChangedAsync(10.0f);
 
             Assert.NotNull(_eventArgs);
             Assert.Equal(10.0f, _eventArgs.Value);
             Assert.Equal(10.0f, _parameter.Value);
+            Assert.Equal(DateTime.UtcNow,
+                         _eventArgs.TimeStamp,
+                         TimeSpan.FromSeconds(1));
         }
 
-        private async Task ParameterValueChanged(object sender, ParameterValueChangedEventArgs<float> e)
+        [Fact]
+        public async Task TestWriteValue()
+        {
+            await _parameter.WriteAsync(1.0f);
+
+            Assert.True(_parameter.CanWrite);
+            Assert.Equal(1.0f, _updatedValue);
+        }
+
+        private async Task ParameterValueChanged(object sender,
+                                                 ParameterValueChangedEventArgs<float> e)
         {
             _eventArgs = e;
+
+            await Task.CompletedTask;
+        }
+
+        private async Task WriteCallbackAsync(int id,
+                                              float value)
+        {
+            _updatedValue = value;
 
             await Task.CompletedTask;
         }

@@ -26,31 +26,70 @@ using Shaos.Sdk.Devices.Parameters;
 
 namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
-    public class StringParameterTests
+    public class StringParameterTests : BaseParameterTests
     {
-        public readonly StringParameter _parameter;
+        private const string TestValue = "Test";
+        private readonly StringParameter _parameter;
         private ParameterValueChangedEventArgs<string>? _eventArgs;
+        private string _updatedValue = "";
 
         public StringParameterTests()
         {
-            _parameter = new StringParameter(string.Empty, nameof(StringParameter), "Units", ParameterType.Level);
+            _parameter = new StringParameter(string.Empty,
+                                             nameof(StringParameter),
+                                             "Units",
+                                             WriteCallbackAsync,
+                                             ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;
         }
 
         [Fact]
+        public void TestParameterProperties()
+        {
+            _parameter.SetId(10);
+
+            Assert.NotNull(_parameter);
+            Assert.Equal(10, _parameter.Id);
+            Assert.Equal(nameof(StringParameter), _parameter.Name);
+            Assert.Equal(ParameterType.Level, _parameter.ParameterType);
+            Assert.Equal(Units, _parameter.Units);
+        }
+
+        [Fact]
         public async Task TestValueChangedAsync()
         {
-            await _parameter.WriteValueAsync("X");
+            await _parameter.NotifyValueChangedAsync("X");
 
             Assert.NotNull(_eventArgs);
             Assert.Equal("X", _eventArgs.Value);
             Assert.Equal("X", _parameter.Value);
+            Assert.Equal(DateTime.UtcNow,
+                         _eventArgs.TimeStamp,
+                         TimeSpan.FromSeconds(1));
         }
 
-        private async Task ParameterValueChanged(object sender, ParameterValueChangedEventArgs<string> e)
+        [Fact]
+        public async Task TestWriteValue()
+        {
+            await _parameter.WriteAsync(TestValue);
+
+            Assert.True(_parameter.CanWrite);
+            Assert.Equal(TestValue, _updatedValue);
+        }
+
+        private async Task ParameterValueChanged(object sender,
+                                                 ParameterValueChangedEventArgs<string> e)
         {
             _eventArgs = e;
+
+            await Task.CompletedTask;
+        }
+
+        private async Task WriteCallbackAsync(int id,
+                                              string value)
+        {
+            _updatedValue = value;
 
             await Task.CompletedTask;
         }

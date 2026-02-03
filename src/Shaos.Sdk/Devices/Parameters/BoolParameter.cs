@@ -30,14 +30,30 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <remarks>
     /// Create an instance of a <see cref="BoolParameter"/>
     /// </remarks>
-    /// <param name="value">The value of the parameter</param>
-    /// <param name="name">The name of the parameter</param>
-    /// <param name="units">The units of this parameter</param>
-    /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-    public class BoolParameter(bool value,
-                               string? name,
-                               string? units,
-                               ParameterType? parameterType) : BaseParameter<bool>(value, name, units, parameterType)
+    public class BoolParameter : BaseParameter<bool>
     {
+        /// <param name="value">The value of the parameter</param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
+        public BoolParameter(bool value,
+                             string name,
+                             string units,
+                             ParameterType? parameterType = default) : base(value, name, units, parameterType)
+        {
+        }
+
+        /// <param name="value">The value of the parameter</param>
+        /// <param name="name">The name of the parameter</param>
+        /// <param name="units">The units of this parameter</param>
+        /// <param name="writeAsync">The function for writing the parameters value</param>
+        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
+        public BoolParameter(bool value,
+                             string name,
+                             string units,
+                             Func<int, bool, Task> writeAsync,
+                             ParameterType? parameterType = default) : base(value, name, units, writeAsync, parameterType)
+        {
+        }
     }
 }

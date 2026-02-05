@@ -30,15 +30,17 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <remarks>
     /// Create an instance of a <see cref="BaseParameter"/>
     /// </remarks>
+    /// <param name="id">The parameter identifier</param>
     /// <param name="name">The name of the parameter</param>
     /// <param name="units">The units of this parameter</param>
     /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-    public abstract class BaseParameter(string name,
+    public abstract class BaseParameter(int id,
+                                        string name,
                                         string units,
                                         ParameterType? parameterType)
     {
         /// <inheritdoc/>
-        public int Id { get; internal set; }
+        public int Id { get; init; } = id;
 
         /// <inheritdoc/>
         public string Name { get; } = name;
@@ -48,11 +50,5 @@ namespace Shaos.Sdk.Devices.Parameters
 
         /// <inheritdoc/>
         public string Units { get; } = units;
-
-        /// <inheritdoc/>
-        public void SetId(int id)
-        {
-            Id = id;
-        }
     }
 }

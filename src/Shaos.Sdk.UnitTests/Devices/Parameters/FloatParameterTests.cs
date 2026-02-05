@@ -34,7 +34,8 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 
         public FloatParameterTests()
         {
-            _parameter = new FloatParameter(1.0f,
+            _parameter = new FloatParameter(10,
+                                            1.0f,
                                             0f,
                                             1.0f,
                                             nameof(FloatParameter),
@@ -48,8 +49,6 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public void TestParameterProperties()
         {
-            _parameter.SetId(10);
-
             Assert.NotNull(_parameter);
             Assert.Equal(10, _parameter.Id);
             Assert.Equal(1, _parameter.Max);

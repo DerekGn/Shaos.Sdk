@@ -42,23 +42,26 @@ namespace Shaos.Sdk.Devices.Parameters
         /// </summary>
         public uint Min { get; }
 
+        /// <param name="id">The parameter identifier</param>
         /// <param name="value">The value of the parameter</param>
         /// <param name="min">The minimum value for the <see cref="UIntParameter"/></param>
         /// <param name="max">The maximum value for the <see cref="UIntParameter"/></param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        public UIntParameter(uint value,
+        public UIntParameter(int id,
+                             uint value,
                              uint min,
                              uint max,
                              string name,
                              string units,
-                             ParameterType? parameterType = default) : base(value, name, units, parameterType)
+                             ParameterType? parameterType = default) : base(id, value, name, units, parameterType)
         {
             Max = max;
             Min = min;
         }
 
+        /// <param name="id">The parameter identifier</param>
         /// <param name="value">The value of the parameter</param>
         /// <param name="min">The minimum value for the <see cref="UIntParameter"/></param>
         /// <param name="max">The maximum value for the <see cref="UIntParameter"/></param>
@@ -66,13 +69,14 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="units">The units of this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        public UIntParameter(uint value,
+        public UIntParameter(int id,
+                             uint value,
                              uint min,
                              uint max,
                              string name,
                              string units,
                              Func<int, uint, Task> writeAsync,
-                             ParameterType? parameterType = default) : base(value, name, units, writeAsync, parameterType)
+                             ParameterType? parameterType = default) : base(id, value, name, units, writeAsync, parameterType)
         {
             Max = max;
             Min = min;

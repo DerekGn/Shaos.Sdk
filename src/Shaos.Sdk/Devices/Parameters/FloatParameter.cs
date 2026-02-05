@@ -42,23 +42,26 @@ namespace Shaos.Sdk.Devices.Parameters
         /// </summary>
         public float Min { get; }
 
+        /// <param name="id">The parameter identifier</param>
         /// <param name="value">The value of the <see cref="FloatParameter"/></param>
         /// <param name="min">The minimum value for the <see cref="FloatParameter"/></param>
         /// <param name="max">The maximum value for the <see cref="FloatParameter"/></param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        public FloatParameter(float value,
+        public FloatParameter(int id,
+                              float value,
                               float min,
                               float max,
                               string name,
                               string units,
-                              ParameterType? parameterType = default) : base(value, name, units, parameterType)
+                              ParameterType? parameterType = default) : base(id, value, name, units, parameterType)
         {
             Max = max;
             Min = min;
         }
 
+        /// <param name="id">The parameter identifier</param>
         /// <param name="value">The value of the <see cref="FloatParameter"/></param>
         /// <param name="min">The minimum value for the <see cref="FloatParameter"/></param>
         /// <param name="max">The maximum value for the <see cref="FloatParameter"/></param>
@@ -66,13 +69,14 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="units">The units of this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        public FloatParameter(float value,
+        public FloatParameter(int id,
+                              float value,
                               float min,
                               float max,
                               string name,
                               string units,
                               Func<int, float, Task> writeAsync,
-                              ParameterType? parameterType = default) : base(value, name, units, writeAsync, parameterType)
+                              ParameterType? parameterType = default) : base(id, value, name, units, writeAsync, parameterType)
         {
             Max = max;
             Min = min;

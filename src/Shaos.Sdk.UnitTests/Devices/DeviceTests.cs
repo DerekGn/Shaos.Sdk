@@ -39,7 +39,8 @@ namespace Shaos.Sdk.UnitTests.Devices
         {
             BatteryLevelChangedEventArgs? eventArgs = null;
 
-            Device device = new Device(Name,
+            Device device = new Device(1,
+                                       Name,
                                        DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
                                        []);
 
@@ -73,7 +74,8 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public async Task TestDeviceParameterAdded()
         {
-            Device device = new Device(Name,
+            Device device = new Device(1,
+                                       Name,
                                        DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
                                        []);
 
@@ -101,7 +103,8 @@ namespace Shaos.Sdk.UnitTests.Devices
                 CreateBoolParameter()
             };
 
-            Device device = new Device(Name,
+            Device device = new Device(1,
+                                       Name,
                                        DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
                                        parameters);
 
@@ -125,13 +128,12 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public void TestDeviceProperties()
         {
-            Device device = new Device(Name,
+            Device device = new Device(1,
+                                       Name,
                                        DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
                                        []);
 
-            device.SetId(10);
-
-            Assert.Equal(10, device.Id);
+            Assert.Equal(1, device.Id);
             Assert.Equal(Name, device.Name);
             Assert.NotNull(device.SignalLevel);
             Assert.Equal(-100, device.SignalLevel.Level);
@@ -147,7 +149,8 @@ namespace Shaos.Sdk.UnitTests.Devices
         {
             SignalLevelChangedEventArgs? eventArgs = null;
 
-            Device device = new Device(Name,
+            Device device = new Device(1,
+                                       Name,
                                        DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
                                        []);
 
@@ -181,7 +184,8 @@ namespace Shaos.Sdk.UnitTests.Devices
 
         private static BoolParameter CreateBoolParameter()
         {
-            return new BoolParameter(true,
+            return new BoolParameter(1,
+                                     true,
                                      Name,
                                      "units",
                                      ParameterType.Iaq);

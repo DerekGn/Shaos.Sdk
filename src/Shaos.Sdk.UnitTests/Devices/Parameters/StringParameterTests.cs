@@ -35,7 +35,8 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 
         public StringParameterTests()
         {
-            _parameter = new StringParameter(string.Empty,
+            _parameter = new StringParameter(10,
+                                             string.Empty,
                                              nameof(StringParameter),
                                              "Units",
                                              WriteCallbackAsync,
@@ -47,8 +48,6 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public void TestParameterProperties()
         {
-            _parameter.SetId(10);
-
             Assert.NotNull(_parameter);
             Assert.Equal(10, _parameter.Id);
             Assert.Equal(nameof(StringParameter), _parameter.Name);

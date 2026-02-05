@@ -50,12 +50,6 @@ namespace Shaos.Sdk.Devices.Parameters
         string Units { get; }
 
         /// <summary>
-        /// Set the identifier of the <see cref="IBaseParameter"/>
-        /// </summary>
-        /// <param name="id">The identifier to set</param>
-        void SetId(int id);
-
-        /// <summary>
         /// Indicates if a <see cref="IBaseParameter"/> can be written.
         /// </summary>
         bool CanWrite { get; }

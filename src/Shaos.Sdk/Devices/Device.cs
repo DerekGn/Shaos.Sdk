@@ -35,13 +35,16 @@ namespace Shaos.Sdk.Devices
         /// <summary>
         /// Create an instance of a <see cref="Device"/>
         /// </summary>
+        /// <param name="id">The device identifier</param>
         /// <param name="name">The device name</param>
         /// <param name="features">The device features <see cref="DeviceFeatures"/></param>
         /// <param name="parameters">The set of <see cref="BaseParameter"/> instances for this <see cref="Device"/></param>
-        public Device(string name,
+        public Device(int id,
+                      string name,
                       DeviceFeatures features,
                       IList<IBaseParameter> parameters)
         {
+            Id = id;
             Name = name;
             Features = features;
 
@@ -88,12 +91,6 @@ namespace Shaos.Sdk.Devices
 
         /// <inheritdoc/>
         public SignalLevel? SignalLevel { get; }
-
-        /// <inheritdoc/>
-        public void SetId(int id)
-        {
-            Id = id;
-        }
 
         internal void RaiseBatteryLevelChanged(uint level)
         {

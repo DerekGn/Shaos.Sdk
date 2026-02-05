@@ -34,7 +34,8 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 
         public BoolParameterTests()
         {
-            _parameter = new BoolParameter(false,
+            _parameter = new BoolParameter(10,
+                                           false,
                                            nameof(BoolParameter),
                                            Units,
                                            WriteCallbackAsync,
@@ -46,8 +47,6 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public void TestParameterProperties()
         {
-            _parameter.SetId(10);
-
             Assert.NotNull(_parameter);
             Assert.Equal(10,
                          _parameter.Id);

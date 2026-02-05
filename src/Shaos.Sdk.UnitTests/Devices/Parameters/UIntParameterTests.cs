@@ -34,7 +34,8 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 
         public UIntParameterTests()
         {
-            _parameter = new UIntParameter(0,
+            _parameter = new UIntParameter(10,
+                                           0,
                                            0,
                                            10,
                                            nameof(UIntParameter),
@@ -48,8 +49,6 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public void TestParameterProperties()
         {
-            _parameter.SetId(10);
-
             Assert.NotNull(_parameter);
             Assert.Equal(10, _parameter.Id);
             Assert.Equal(10u, _parameter.Max);

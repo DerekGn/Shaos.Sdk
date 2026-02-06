@@ -33,29 +33,6 @@ namespace Shaos.Sdk.Devices
     public interface IDevice
     {
         /// <summary>
-        /// Raised when the <see cref="Device"/> battery level changes
-        /// </summary>
-        event AsyncEventHandler<BatteryLevelChangedEventArgs>? BatteryLevelChanged;
-
-        /// <summary>
-        /// Raised when the <see cref="Device"/> battery level changes
-        /// </summary>
-        event AsyncEventHandler<SignalLevelChangedEventArgs>? SignalLevelChanged;
-
-        /// <summary>
-        /// The <see cref="BatteryLevel"/> for this device
-        /// </summary>
-        /// <remarks>
-        /// A <see cref="Device"/> optional battery level
-        /// </remarks>
-        BatteryLevel? BatteryLevel { get; }
-
-        /// <summary>
-        /// The features of this device
-        /// </summary>
-        DeviceFeatures Features { get; }
-
-        /// <summary>
         /// The device identifier
         /// </summary>
         int Id { get; }
@@ -72,13 +49,5 @@ namespace Shaos.Sdk.Devices
         /// The set of <see cref="Device"/> <see cref="BaseParameter"/>
         /// </summary>
         IChildObservableList<IDevice, IBaseParameter> Parameters { get; }
-
-        /// <summary>
-        /// The <see cref="SignalLevel"/> for this device
-        /// </summary>
-        /// <remarks>
-        /// A <see cref="Device"/> optional signal level
-        /// </remarks>
-        SignalLevel? SignalLevel { get; }
     }
 }

@@ -40,7 +40,7 @@ namespace Shaos.Sdk.Devices.Parameters
                                         ParameterType? parameterType)
     {
         /// <inheritdoc/>
-        public int Id { get; init; } = id;
+        public int Id { get; } = id;
 
         /// <inheritdoc/>
         public string Name { get; } = name;

@@ -38,6 +38,6 @@ namespace Shaos.Sdk.Collections.Generic
         /// <summary>
         /// The parent type of this collection
         /// </summary>
-        public TParent Parent { get; private set; } = parent;
+        public TParent Parent { get; } = parent;
     }
 }

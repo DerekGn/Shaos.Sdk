@@ -37,26 +37,13 @@ namespace Shaos.Sdk.Devices
         /// </summary>
         /// <param name="id">The device identifier</param>
         /// <param name="name">The device name</param>
-        /// <param name="features">The device features <see cref="DeviceFeatures"/></param>
         /// <param name="parameters">The set of <see cref="BaseParameter"/> instances for this <see cref="Device"/></param>
         public Device(int id,
                       string name,
-                      DeviceFeatures features,
                       IList<IBaseParameter> parameters)
         {
             Id = id;
             Name = name;
-            Features = features;
-
-            if ((features & DeviceFeatures.BatteryPowered) == DeviceFeatures.BatteryPowered)
-            {
-                BatteryLevel = new BatteryLevel(this, 0);
-            }
-
-            if ((features & DeviceFeatures.Wireless) == DeviceFeatures.Wireless)
-            {
-                SignalLevel = new SignalLevel(this, -100);
-            }
 
             var childList = new ChildObservableList<IDevice, IBaseParameter>(this);
 
@@ -69,18 +56,6 @@ namespace Shaos.Sdk.Devices
         }
 
         /// <inheritdoc/>
-        public event AsyncEventHandler<BatteryLevelChangedEventArgs>? BatteryLevelChanged;
-
-        /// <inheritdoc/>
-        public event AsyncEventHandler<SignalLevelChangedEventArgs>? SignalLevelChanged;
-
-        /// <inheritdoc/>
-        public BatteryLevel? BatteryLevel { get; }
-
-        /// <inheritdoc/>
-        public DeviceFeatures Features { get; }
-
-        /// <inheritdoc/>
         public int Id { get; internal set; }
 
         /// <inheritdoc/>
@@ -88,36 +63,5 @@ namespace Shaos.Sdk.Devices
 
         /// <inheritdoc/>
         public IChildObservableList<IDevice, IBaseParameter> Parameters { get; }
-
-        /// <inheritdoc/>
-        public SignalLevel? SignalLevel { get; }
-
-        internal void RaiseBatteryLevelChanged(uint level)
-        {
-            OnBatteryLevelChanged(new BatteryLevelChangedEventArgs() { BatteryLevel = level });
-        }
-
-        internal void RaiseSignalLevelChanged(int level)
-        {
-            OnSignalLevelChanged(new SignalLevelChangedEventArgs() { SignalLevel = level });
-        }
-
-        /// <summary>
-        /// Raise the <see cref="BatteryLevelChanged"/>
-        /// </summary>
-        /// <param name="e">The <see cref="BatteryLevelChangedEventArgs"/></param>
-        protected virtual void OnBatteryLevelChanged(BatteryLevelChangedEventArgs e)
-        {
-            BatteryLevelChanged?.Invoke(this, e);
-        }
-
-        /// <summary>
-        /// Raise the <see cref="SignalLevelChanged"/>
-        /// </summary>
-        /// <param name="e">The <see cref="SignalLevelChangedEventArgs"/></param>
-        protected virtual void OnSignalLevelChanged(SignalLevelChangedEventArgs e)
-        {
-            SignalLevelChanged?.Invoke(this, e);
-        }
     }
 }

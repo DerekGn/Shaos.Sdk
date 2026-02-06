@@ -35,48 +35,10 @@ namespace Shaos.Sdk.UnitTests.Devices
         private ListChangedEventArgs<IBaseParameter>? _listChangedEventArgs;
 
         [Fact]
-        public void TestDeviceBatteryLevelChanged()
-        {
-            BatteryLevelChangedEventArgs? eventArgs = null;
-
-            Device device = new Device(1,
-                                       Name,
-                                       DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
-                                       []);
-
-            AsyncEventHandler<BatteryLevelChangedEventArgs> eventHandler = (s, e) =>
-            {
-                eventArgs = e;
-
-                return Task.CompletedTask;
-            };
-
-            try
-            {
-                device.BatteryLevelChanged += eventHandler;
-
-                device.BatteryLevel!.Level = 1;
-
-                Assert.NotNull(eventArgs);
-
-                Assert.Equal((uint)1, eventArgs.BatteryLevel);
-
-                Assert.Equal(DateTime.UtcNow,
-                             eventArgs.TimeStamp,
-                             TimeSpan.FromSeconds(1));
-            }
-            finally
-            {
-                device.BatteryLevelChanged -= eventHandler;
-            }
-        }
-
-        [Fact]
         public async Task TestDeviceParameterAdded()
         {
             Device device = new Device(1,
                                        Name,
-                                       DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
                                        []);
 
             try
@@ -105,7 +67,6 @@ namespace Shaos.Sdk.UnitTests.Devices
 
             Device device = new Device(1,
                                        Name,
-                                       DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
                                        parameters);
 
             try
@@ -130,56 +91,10 @@ namespace Shaos.Sdk.UnitTests.Devices
         {
             Device device = new Device(1,
                                        Name,
-                                       DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
                                        []);
 
             Assert.Equal(1, device.Id);
             Assert.Equal(Name, device.Name);
-            Assert.NotNull(device.SignalLevel);
-            Assert.Equal(-100, device.SignalLevel.Level);
-            Assert.NotNull(device.BatteryLevel);
-            Assert.Equal(0u, device.BatteryLevel.Level);
-
-            Assert.Equal(DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
-                         device.Features);
-        }
-
-        [Fact]
-        public void TestDeviceSignalLevelChanged()
-        {
-            SignalLevelChangedEventArgs? eventArgs = null;
-
-            Device device = new Device(1,
-                                       Name,
-                                       DeviceFeatures.Wireless | DeviceFeatures.BatteryPowered,
-                                       []);
-
-            AsyncEventHandler<SignalLevelChangedEventArgs> eventHandler = (s, e) =>
-            {
-                eventArgs = e;
-
-                return Task.CompletedTask;
-            };
-
-            try
-            {
-                device.SignalLevelChanged += eventHandler;
-
-                device.SignalLevel!.Level = -10;
-
-                Assert.NotNull(eventArgs);
-
-                Assert.Equal(-10,
-                             eventArgs.SignalLevel);
-
-                Assert.Equal(DateTime.UtcNow,
-                             eventArgs.TimeStamp,
-                             TimeSpan.FromSeconds(1));
-            }
-            finally
-            {
-                device.SignalLevelChanged -= eventHandler;
-            }
         }
 
         private static BoolParameter CreateBoolParameter()

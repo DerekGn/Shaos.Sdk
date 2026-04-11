@@ -38,6 +38,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                                            0,
                                            0,
                                            10,
+                                           1,
                                            nameof(UIntParameter),
                                            "Units",
                                            WriteCallbackAsync,

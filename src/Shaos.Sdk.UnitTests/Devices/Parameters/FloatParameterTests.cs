@@ -38,6 +38,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                                             1.0f,
                                             0f,
                                             1.0f,
+                                            0.1f,
                                             nameof(FloatParameter),
                                             "Units",
                                             WriteCallbackAsync,

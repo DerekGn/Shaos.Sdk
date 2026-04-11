@@ -47,8 +47,10 @@ namespace Shaos.Sdk.Devices.Parameters
                                 T value,
                                 string name,
                                 string units,
-                                ParameterType? parameterType)
-            : base(id, name, units, parameterType)
+                                ParameterType? parameterType) : base(id,
+                                                                     name,
+                                                                     units,
+                                                                     parameterType)
         {
             _value = value;
             _canWrite = false;
@@ -68,8 +70,10 @@ namespace Shaos.Sdk.Devices.Parameters
                                 string name,
                                 string units,
                                 Func<int, T, Task> writeAsync,
-                                ParameterType? parameterType)
-            : base(id, name, units, parameterType)
+                                ParameterType? parameterType) : base(id,
+                                                                     name,
+                                                                     units,
+                                                                     parameterType)
         {
             _value = value;
             _writeAsync = writeAsync;

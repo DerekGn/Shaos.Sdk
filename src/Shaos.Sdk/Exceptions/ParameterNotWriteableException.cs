@@ -22,23 +22,23 @@
 * SOFTWARE.
 */
 
-using Shaos.Sdk.Devices;
+using Shaos.Sdk.Devices.Parameters;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Shaos.Sdk.Exceptions
 {
     /// <summary>
-    /// Thrown when the parent of a <see cref="Device"/> instance cannot be found
+    /// Thrown when a <see cref="BaseParameter"/> cannot be written
     /// </summary>
     /// <remarks>
-    /// Create an instance of a <see cref="DeviceParentNotFoundException"/>
+    /// Create an instance of a <see cref="ParameterNotWriteableException"/>
     /// </remarks>
-    /// <param name="id">The identifier of the parent</param>
+    /// <param name="id">The identifier of the <see cref="BaseParameter"/></param>
     [ExcludeFromCodeCoverage]
-    public class DeviceParentNotFoundException(int id) : Exception
+    public class ParameterNotWriteableException(int id) : Exception
     {
         /// <summary>
-        /// The identifier of the <see cref="Device"/> parent
+        /// The identifier of the <see cref="BaseParameter"/> instance
         /// </summary>
         public int Id { get; } = id;
     }

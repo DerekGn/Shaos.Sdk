@@ -23,6 +23,7 @@
 */
 
 using Shaos.Sdk.Collections.Generic;
+using Shaos.Sdk.Exceptions;
 
 namespace Shaos.Sdk.Devices.Parameters
 {
@@ -110,6 +111,10 @@ namespace Shaos.Sdk.Devices.Parameters
             {
                 await _writeAsync(Id,
                                   value);
+            }
+            else
+            {
+                throw new ParameterNotWriteableException(Id);
             }
         }
 

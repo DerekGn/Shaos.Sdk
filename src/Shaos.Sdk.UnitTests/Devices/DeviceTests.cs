@@ -37,8 +37,7 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public async Task TestDeviceParameterAdded()
         {
-            Device device = new Device(1,
-                                       Name,
+            Device device = new Device(Name,
                                        []);
 
             try
@@ -65,8 +64,7 @@ namespace Shaos.Sdk.UnitTests.Devices
                 CreateBoolParameter()
             };
 
-            Device device = new Device(1,
-                                       Name,
+            Device device = new Device(Name,
                                        parameters);
 
             try
@@ -89,17 +87,15 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public void TestDeviceProperties()
         {
-            Device device = new Device(1,
-                                       Name,
+            Device device = new Device(Name,
                                        []);
 
-            Assert.Equal(1, device.Id);
             Assert.Equal(Name, device.Name);
         }
 
         private static BoolParameter CreateBoolParameter()
         {
-            return new BoolParameter(1,
+            return new BoolParameter("1",
                                      true,
                                      Name,
                                      "units",

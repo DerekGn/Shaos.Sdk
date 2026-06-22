@@ -33,7 +33,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 
         public BoolParameterWriteTests()
         {
-            _parameter = new BoolParameter(10,
+            _parameter = new BoolParameter("10",
                                            false,
                                            nameof(BoolParameter),
                                            Units,

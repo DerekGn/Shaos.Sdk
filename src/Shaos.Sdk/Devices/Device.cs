@@ -35,14 +35,11 @@ namespace Shaos.Sdk.Devices
         /// <summary>
         /// Create an instance of a <see cref="Device"/>
         /// </summary>
-        /// <param name="id">The device identifier</param>
         /// <param name="name">The device name</param>
         /// <param name="parameters">The set of <see cref="BaseParameter"/> instances for this <see cref="Device"/></param>
-        public Device(int id,
-                      string name,
+        public Device(string name,
                       IList<IBaseParameter> parameters)
         {
-            Id = id;
             Name = name;
 
             var childList = new ChildObservableList<IDevice, IBaseParameter>(this);
@@ -54,9 +51,6 @@ namespace Shaos.Sdk.Devices
                 childList.Add(parameter);
             }
         }
-
-        /// <inheritdoc/>
-        public int Id { get; internal set; }
 
         /// <inheritdoc/>
         public string Name { get; }

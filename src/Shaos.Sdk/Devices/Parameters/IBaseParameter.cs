@@ -30,9 +30,17 @@ namespace Shaos.Sdk.Devices.Parameters
     public interface IBaseParameter
     {
         /// <summary>
-        /// The <see cref="BaseParameter"/> identifier
+        /// Indicates if a <see cref="IBaseParameter"/> can be written.
         /// </summary>
-        int Id { get; }
+        bool CanWrite { get; }
+
+        /// <summary>
+        /// The <see cref="BaseParameter"/> instance identifier
+        /// </summary>
+        /// <remarks>
+        /// This is an application generated value and must be unique
+        /// </remarks>
+        string InstanceId { get; }
 
         /// <summary>
         /// The <see cref="BaseParameter{T}"/> name
@@ -48,10 +56,5 @@ namespace Shaos.Sdk.Devices.Parameters
         /// The <see cref="BaseParameter{T}"/> units
         /// </summary>
         string Units { get; }
-
-        /// <summary>
-        /// Indicates if a <see cref="IBaseParameter"/> can be written.
-        /// </summary>
-        bool CanWrite { get; }
     }
 }

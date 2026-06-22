@@ -33,13 +33,13 @@ namespace Shaos.Sdk.Exceptions
     /// <remarks>
     /// Create an instance of a <see cref="ParameterNotWriteableException"/>
     /// </remarks>
-    /// <param name="id">The identifier of the <see cref="BaseParameter"/></param>
+    /// <param name="instanceId">The instance identifier of the <see cref="BaseParameter"/></param>
     [ExcludeFromCodeCoverage]
-    public class ParameterNotWriteableException(int id) : Exception
+    public class ParameterNotWriteableException(string instanceId) : Exception
     {
         /// <summary>
         /// The identifier of the <see cref="BaseParameter"/> instance
         /// </summary>
-        public int Id { get; } = id;
+        public string InstanceId { get; } = instanceId;
     }
 }

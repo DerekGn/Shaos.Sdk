@@ -38,11 +38,6 @@ namespace Shaos.Sdk
         IChildObservableList<IPlugIn, IDevice> Devices { get; }
 
         /// <summary>
-        /// The system assigned identifier for this <see cref="IPlugIn"/> instance
-        /// </summary>
-        int Id { get; set; }
-
-        /// <summary>
         /// The entry point of the<see cref="IPlugIn"/> instance
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to cancel the <see cref="IPlugIn"/> method execution</param>

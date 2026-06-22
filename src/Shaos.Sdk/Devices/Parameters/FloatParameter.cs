@@ -32,7 +32,7 @@ namespace Shaos.Sdk.Devices.Parameters
     /// </remarks>
     public class FloatParameter : BaseParameterMinMax<float>
     {
-        /// <param name="id">The parameter identifier</param>
+        /// <param name="instanceId">The parameter instance identifier</param>
         /// <param name="value">The value of the <see cref="FloatParameter"/></param>
         /// <param name="min">The minimum value for the <see cref="FloatParameter"/></param>
         /// <param name="max">The maximum value for the <see cref="FloatParameter"/></param>
@@ -40,14 +40,14 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        public FloatParameter(int id,
+        public FloatParameter(string instanceId,
                               float value,
                               float min,
                               float max,
                               float step,
                               string name,
                               string units,
-                              ParameterType? parameterType = default) : base(id,
+                              ParameterType? parameterType = default) : base(instanceId,
                                                                              value,
                                                                              min,
                                                                              max,
@@ -58,7 +58,7 @@ namespace Shaos.Sdk.Devices.Parameters
         {
         }
 
-        /// <param name="id">The parameter identifier</param>
+        /// <param name="instanceId">The parameter instance identifier</param>
         /// <param name="value">The value of the <see cref="FloatParameter"/></param>
         /// <param name="min">The minimum value for the <see cref="FloatParameter"/></param>
         /// <param name="max">The maximum value for the <see cref="FloatParameter"/></param>
@@ -67,15 +67,15 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="units">The units of this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        public FloatParameter(int id,
+        public FloatParameter(string instanceId,
                               float value,
                               float min,
                               float max,
                               float step,
                               string name,
                               string units,
-                              Func<int, float, Task> writeAsync,
-                              ParameterType? parameterType = default) : base(id,
+                              Func<string, float, Task> writeAsync,
+                              ParameterType? parameterType = default) : base(instanceId,
                                                                              value,
                                                                              min,
                                                                              max,

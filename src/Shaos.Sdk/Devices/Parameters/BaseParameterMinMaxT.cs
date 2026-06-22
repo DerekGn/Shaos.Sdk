@@ -9,7 +9,7 @@
         /// <summary>
         /// Create an instance of a <see cref="BaseParameterMinMax{T}"/>
         /// </summary>
-        /// <param name="id">The parameter identifier</param>
+        /// <param name="instanceId">The parameter instance identifier</param>
         /// <param name="value">The value of the <see cref="BaseParameterMinMax{T}"/>></param>
         /// <param name="min">The minimum value for the <see cref="BaseParameterMinMax{T}"/></param>
         /// <param name="max">The maximum value for the <see cref="BaseParameterMinMax{T}"/></param>
@@ -17,14 +17,14 @@
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        protected BaseParameterMinMax(int id,
+        protected BaseParameterMinMax(string instanceId,
                                       T value,
                                       T min,
                                       T max,
                                       T step,
                                       string name,
                                       string units,
-                                      ParameterType? parameterType) : base(id,
+                                      ParameterType? parameterType) : base(instanceId,
                                                                            value,
                                                                            name,
                                                                            units,
@@ -38,7 +38,7 @@
         /// <summary>
         /// Create an instance of a <see cref="BaseParameterMinMax{T}"/>
         /// </summary>
-        /// <param name="id">The parameter identifier</param>
+        /// <param name="instanceId">The parameter instance identifier</param>
         /// <param name="value">The value of the <see cref="BaseParameterMinMax{T}"/>></param>
         /// <param name="min">The minimum value for the <see cref="BaseParameterMinMax{T}"/></param>
         /// <param name="max">The maximum value for the <see cref="BaseParameterMinMax{T}"/></param>
@@ -47,15 +47,15 @@
         /// <param name="units">The units of this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        protected BaseParameterMinMax(int id,
+        protected BaseParameterMinMax(string instanceId,
                                       T value,
                                       T min,
                                       T max,
                                       T step,
                                       string name,
                                       string units,
-                                      Func<int, T, Task> writeAsync,
-                                      ParameterType? parameterType) : base(id,
+                                      Func<string, T, Task> writeAsync,
+                                      ParameterType? parameterType) : base(instanceId,
                                                                            value,
                                                                            name,
                                                                            units,

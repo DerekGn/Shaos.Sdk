@@ -22,6 +22,7 @@
 * SOFTWARE.
 */
 
+using Newtonsoft.Json.Linq;
 using Shaos.Sdk.Devices.Parameters;
 
 namespace Shaos.Sdk.UnitTests.Devices.Parameters
@@ -34,7 +35,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 
         public BoolParameterTests()
         {
-            _parameter = new BoolParameter(10,
+            _parameter = new BoolParameter("10",
                                            false,
                                            nameof(BoolParameter),
                                            Units,
@@ -48,8 +49,8 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         public void TestParameterProperties()
         {
             Assert.NotNull(_parameter);
-            Assert.Equal(10,
-                         _parameter.Id);
+            Assert.Equal("10",
+                         _parameter.InstanceId);
             Assert.Equal(nameof(BoolParameter),
                          _parameter.Name);
             Assert.Equal(ParameterType.Level,
@@ -66,6 +67,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             Assert.NotNull(_eventArgs);
             Assert.True(_eventArgs.Value);
             Assert.True(_parameter.Value);
+            Assert.True(_updatedValue);
             Assert.Equal(DateTime.UtcNow,
                          _eventArgs.TimeStamp,
                          TimeSpan.FromSeconds(1));
@@ -83,12 +85,13 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         private async Task ParameterValueChanged(object sender,
                                                  ParameterValueChangedEventArgs<bool> e)
         {
+            _updatedValue = e.Value;
             _eventArgs = e;
 
             await Task.CompletedTask;
         }
 
-        private async Task WriteCallbackAsync(int id,
+        private async Task WriteCallbackAsync(string instanceId,
                                               bool value)
         {
             _updatedValue = value;

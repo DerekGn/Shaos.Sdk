@@ -33,11 +33,6 @@ namespace Shaos.Sdk.Devices
     public interface IDevice
     {
         /// <summary>
-        /// The device identifier
-        /// </summary>
-        int Id { get; }
-
-        /// <summary>
         /// The device name
         /// </summary>
         /// <remarks>

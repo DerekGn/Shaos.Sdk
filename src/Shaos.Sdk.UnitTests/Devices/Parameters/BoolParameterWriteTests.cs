@@ -22,24 +22,28 @@
 * SOFTWARE.
 */
 
-using Shaos.Sdk.Devices;
-using System.Diagnostics.CodeAnalysis;
+using Shaos.Sdk.Devices.Parameters;
+using Shaos.Sdk.Exceptions;
 
-namespace Shaos.Sdk.Exceptions
+namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
-    /// <summary>
-    /// Thrown when a <see cref="Device"/> instance cannot be found
-    /// </summary>
-    /// <remarks>
-    /// Create an instance of a <see cref="DeviceNotFoundException"/>
-    /// </remarks>
-    /// <param name="id">The identifier of the <see cref="Device"/></param>
-    [ExcludeFromCodeCoverage]
-    public class DeviceNotFoundException(int id) : Exception
+    public class BoolParameterWriteTests : BaseParameterTests
     {
-        /// <summary>
-        /// The identifier of the <see cref="Device"/>
-        /// </summary>
-        public int Id { get; } = id;
+        private readonly BoolParameter _parameter;
+
+        public BoolParameterWriteTests()
+        {
+            _parameter = new BoolParameter(10,
+                                           false,
+                                           nameof(BoolParameter),
+                                           Units,
+                                           ParameterType.Level);
+        }
+
+        [Fact]
+        public async Task TestWriteValue()
+        {
+            await Assert.ThrowsAsync<ParameterNotWriteableException>(async () => await _parameter.WriteAsync(true));
+        }
     }
 }

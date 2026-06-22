@@ -57,6 +57,24 @@ namespace Shaos.Sdk.UnitTests.Devices
         }
 
         [Fact]
+        public async Task TestDeviceParameterAddedDuplicate()
+        {
+            Device device = new Device(Name,
+                                       []);
+
+            try
+            {
+                device.Parameters.ListChanged += ParametersListChangeDuplicate;
+
+                await Assert.ThrowsAsync<Exception>(async () => await device.Parameters.AddAsync(CreateBoolParameter()));
+            }
+            finally
+            {
+                device.Parameters.ListChanged += ParametersListChangeDuplicate;
+            }
+        }
+
+        [Fact]
         public async Task TestDeviceParameterRemoved()
         {
             var parameters = new List<IBaseParameter>()
@@ -108,6 +126,12 @@ namespace Shaos.Sdk.UnitTests.Devices
             _listChangedEventArgs = e;
 
             return Task.CompletedTask;
+        }
+
+        private Task ParametersListChangeDuplicate(object sender,
+                                                   ListChangedEventArgs<IBaseParameter> e)
+        {
+            throw new Exception();
         }
     }
 }

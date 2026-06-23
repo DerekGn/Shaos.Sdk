@@ -32,31 +32,23 @@ namespace Shaos.Sdk.Devices.Parameters
     /// </remarks>
     public class BoolParameter : BaseParameter<bool>
     {
-        /// <param name="id">The parameter identifier</param>
         /// <param name="value">The value of the parameter</param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
+        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        public BoolParameter(int id,
-                             bool value,
-                             string name,
-                             string units,
-                             ParameterType? parameterType = default) : base(id, value, name, units, parameterType)
-        {
-        }
-
-        /// <param name="id">The parameter identifier</param>
-        /// <param name="value">The value of the parameter</param>
-        /// <param name="name">The name of the parameter</param>
-        /// <param name="units">The units of this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
-        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        public BoolParameter(int id,
-                             bool value,
+        public BoolParameter(bool value,
                              string name,
                              string units,
-                             Func<int, bool, Task> writeAsync,
-                             ParameterType? parameterType = default) : base(id, value, name, units, writeAsync, parameterType)
+                             string? referenceId = default,
+                             ParameterType? parameterType = default,
+                             Func<int, bool, Task>? writeAsync = default) : base(value,
+                                                                                 name,
+                                                                                 units,
+                                                                                 referenceId,
+                                                                                 parameterType,
+                                                                                 writeAsync)
         {
         }
     }

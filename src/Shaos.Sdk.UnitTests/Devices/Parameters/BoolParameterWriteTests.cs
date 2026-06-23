@@ -29,21 +29,30 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
     public class BoolParameterWriteTests : BaseParameterTests
     {
+        private const int Id = 10;
         private readonly BoolParameter _parameter;
 
         public BoolParameterWriteTests()
         {
-            _parameter = new BoolParameter(10,
-                                           false,
+            _parameter = new BoolParameter(false,
                                            nameof(BoolParameter),
                                            Units,
+                                           "reference",
                                            ParameterType.Level);
+        }
+
+        [Fact]
+        public async Task TestWriteValueParameterNotWritable()
+        {
+            _parameter.AssignId(Id);
+
+            await Assert.ThrowsAsync<ParameterNotWriteableException>(async () => await _parameter.WriteAsync(true));
         }
 
         [Fact]
         public async Task TestWriteValue()
         {
-            await Assert.ThrowsAsync<ParameterNotWriteableException>(async () => await _parameter.WriteAsync(true));
+            await Assert.ThrowsAsync<IdentifierNotAssignedException>(async () => await _parameter.WriteAsync(true));
         }
     }
 }

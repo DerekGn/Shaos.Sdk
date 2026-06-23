@@ -29,18 +29,19 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
     public class StringParameterTests : BaseParameterTests
     {
         private const string TestValue = "Test";
+        private const int Id = 10;
         private readonly StringParameter _parameter;
         private ParameterValueChangedEventArgs<string>? _eventArgs;
         private string _updatedValue = "";
 
         public StringParameterTests()
         {
-            _parameter = new StringParameter(10,
-                                             string.Empty,
+            _parameter = new StringParameter(string.Empty,
                                              nameof(StringParameter),
                                              "Units",
-                                             WriteCallbackAsync,
-                                             ParameterType.Level);
+                                             "reference",
+                                             ParameterType.Level,
+                                             WriteCallbackAsync);
 
             _parameter.ValueChanged += ParameterValueChanged;
         }
@@ -48,8 +49,10 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public void TestParameterProperties()
         {
+            _parameter.AssignId(Id);
+
             Assert.NotNull(_parameter);
-            Assert.Equal(10, _parameter.Id);
+            Assert.Equal(Id, _parameter.Id);
             Assert.Equal(nameof(StringParameter), _parameter.Name);
             Assert.Equal(ParameterType.Level, _parameter.ParameterType);
             Assert.Equal(Units, _parameter.Units);
@@ -63,6 +66,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             Assert.NotNull(_eventArgs);
             Assert.Equal("X", _eventArgs.Value);
             Assert.Equal("X", _parameter.Value);
+            Assert.Equal("X", _updatedValue);
             Assert.Equal(DateTime.UtcNow,
                          _eventArgs.TimeStamp,
                          TimeSpan.FromSeconds(1));
@@ -71,6 +75,8 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public async Task TestWriteValue()
         {
+            _parameter.AssignId(Id);
+
             await _parameter.WriteAsync(TestValue);
 
             Assert.True(_parameter.CanWrite);
@@ -80,6 +86,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         private async Task ParameterValueChanged(object sender,
                                                  ParameterValueChangedEventArgs<string> e)
         {
+            _updatedValue = e.Value;
             _eventArgs = e;
 
             await Task.CompletedTask;

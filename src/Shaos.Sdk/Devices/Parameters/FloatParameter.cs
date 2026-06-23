@@ -32,58 +32,32 @@ namespace Shaos.Sdk.Devices.Parameters
     /// </remarks>
     public class FloatParameter : BaseParameterMinMax<float>
     {
-        /// <param name="id">The parameter identifier</param>
         /// <param name="value">The value of the <see cref="FloatParameter"/></param>
         /// <param name="min">The minimum value for the <see cref="FloatParameter"/></param>
         /// <param name="max">The maximum value for the <see cref="FloatParameter"/></param>
         /// <param name="step">The step value for the <see cref="FloatParameter"/></param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
+        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        public FloatParameter(int id,
-                              float value,
-                              float min,
-                              float max,
-                              float step,
-                              string name,
-                              string units,
-                              ParameterType? parameterType = default) : base(id,
-                                                                             value,
-                                                                             min,
-                                                                             max,
-                                                                             step,
-                                                                             name,
-                                                                             units,
-                                                                             parameterType)
-        {
-        }
-
-        /// <param name="id">The parameter identifier</param>
-        /// <param name="value">The value of the <see cref="FloatParameter"/></param>
-        /// <param name="min">The minimum value for the <see cref="FloatParameter"/></param>
-        /// <param name="max">The maximum value for the <see cref="FloatParameter"/></param>
-        /// <param name="step">The step value for the <see cref="FloatParameter"/></param>
-        /// <param name="name">The name of the parameter</param>
-        /// <param name="units">The units of this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
-        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        public FloatParameter(int id,
-                              float value,
+        public FloatParameter(float value,
                               float min,
                               float max,
                               float step,
                               string name,
                               string units,
-                              Func<int, float, Task> writeAsync,
-                              ParameterType? parameterType = default) : base(id,
-                                                                             value,
-                                                                             min,
-                                                                             max,
-                                                                             step,
-                                                                             name,
-                                                                             units,
-                                                                             writeAsync,
-                                                                             parameterType)
+                              string? referenceId = default,
+                              ParameterType? parameterType = default,
+                              Func<int, float, Task>? writeAsync = default) : base(value,
+                                                                                   min,
+                                                                                   max,
+                                                                                   step,
+                                                                                   name,
+                                                                                   units,
+                                                                                   referenceId,
+                                                                                   parameterType,
+                                                                                   writeAsync)
         {
         }
     }

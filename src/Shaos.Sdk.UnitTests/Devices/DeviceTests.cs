@@ -25,21 +25,20 @@
 using Shaos.Sdk.Collections.Generic;
 using Shaos.Sdk.Devices;
 using Shaos.Sdk.Devices.Parameters;
+using Shaos.Sdk.Exceptions;
 
 namespace Shaos.Sdk.UnitTests.Devices
 {
     public class DeviceTests
     {
         private const string Name = "name";
-
+        private const string ReferenceId = "referenceid";
         private ListChangedEventArgs<IBaseParameter>? _listChangedEventArgs;
 
         [Fact]
         public async Task TestDeviceParameterAdded()
         {
-            Device device = new Device(1,
-                                       Name,
-                                       []);
+            Device device = new Device(Name);
 
             try
             {
@@ -65,9 +64,8 @@ namespace Shaos.Sdk.UnitTests.Devices
                 CreateBoolParameter()
             };
 
-            Device device = new Device(1,
-                                       Name,
-                                       parameters);
+            Device device = new Device(Name,
+                                       parameters: parameters);
 
             try
             {
@@ -89,20 +87,31 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public void TestDeviceProperties()
         {
-            Device device = new Device(1,
-                                       Name,
-                                       []);
+            Device device = new Device(Name,
+                                       ReferenceId);
 
+            device.AssignId(1);
             Assert.Equal(1, device.Id);
             Assert.Equal(Name, device.Name);
+            Assert.Equal(ReferenceId, device.ReferenceId);
+        }
+
+        [Fact]
+        public void TestDevicePropertiesIdAssigned()
+        {
+            Device device = new Device(Name);
+
+            device.AssignId(1);
+
+            Assert.Throws<IdentifierAssignedException>(() => device.AssignId(1));
         }
 
         private static BoolParameter CreateBoolParameter()
         {
-            return new BoolParameter(1,
-                                     true,
+            return new BoolParameter(true,
                                      Name,
                                      "units",
+                                     "reference",
                                      ParameterType.Iaq);
         }
 

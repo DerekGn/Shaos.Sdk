@@ -22,47 +22,18 @@
 * SOFTWARE.
 */
 
-namespace Shaos.Sdk.Devices.Parameters
+using System.Diagnostics.CodeAnalysis;
+
+namespace Shaos.Sdk.Exceptions
 {
     /// <summary>
-    /// A base parameter
+    /// Thrown when an identifier for a type was already assigned
     /// </summary>
-    public interface IBaseParameter
+    /// <remarks>
+    /// Create an instance of a <see cref="IdentifierAssignedException"/>
+    /// </remarks>
+    [ExcludeFromCodeCoverage]
+    public class IdentifierAssignedException : Exception
     {
-        /// <summary>
-        /// Indicates if a <see cref="IBaseParameter"/> can be written.
-        /// </summary>
-        bool CanWrite { get; }
-
-        /// <summary>
-        /// The <see cref="BaseParameter"/> system assigned identifier
-        /// </summary>
-        int? Id { get; }
-
-        /// <summary>
-        /// The <see cref="BaseParameter{T}"/> name
-        /// </summary>
-        string Name { get; }
-
-        /// <summary>
-        /// The <see cref="ParameterType"/>
-        /// </summary>
-        ParameterType? ParameterType { get; }
-
-        /// <summary>
-        /// Optional reference identifier
-        /// </summary>
-        string? ReferenceId { get; }
-
-        /// <summary>
-        /// The <see cref="BaseParameter{T}"/> units
-        /// </summary>
-        string Units { get; }
-
-        /// <summary>
-        /// Assign the <see cref="IBaseParameter"/> identifier
-        /// </summary>
-        /// <param name="id">The system assigned identifier</param>
-        void AssignId(int id);
     }
 }

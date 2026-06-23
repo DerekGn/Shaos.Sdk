@@ -35,7 +35,7 @@ namespace Shaos.Sdk.Devices
         /// <summary>
         /// The device identifier
         /// </summary>
-        int Id { get; }
+        int? Id { get; }
 
         /// <summary>
         /// The device name
@@ -49,5 +49,16 @@ namespace Shaos.Sdk.Devices
         /// The set of <see cref="Device"/> <see cref="BaseParameter"/>
         /// </summary>
         IChildObservableList<IDevice, IBaseParameter> Parameters { get; }
+
+        /// <summary>
+        /// Optional reference identifier
+        /// </summary>
+        string? ReferenceId { get; }
+
+        /// <summary>
+        /// Assign the <see cref="IDevice"/> identifier
+        /// </summary>
+        /// <param name="id">The system assigned identifier</param>
+        void AssignId(int id);
     }
 }

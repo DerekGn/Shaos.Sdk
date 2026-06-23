@@ -24,6 +24,7 @@
 
 using Shaos.Sdk.Collections.Generic;
 using Shaos.Sdk.Devices.Parameters;
+using Shaos.Sdk.Extensions;
 
 namespace Shaos.Sdk.Devices
 {
@@ -35,33 +36,46 @@ namespace Shaos.Sdk.Devices
         /// <summary>
         /// Create an instance of a <see cref="Device"/>
         /// </summary>
-        /// <param name="id">The device identifier</param>
         /// <param name="name">The device name</param>
+        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameters">The set of <see cref="BaseParameter"/> instances for this <see cref="Device"/></param>
-        public Device(int id,
-                      string name,
-                      IList<IBaseParameter> parameters)
+        public Device(string name,
+                      string? referenceId = null,
+                      IList<IBaseParameter>? parameters = null)
         {
-            Id = id;
             Name = name;
-
+            ReferenceId = referenceId;
             var childList = new ChildObservableList<IDevice, IBaseParameter>(this);
 
             Parameters = childList;
 
-            foreach (var parameter in parameters)
+            if (parameters is not null)
             {
-                childList.Add(parameter);
+                foreach (var parameter in parameters)
+                {
+                    childList.Add(parameter);
+                }
             }
         }
 
         /// <inheritdoc/>
-        public int Id { get; internal set; }
+        public int? Id { get; private set; }
 
         /// <inheritdoc/>
         public string Name { get; }
 
         /// <inheritdoc/>
         public IChildObservableList<IDevice, IBaseParameter> Parameters { get; }
+
+        /// <inheritdoc/>
+        public string? ReferenceId { get; }
+
+        /// <inheritdoc/>
+        public void AssignId(int id)
+        {
+            Id.IsIdentifierAssigned();
+
+            Id = id;
+        }
     }
 }

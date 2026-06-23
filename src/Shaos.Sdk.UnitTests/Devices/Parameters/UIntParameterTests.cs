@@ -29,20 +29,21 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
     public class UIntParameterTests : BaseParameterTests
     {
         public readonly UIntParameter _parameter;
+        private const int Id = 10;
         private ParameterValueChangedEventArgs<uint>? _eventArgs;
         private uint _updatedValue;
 
         public UIntParameterTests()
         {
-            _parameter = new UIntParameter(10,
-                                           0,
+            _parameter = new UIntParameter(0,
                                            0,
                                            10,
                                            1,
                                            nameof(UIntParameter),
                                            "Units",
-                                           WriteCallbackAsync,
-                                           ParameterType.Level);
+                                           "reference",
+                                           ParameterType.Level,
+                                           WriteCallbackAsync);
 
             _parameter.ValueChanged += ParameterValueChanged;
         }
@@ -50,10 +51,13 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public void TestParameterProperties()
         {
+            _parameter.AssignId(Id);
+
             Assert.NotNull(_parameter);
             Assert.Equal(10, _parameter.Id);
-            Assert.Equal(10u, _parameter.Max);
             Assert.Equal(0u, _parameter.Min);
+            Assert.Equal(1u, _parameter.Step);
+            Assert.Equal(10u, _parameter.Max);
             Assert.Equal(nameof(UIntParameter), _parameter.Name);
             Assert.Equal(ParameterType.Level, _parameter.ParameterType);
             Assert.Equal(Units, _parameter.Units);
@@ -67,12 +71,14 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             Assert.NotNull(_eventArgs);
             Assert.Equal((uint)10, _eventArgs.Value);
             Assert.Equal((uint)10, _parameter.Value);
+            Assert.Equal((uint)10, _updatedValue);
             Assert.Equal(DateTime.UtcNow, _eventArgs.TimeStamp, TimeSpan.FromSeconds(1));
         }
 
         private async Task ParameterValueChanged(object sender,
                                                  ParameterValueChangedEventArgs<uint> e)
         {
+            _updatedValue = e.Value;
             _eventArgs = e;
 
             await Task.CompletedTask;

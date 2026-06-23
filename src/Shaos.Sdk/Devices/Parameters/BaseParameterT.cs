@@ -39,42 +39,21 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <summary>
         /// Create an instance of a <see cref="BaseParameter{T}"/>
         /// </summary>
-        /// <param name="id">The parameter identifier</param>
         /// <param name="value">The parameter value</param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
-        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        protected BaseParameter(int id,
-                                T value,
-                                string name,
-                                string units,
-                                ParameterType? parameterType) : base(id,
-                                                                     name,
-                                                                     units,
-                                                                     parameterType)
-        {
-            _value = value;
-            _canWrite = false;
-        }
-
-        /// <summary>
-        /// Create an instance of a <see cref="BaseParameter{T}"/>
-        /// </summary>
-        /// <param name="id">The parameter identifier</param>
-        /// <param name="value">The parameter value</param>
-        /// <param name="name">The name of the parameter</param>
-        /// <param name="units">The units of this parameter</param>
+        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        protected BaseParameter(int id,
-                                T value,
+        protected BaseParameter(T value,
                                 string name,
                                 string units,
-                                Func<int, T, Task> writeAsync,
-                                ParameterType? parameterType) : base(id,
-                                                                     name,
-                                                                     units,
-                                                                     parameterType)
+                                string? referenceId = default,
+                                ParameterType? parameterType = default,
+                                Func<int, T, Task>? writeAsync = default) : base(name,
+                                                                                 units,
+                                                                                 referenceId,
+                                                                                 parameterType)
         {
             _value = value;
             _writeAsync = writeAsync;
@@ -107,15 +86,18 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <inheritdoc/>
         public async Task WriteAsync(T value)
         {
-            if (_writeAsync != null)
+            if (Id is null)
             {
-                await _writeAsync(Id,
-                                  value);
+                throw new IdentifierNotAssignedException();
             }
-            else
+
+            if (_writeAsync is null)
             {
-                throw new ParameterNotWriteableException(Id);
+                throw new ParameterNotWriteableException(Id.Value);
             }
+
+            await _writeAsync(Id.Value,
+                              value);
         }
 
         /// <summary>

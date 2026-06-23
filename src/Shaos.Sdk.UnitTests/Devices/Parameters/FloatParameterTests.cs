@@ -28,21 +28,22 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
     public class FloatParameterTests : BaseParameterTests
     {
+        private const int Id = 10;
         private readonly FloatParameter _parameter;
         private ParameterValueChangedEventArgs<float>? _eventArgs;
         private float _updatedValue;
 
         public FloatParameterTests()
         {
-            _parameter = new FloatParameter(10,
-                                            1.0f,
+            _parameter = new FloatParameter(1.0f,
                                             0f,
                                             1.0f,
                                             0.1f,
                                             nameof(FloatParameter),
                                             "Units",
-                                            WriteCallbackAsync,
-                                            ParameterType.Level);
+                                            "reference",
+                                            ParameterType.Level,
+                                            WriteCallbackAsync);
 
             _parameter.ValueChanged += ParameterValueChanged;
         }
@@ -50,10 +51,13 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public void TestParameterProperties()
         {
+            _parameter.AssignId(Id);
+
             Assert.NotNull(_parameter);
-            Assert.Equal(10, _parameter.Id);
-            Assert.Equal(1, _parameter.Max);
+            Assert.Equal(Id, _parameter.Id);
             Assert.Equal(0, _parameter.Min);
+            Assert.Equal(0.1f, _parameter.Step);
+            Assert.Equal(1, _parameter.Max);
             Assert.Equal(nameof(FloatParameter), _parameter.Name);
             Assert.Equal(ParameterType.Level, _parameter.ParameterType);
             Assert.Equal(Units, _parameter.Units);
@@ -67,6 +71,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             Assert.NotNull(_eventArgs);
             Assert.Equal(10.0f, _eventArgs.Value);
             Assert.Equal(10.0f, _parameter.Value);
+            Assert.Equal(10.0f, _updatedValue);
             Assert.Equal(DateTime.UtcNow,
                          _eventArgs.TimeStamp,
                          TimeSpan.FromSeconds(1));
@@ -75,6 +80,8 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public async Task TestWriteValue()
         {
+            _parameter.AssignId(Id);
+
             await _parameter.WriteAsync(1.0f);
 
             Assert.True(_parameter.CanWrite);
@@ -84,6 +91,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         private async Task ParameterValueChanged(object sender,
                                                  ParameterValueChangedEventArgs<float> e)
         {
+            _updatedValue = e.Value;
             _eventArgs = e;
 
             await Task.CompletedTask;

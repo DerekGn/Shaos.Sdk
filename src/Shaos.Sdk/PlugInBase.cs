@@ -24,6 +24,7 @@
 
 using Shaos.Sdk.Collections.Generic;
 using Shaos.Sdk.Devices;
+using Shaos.Sdk.Extensions;
 
 namespace Shaos.Sdk
 {
@@ -51,7 +52,15 @@ namespace Shaos.Sdk
         public IChildObservableList<IPlugIn, IDevice> Devices => _devices;
 
         /// <inheritdoc/>
-        public int Id { get; set; }
+        public int? Id { get; private set; }
+
+        /// <inheritdoc/>
+        public void AssignId(int id)
+        {
+            Id.IsIdentifierAssigned();
+
+            Id = id;
+        }
 
         /// <inheritdoc/>
         public void Dispose()

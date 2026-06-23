@@ -32,58 +32,32 @@ namespace Shaos.Sdk.Devices.Parameters
     /// </remarks>
     public class UIntParameter : BaseParameterMinMax<uint>
     {
-        /// <param name="id">The parameter identifier</param>
         /// <param name="value">The value of the parameter</param>
         /// <param name="min">The minimum value for the <see cref="UIntParameter"/></param>
         /// <param name="max">The maximum value for the <see cref="UIntParameter"/></param>
         /// <param name="step">The step value for the <see cref="UIntParameter"/></param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
+        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        public UIntParameter(int id,
-                             uint value,
-                             uint min,
-                             uint max,
-                             uint step,
-                             string name,
-                             string units,
-                             ParameterType? parameterType = default) : base(id,
-                                                                            value,
-                                                                            min,
-                                                                            max,
-                                                                            step,
-                                                                            name,
-                                                                            units,
-                                                                            parameterType)
-        {
-        }
-
-        /// <param name="id">The parameter identifier</param>
-        /// <param name="value">The value of the parameter</param>
-        /// <param name="min">The minimum value for the <see cref="UIntParameter"/></param>
-        /// <param name="max">The maximum value for the <see cref="UIntParameter"/></param>
-        /// <param name="step">The step value for the <see cref="UIntParameter"/></param>
-        /// <param name="name">The name of the parameter</param>
-        /// <param name="units">The units of this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
-        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        public UIntParameter(int id,
-                             uint value,
+        public UIntParameter(uint value,
                              uint min,
                              uint max,
                              uint step,
                              string name,
                              string units,
-                             Func<int, uint, Task> writeAsync,
-                             ParameterType? parameterType = default) : base(id,
-                                                                            value,
-                                                                            min,
-                                                                            max,
-                                                                            step,
-                                                                            name,
-                                                                            units,
-                                                                            writeAsync,
-                                                                            parameterType)
+                             string? referenceId = default,
+                             ParameterType? parameterType = default,
+                             Func<int, uint, Task>? writeAsync = default) : base(value,
+                                                                                 min,
+                                                                                 max,
+                                                                                 step,
+                                                                                 name,
+                                                                                 units,
+                                                                                 referenceId,
+                                                                                 parameterType,
+                                                                                 writeAsync)
         {
         }
     }

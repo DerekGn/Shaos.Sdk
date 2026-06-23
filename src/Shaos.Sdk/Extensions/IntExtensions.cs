@@ -22,47 +22,18 @@
 * SOFTWARE.
 */
 
-namespace Shaos.Sdk.Devices.Parameters
+using Shaos.Sdk.Exceptions;
+
+namespace Shaos.Sdk.Extensions
 {
-    /// <summary>
-    /// A base parameter
-    /// </summary>
-    public interface IBaseParameter
+    internal static class IntExtensions
     {
-        /// <summary>
-        /// Indicates if a <see cref="IBaseParameter"/> can be written.
-        /// </summary>
-        bool CanWrite { get; }
-
-        /// <summary>
-        /// The <see cref="BaseParameter"/> system assigned identifier
-        /// </summary>
-        int? Id { get; }
-
-        /// <summary>
-        /// The <see cref="BaseParameter{T}"/> name
-        /// </summary>
-        string Name { get; }
-
-        /// <summary>
-        /// The <see cref="ParameterType"/>
-        /// </summary>
-        ParameterType? ParameterType { get; }
-
-        /// <summary>
-        /// Optional reference identifier
-        /// </summary>
-        string? ReferenceId { get; }
-
-        /// <summary>
-        /// The <see cref="BaseParameter{T}"/> units
-        /// </summary>
-        string Units { get; }
-
-        /// <summary>
-        /// Assign the <see cref="IBaseParameter"/> identifier
-        /// </summary>
-        /// <param name="id">The system assigned identifier</param>
-        void AssignId(int id);
+        public static void IsIdentifierAssigned(this int? id)
+        {
+            if (id is not null)
+            {
+                throw new IdentifierAssignedException();
+            }
+        }
     }
 }

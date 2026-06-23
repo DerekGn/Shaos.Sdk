@@ -22,6 +22,8 @@
 * SOFTWARE.
 */
 
+using Shaos.Sdk.Extensions;
+
 namespace Shaos.Sdk.Devices.Parameters
 {
     /// <summary>
@@ -30,17 +32,17 @@ namespace Shaos.Sdk.Devices.Parameters
     /// <remarks>
     /// Create an instance of a <see cref="BaseParameter"/>
     /// </remarks>
-    /// <param name="id">The parameter identifier</param>
     /// <param name="name">The name of the parameter</param>
     /// <param name="units">The units of this parameter</param>
+    /// <param name="referenceId">The reference identifier for this parameter</param>
     /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-    public abstract class BaseParameter(int id,
-                                        string name,
+    public abstract class BaseParameter(string name,
                                         string units,
+                                        string? referenceId,
                                         ParameterType? parameterType)
     {
         /// <inheritdoc/>
-        public int Id { get; } = id;
+        public int? Id { get; private set; }
 
         /// <inheritdoc/>
         public string Name { get; } = name;
@@ -50,5 +52,16 @@ namespace Shaos.Sdk.Devices.Parameters
 
         /// <inheritdoc/>
         public string Units { get; } = units;
+
+        /// <inheritdoc/>
+        public string? ReferenceId { get; } = referenceId;
+
+        /// <inheritdoc/>
+        public void AssignId(int id)
+        {
+            Id.IsIdentifierAssigned();
+
+            Id = id;
+        }
     }
 }

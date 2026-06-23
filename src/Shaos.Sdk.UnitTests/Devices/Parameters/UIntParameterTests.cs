@@ -41,9 +41,9 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                                            1,
                                            nameof(UIntParameter),
                                            "Units",
-                                           WriteCallbackAsync,
                                            "reference",
-                                           ParameterType.Level);
+                                           ParameterType.Level,
+                                           WriteCallbackAsync);
 
             _parameter.ValueChanged += ParameterValueChanged;
         }
@@ -55,8 +55,9 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 
             Assert.NotNull(_parameter);
             Assert.Equal(10, _parameter.Id);
-            Assert.Equal(10u, _parameter.Max);
             Assert.Equal(0u, _parameter.Min);
+            Assert.Equal(1u, _parameter.Step);
+            Assert.Equal(10u, _parameter.Max);
             Assert.Equal(nameof(UIntParameter), _parameter.Name);
             Assert.Equal(ParameterType.Level, _parameter.ParameterType);
             Assert.Equal(Units, _parameter.Units);

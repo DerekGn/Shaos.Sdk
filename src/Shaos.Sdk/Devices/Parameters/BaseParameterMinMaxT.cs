@@ -39,35 +39,6 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="step">The step value for the <see cref="BaseParameterMinMax{T}"/></param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
-        /// <param name="referenceId">The reference identifier for this parameter</param>
-        /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
-        protected BaseParameterMinMax(T value,
-                                      T min,
-                                      T max,
-                                      T step,
-                                      string name,
-                                      string units,
-                                      string? referenceId,
-                                      ParameterType? parameterType) : base(value,
-                                                                           name,
-                                                                           units,
-                                                                           referenceId,
-                                                                           parameterType)
-        {
-            Max = max;
-            Min = min;
-            Step = step;
-        }
-
-        /// <summary>
-        /// Create an instance of a <see cref="BaseParameterMinMax{T}"/>
-        /// </summary>
-        /// <param name="value">The value of the <see cref="BaseParameterMinMax{T}"/>></param>
-        /// <param name="min">The minimum value for the <see cref="BaseParameterMinMax{T}"/></param>
-        /// <param name="max">The maximum value for the <see cref="BaseParameterMinMax{T}"/></param>
-        /// <param name="step">The step value for the <see cref="BaseParameterMinMax{T}"/></param>
-        /// <param name="name">The name of the parameter</param>
-        /// <param name="units">The units of this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
         /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
@@ -77,14 +48,14 @@ namespace Shaos.Sdk.Devices.Parameters
                                       T step,
                                       string name,
                                       string units,
-                                      Func<int, T, Task> writeAsync,
-                                      string? referenceId,
-                                      ParameterType? parameterType) : base(value,
-                                                                           name,
-                                                                           units,
-                                                                           writeAsync,
-                                                                           referenceId,
-                                                                           parameterType)
+                                      string? referenceId = default,
+                                      ParameterType? parameterType = default,
+                                      Func<int, T, Task>? writeAsync = default) : base(value,
+                                                                                       name,
+                                                                                       units,
+                                                                                       referenceId,
+                                                                                       parameterType,
+                                                                                       writeAsync)
         {
             Max = max;
             Min = min;

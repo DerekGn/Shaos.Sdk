@@ -32,14 +32,13 @@ namespace Shaos.Sdk.UnitTests.Devices
     public class DeviceTests
     {
         private const string Name = "name";
-
+        private const string ReferenceId = "referenceid";
         private ListChangedEventArgs<IBaseParameter>? _listChangedEventArgs;
 
         [Fact]
         public async Task TestDeviceParameterAdded()
         {
-            Device device = new Device(Name,
-                                       []);
+            Device device = new Device(Name);
 
             try
             {
@@ -66,7 +65,7 @@ namespace Shaos.Sdk.UnitTests.Devices
             };
 
             Device device = new Device(Name,
-                                       parameters);
+                                       parameters: parameters);
 
             try
             {
@@ -89,18 +88,18 @@ namespace Shaos.Sdk.UnitTests.Devices
         public void TestDeviceProperties()
         {
             Device device = new Device(Name,
-                                       []);
+                                       ReferenceId);
 
             device.AssignId(1);
             Assert.Equal(1, device.Id);
             Assert.Equal(Name, device.Name);
+            Assert.Equal(ReferenceId, device.ReferenceId);
         }
 
         [Fact]
         public void TestDevicePropertiesIdAssigned()
         {
-            Device device = new Device(Name,
-                                       []);
+            Device device = new Device(Name);
 
             device.AssignId(1);
 

@@ -30,6 +30,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
     public class BoolParameterTests : BaseParameterTests
     {
         private const int Id = 10;
+        private const string ReferenceId = "reference";
         private readonly BoolParameter _parameter;
         private ParameterValueChangedEventArgs<bool>? _eventArgs;
         private bool _updatedValue;
@@ -39,9 +40,9 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             _parameter = new BoolParameter(false,
                                            nameof(BoolParameter),
                                            Units,
-                                           WriteCallbackAsync,
-                                           "reference",
-                                           ParameterType.Level);
+                                           ReferenceId,
+                                           ParameterType.Level,
+                                           WriteCallbackAsync);
 
             _parameter.ValueChanged += ParameterValueChanged;
         }
@@ -52,12 +53,10 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             _parameter.AssignId(Id);
 
             Assert.NotNull(_parameter);
-            Assert.Equal(nameof(BoolParameter),
-                         _parameter.Name);
-            Assert.Equal(ParameterType.Level,
-                         _parameter.ParameterType);
-            Assert.Equal(Units,
-                         _parameter.Units);
+            Assert.Equal(nameof(BoolParameter), _parameter.Name);
+            Assert.Equal(ParameterType.Level, _parameter.ParameterType);
+            Assert.Equal(ReferenceId, _parameter.ReferenceId);
+            Assert.Equal(Units, _parameter.Units);
         }
 
         [Fact]

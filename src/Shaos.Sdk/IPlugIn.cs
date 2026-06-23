@@ -43,15 +43,15 @@ namespace Shaos.Sdk
         int? Id { get; }
 
         /// <summary>
-        /// The entry point of the<see cref="IPlugIn"/> instance
-        /// </summary>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to cancel the <see cref="IPlugIn"/> method execution</param>
-        Task ExecuteAsync(CancellationToken cancellationToken);
-
-        /// <summary>
         /// Assign the <see cref="IPlugIn"/> identifier
         /// </summary>
         /// <param name="id">The system assigned identifier</param>
         void AssignId(int id);
+
+        /// <summary>
+        /// The entry point of the<see cref="IPlugIn"/> instance
+        /// </summary>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to cancel the <see cref="IPlugIn"/> method execution</param>
+        Task ExecuteAsync(CancellationToken cancellationToken);
     }
 }

@@ -63,6 +63,9 @@ namespace Shaos.Sdk.Devices
         public IChildObservableList<IDevice, IBaseParameter> Parameters { get; }
 
         /// <inheritdoc/>
+        public string? ReferenceId { get; }
+
+        /// <inheritdoc/>
         public void AssignId(int id)
         {
             Id.IsIdentifierAssigned();

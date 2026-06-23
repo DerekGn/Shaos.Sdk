@@ -42,12 +42,15 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="value">The parameter value</param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
+        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
         protected BaseParameter(T value,
                                 string name,
                                 string units,
+                                string? referenceId,
                                 ParameterType? parameterType) : base(name,
                                                                      units,
+                                                                     referenceId,
                                                                      parameterType)
         {
             _value = value;
@@ -60,14 +63,17 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="value">The parameter value</param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
+        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
         protected BaseParameter(T value,
                                 string name,
                                 string units,
                                 Func<int, T, Task> writeAsync,
+                                string? referenceId,
                                 ParameterType? parameterType) : base(name,
                                                                      units,
+                                                                     referenceId,
                                                                      parameterType)
         {
             _value = value;

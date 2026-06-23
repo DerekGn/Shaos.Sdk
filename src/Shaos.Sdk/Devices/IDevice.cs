@@ -51,6 +51,11 @@ namespace Shaos.Sdk.Devices
         IChildObservableList<IDevice, IBaseParameter> Parameters { get; }
 
         /// <summary>
+        /// Optional reference identifier
+        /// </summary>
+        string? ReferenceId { get; }
+
+        /// <summary>
         /// Assign the <see cref="IDevice"/> identifier
         /// </summary>
         /// <param name="id">The system assigned identifier</param>

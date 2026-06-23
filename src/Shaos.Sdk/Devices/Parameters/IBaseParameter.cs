@@ -50,6 +50,11 @@ namespace Shaos.Sdk.Devices.Parameters
         ParameterType? ParameterType { get; }
 
         /// <summary>
+        /// Optional reference identifier
+        /// </summary>
+        string? ReferenceId { get; }
+
+        /// <summary>
         /// The <see cref="BaseParameter{T}"/> units
         /// </summary>
         string Units { get; }

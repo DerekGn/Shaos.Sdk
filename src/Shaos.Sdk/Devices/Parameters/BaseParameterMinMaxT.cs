@@ -39,6 +39,7 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="step">The step value for the <see cref="BaseParameterMinMax{T}"/></param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
+        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
         protected BaseParameterMinMax(T value,
                                       T min,
@@ -46,9 +47,11 @@ namespace Shaos.Sdk.Devices.Parameters
                                       T step,
                                       string name,
                                       string units,
+                                      string? referenceId,
                                       ParameterType? parameterType) : base(value,
                                                                            name,
                                                                            units,
+                                                                           referenceId,
                                                                            parameterType)
         {
             Max = max;
@@ -66,6 +69,7 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
+        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
         protected BaseParameterMinMax(T value,
                                       T min,
@@ -74,10 +78,12 @@ namespace Shaos.Sdk.Devices.Parameters
                                       string name,
                                       string units,
                                       Func<int, T, Task> writeAsync,
+                                      string? referenceId,
                                       ParameterType? parameterType) : base(value,
                                                                            name,
                                                                            units,
                                                                            writeAsync,
+                                                                           referenceId,
                                                                            parameterType)
         {
             Max = max;

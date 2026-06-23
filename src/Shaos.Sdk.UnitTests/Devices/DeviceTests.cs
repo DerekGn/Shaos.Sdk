@@ -112,6 +112,7 @@ namespace Shaos.Sdk.UnitTests.Devices
             return new BoolParameter(true,
                                      Name,
                                      "units",
+                                     "reference",
                                      ParameterType.Iaq);
         }
 

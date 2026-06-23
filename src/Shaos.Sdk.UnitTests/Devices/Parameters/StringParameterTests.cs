@@ -40,6 +40,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                                              nameof(StringParameter),
                                              "Units",
                                              WriteCallbackAsync,
+                                             "reference",
                                              ParameterType.Level);
 
             _parameter.ValueChanged += ParameterValueChanged;

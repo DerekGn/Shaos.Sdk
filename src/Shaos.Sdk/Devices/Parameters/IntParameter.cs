@@ -38,6 +38,7 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="step">The step value for the <see cref="IntParameter"/></param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
+        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
         public IntParameter(int value,
                             int min,
@@ -45,12 +46,14 @@ namespace Shaos.Sdk.Devices.Parameters
                             int step,
                             string name,
                             string units,
+                            string? referenceId,
                             ParameterType? parameterType = default) : base(value,
                                                                            min,
                                                                            max,
                                                                            step,
                                                                            name,
                                                                            units,
+                                                                           referenceId,
                                                                            parameterType)
         {
         }
@@ -62,6 +65,7 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
+        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
         public IntParameter(int value,
                             int min,
@@ -70,6 +74,7 @@ namespace Shaos.Sdk.Devices.Parameters
                             string name,
                             string units,
                             Func<int, int, Task> writeAsync,
+                            string? referenceId,
                             ParameterType? parameterType = default) : base(value,
                                                                            min,
                                                                            max,
@@ -77,6 +82,7 @@ namespace Shaos.Sdk.Devices.Parameters
                                                                            name,
                                                                            units,
                                                                            writeAsync,
+                                                                           referenceId,
                                                                            parameterType)
         {
         }

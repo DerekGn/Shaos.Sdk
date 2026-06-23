@@ -28,7 +28,7 @@ namespace Shaos.Sdk.Extensions
 {
     internal static class IntExtensions
     {
-        public static void IsValidIdentifier(this int? id)
+        public static void IsIdentifierAssigned(this int? id)
         {
             if (id is not null)
             {

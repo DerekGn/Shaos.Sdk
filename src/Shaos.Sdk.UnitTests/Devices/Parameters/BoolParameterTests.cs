@@ -23,6 +23,7 @@
 */
 
 using Shaos.Sdk.Devices.Parameters;
+using Shaos.Sdk.Exceptions;
 
 namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
@@ -56,6 +57,14 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                          _parameter.ParameterType);
             Assert.Equal(Units,
                          _parameter.Units);
+        }
+
+        [Fact]
+        public void TestParameterPropertiesIdAssigned()
+        {
+            _parameter.AssignId(Id);
+
+            Assert.Throws<IdentifierAssignedException>(() => _parameter.AssignId(1));
         }
 
         [Fact]

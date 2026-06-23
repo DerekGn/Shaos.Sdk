@@ -25,6 +25,7 @@
 using Shaos.Sdk.Collections.Generic;
 using Shaos.Sdk.Devices;
 using Shaos.Sdk.Devices.Parameters;
+using Shaos.Sdk.Exceptions;
 
 namespace Shaos.Sdk.UnitTests.Devices
 {
@@ -93,6 +94,17 @@ namespace Shaos.Sdk.UnitTests.Devices
             device.AssignId(1);
             Assert.Equal(1, device.Id);
             Assert.Equal(Name, device.Name);
+        }
+
+        [Fact]
+        public void TestDevicePropertiesIdAssigned()
+        {
+            Device device = new Device(Name,
+                                       []);
+
+            device.AssignId(1);
+
+            Assert.Throws<IdentifierAssignedException>(() => device.AssignId(1));
         }
 
         private static BoolParameter CreateBoolParameter()

@@ -1,4 +1,6 @@
-﻿namespace Shaos.Sdk.UnitTests
+﻿using Shaos.Sdk.Exceptions;
+
+namespace Shaos.Sdk.UnitTests
 {
     public class PlugInTests
     {
@@ -24,6 +26,16 @@
 
             Assert.NotNull(plugIn.Devices);
             Assert.Equal(10, plugIn.Id);
+        }
+
+        [Fact]
+        public void TestPlugInPropertiesIdAssignedAndDispose()
+        {
+            using var plugIn = new TestPlugIn();
+
+            plugIn.AssignId(10);
+
+            Assert.Throws<IdentifierAssignedException>(() => plugIn.AssignId(1));
         }
     }
 }

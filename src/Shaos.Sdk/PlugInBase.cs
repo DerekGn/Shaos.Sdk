@@ -57,7 +57,7 @@ namespace Shaos.Sdk
         /// <inheritdoc/>
         public void AssignId(int id)
         {
-            Id.IsValidIdentifier();
+            Id.IsIdentifierAssigned();
 
             Id = id;
         }

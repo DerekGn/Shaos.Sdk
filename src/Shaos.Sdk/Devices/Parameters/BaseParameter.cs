@@ -22,7 +22,6 @@
 * SOFTWARE.
 */
 
-using Shaos.Sdk.Exceptions;
 using Shaos.Sdk.Extensions;
 
 namespace Shaos.Sdk.Devices.Parameters
@@ -55,7 +54,7 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <inheritdoc/>
         public void AssignId(int id)
         {
-            Id.IsValidIdentifier();
+            Id.IsIdentifierAssigned();
 
             Id = id;
         }

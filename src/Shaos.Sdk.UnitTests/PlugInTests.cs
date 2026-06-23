@@ -18,14 +18,12 @@
         [Fact]
         public void TestPlugInPropertiesAndDispose()
         {
-            {
-                using var plugIn = new TestPlugIn();
+            using var plugIn = new TestPlugIn();
 
-                plugIn.Id = 10;
+            plugIn.AssignId(10);
 
-                Assert.NotNull(plugIn.Devices);
-                Assert.Equal(10, plugIn.Id);
-            }
+            Assert.NotNull(plugIn.Devices);
+            Assert.Equal(10, plugIn.Id);
         }
     }
 }

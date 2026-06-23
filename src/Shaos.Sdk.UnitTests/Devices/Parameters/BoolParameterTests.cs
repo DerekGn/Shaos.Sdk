@@ -28,14 +28,14 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
 {
     public class BoolParameterTests : BaseParameterTests
     {
+        private const int Id = 10;
         private readonly BoolParameter _parameter;
         private ParameterValueChangedEventArgs<bool>? _eventArgs;
         private bool _updatedValue;
 
         public BoolParameterTests()
         {
-            _parameter = new BoolParameter(10,
-                                           false,
+            _parameter = new BoolParameter(false,
                                            nameof(BoolParameter),
                                            Units,
                                            WriteCallbackAsync,
@@ -47,9 +47,9 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public void TestParameterProperties()
         {
+            _parameter.AssignId(Id);
+
             Assert.NotNull(_parameter);
-            Assert.Equal(10,
-                         _parameter.Id);
             Assert.Equal(nameof(BoolParameter),
                          _parameter.Name);
             Assert.Equal(ParameterType.Level,
@@ -66,6 +66,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             Assert.NotNull(_eventArgs);
             Assert.True(_eventArgs.Value);
             Assert.True(_parameter.Value);
+            Assert.True(_updatedValue);
             Assert.Equal(DateTime.UtcNow,
                          _eventArgs.TimeStamp,
                          TimeSpan.FromSeconds(1));
@@ -74,6 +75,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         [Fact]
         public async Task TestWriteValue()
         {
+            _parameter.AssignId(Id);
             await _parameter.WriteAsync(true);
 
             Assert.True(_parameter.CanWrite);
@@ -83,6 +85,7 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
         private async Task ParameterValueChanged(object sender,
                                                  ParameterValueChangedEventArgs<bool> e)
         {
+            _updatedValue = e.Value;
             _eventArgs = e;
 
             await Task.CompletedTask;

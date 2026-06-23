@@ -22,36 +22,18 @@
 * SOFTWARE.
 */
 
-using Shaos.Sdk.Collections.Generic;
-using Shaos.Sdk.Devices;
+using Shaos.Sdk.Exceptions;
 
-namespace Shaos.Sdk
+namespace Shaos.Sdk.Extensions
 {
-    /// <summary>
-    /// Defines the interface for a PlugIn
-    /// </summary>
-    public interface IPlugIn : IDisposable
+    internal static class IntExtensions
     {
-        /// <summary>
-        /// The collection of <see cref="Device"/> instances a <see cref="IPlugIn"/> instance manages
-        /// </summary>
-        IChildObservableList<IPlugIn, IDevice> Devices { get; }
-
-        /// <summary>
-        /// The system assigned identifier for this <see cref="IPlugIn"/> instance
-        /// </summary>
-        int? Id { get; }
-
-        /// <summary>
-        /// The entry point of the<see cref="IPlugIn"/> instance
-        /// </summary>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to cancel the <see cref="IPlugIn"/> method execution</param>
-        Task ExecuteAsync(CancellationToken cancellationToken);
-
-        /// <summary>
-        /// Assign the <see cref="IPlugIn"/> identifier
-        /// </summary>
-        /// <param name="id">The system assigned identifier</param>
-        void AssignId(int id);
+        public static void IsValidIdentifier(this int? id)
+        {
+            if (id is not null)
+            {
+                throw new IdentifierAssignedException();
+            }
+        }
     }
 }

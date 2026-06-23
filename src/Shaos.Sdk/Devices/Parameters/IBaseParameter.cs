@@ -30,9 +30,14 @@ namespace Shaos.Sdk.Devices.Parameters
     public interface IBaseParameter
     {
         /// <summary>
-        /// The <see cref="BaseParameter"/> identifier
+        /// Indicates if a <see cref="IBaseParameter"/> can be written.
         /// </summary>
-        int Id { get; }
+        bool CanWrite { get; }
+
+        /// <summary>
+        /// The <see cref="BaseParameter"/> system assigned identifier
+        /// </summary>
+        int? Id { get; }
 
         /// <summary>
         /// The <see cref="BaseParameter{T}"/> name
@@ -50,8 +55,9 @@ namespace Shaos.Sdk.Devices.Parameters
         string Units { get; }
 
         /// <summary>
-        /// Indicates if a <see cref="IBaseParameter"/> can be written.
+        /// Assign the <see cref="IBaseParameter"/> identifier
         /// </summary>
-        bool CanWrite { get; }
+        /// <param name="id">The system assigned identifier</param>
+        void AssignId(int id);
     }
 }

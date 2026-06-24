@@ -38,20 +38,28 @@ namespace Shaos.Sdk
         /// </summary>
         /// <param name="name">The <see cref="IPlugIn"/> instance name</param>
         /// <param name="description">The <see cref="IPlugIn"/> instance description</param>
+        /// <param name="instancing"></param>
         public PlugInDescriptionAttribute(string name,
-                                          string description)
+                                          string description,
+                                          Instancing? instancing = default)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(name);
             ArgumentException.ThrowIfNullOrWhiteSpace(description);
 
             Name = name;
             Description = description;
+            Instancing = instancing ?? Instancing.Multple;
         }
 
         /// <summary>
         /// A description for this <see cref="IPlugIn"/> instance
         /// </summary>
         public string Description { get; }
+
+        /// <summary>
+        /// The <see cref="IPlugIn"/> instancing
+        /// </summary>
+        public Instancing Instancing { get; }
 
         /// <summary>
         /// The name of this <see cref="IPlugIn"/> instance

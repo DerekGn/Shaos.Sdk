@@ -41,14 +41,14 @@ namespace Shaos.Sdk
         /// <param name="instancing"></param>
         public PlugInDescriptionAttribute(string name,
                                           string description,
-                                          Instancing? instancing = default)
+                                          Instancing instancing)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(name);
             ArgumentException.ThrowIfNullOrWhiteSpace(description);
 
             Name = name;
             Description = description;
-            Instancing = instancing ?? Instancing.Multple;
+            Instancing = instancing;
         }
 
         /// <summary>

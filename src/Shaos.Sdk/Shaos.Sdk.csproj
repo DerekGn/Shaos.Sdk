@@ -50,7 +50,7 @@
 		</PackageReleaseNotes>
         <RepositoryUrl>https://github.com/DerekGn/Shaos.Sdk</RepositoryUrl>
         <SignAssembly>true</SignAssembly>
-        <Version>0.10.4-beta</Version>
+        <Version>0.10.5-beta</Version>
     </PropertyGroup>
 
     <ItemGroup>

@@ -41,7 +41,6 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
                                           1,
                                           nameof(IntParameter),
                                           "Units",
-                                          "reference",
                                           ParameterType.Level,
                                           WriteCallbackAsync);
 

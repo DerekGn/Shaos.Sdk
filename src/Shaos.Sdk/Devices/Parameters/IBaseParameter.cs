@@ -42,17 +42,15 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <summary>
         /// The <see cref="BaseParameter{T}"/> name
         /// </summary>
+        /// <remarks>
+        /// This name must be unique across all <see cref="IBaseParameter"/> instances that a given <see cref="IPlugIn"/> instance creates
+        /// </remarks>
         string Name { get; }
 
         /// <summary>
         /// The <see cref="ParameterType"/>
         /// </summary>
         ParameterType? ParameterType { get; }
-
-        /// <summary>
-        /// Optional reference identifier
-        /// </summary>
-        string? ReferenceId { get; }
 
         /// <summary>
         /// The <see cref="BaseParameter{T}"/> units

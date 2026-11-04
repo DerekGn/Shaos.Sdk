@@ -35,18 +35,15 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="value">The value of the parameter</param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
-        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
         public BoolParameter(bool value,
                              string name,
                              string units,
-                             string? referenceId = default,
                              ParameterType? parameterType = default,
                              Func<int, bool, Task>? writeAsync = default) : base(value,
                                                                                  name,
                                                                                  units,
-                                                                                 referenceId,
                                                                                  parameterType,
                                                                                  writeAsync)
         {

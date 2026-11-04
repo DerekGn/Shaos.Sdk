@@ -32,7 +32,6 @@ namespace Shaos.Sdk.UnitTests.Devices
     public class DeviceTests
     {
         private const string Name = "name";
-        private const string ReferenceId = "referenceid";
         private ListChangedEventArgs<IBaseParameter>? _listChangedEventArgs;
 
         [Fact]
@@ -87,13 +86,11 @@ namespace Shaos.Sdk.UnitTests.Devices
         [Fact]
         public void TestDeviceProperties()
         {
-            Device device = new Device(Name,
-                                       ReferenceId);
+            Device device = new Device(Name);
 
             device.AssignId(1);
             Assert.Equal(1, device.Id);
             Assert.Equal(Name, device.Name);
-            Assert.Equal(ReferenceId, device.ReferenceId);
         }
 
         [Fact]
@@ -111,7 +108,6 @@ namespace Shaos.Sdk.UnitTests.Devices
             return new BoolParameter(true,
                                      Name,
                                      "units",
-                                     "reference",
                                      ParameterType.Iaq);
         }
 

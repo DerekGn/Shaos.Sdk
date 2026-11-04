@@ -37,14 +37,11 @@ namespace Shaos.Sdk.Devices
         /// Create an instance of a <see cref="Device"/>
         /// </summary>
         /// <param name="name">The device name</param>
-        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameters">The set of <see cref="BaseParameter"/> instances for this <see cref="Device"/></param>
         public Device(string name,
-                      string? referenceId = null,
                       IList<IBaseParameter>? parameters = null)
         {
             Name = name;
-            ReferenceId = referenceId;
             var childList = new ChildObservableList<IDevice, IBaseParameter>(this);
 
             Parameters = childList;
@@ -66,9 +63,6 @@ namespace Shaos.Sdk.Devices
 
         /// <inheritdoc/>
         public IChildObservableList<IDevice, IBaseParameter> Parameters { get; }
-
-        /// <inheritdoc/>
-        public string? ReferenceId { get; }
 
         /// <inheritdoc/>
         public void AssignId(int id)

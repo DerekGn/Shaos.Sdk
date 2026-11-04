@@ -37,7 +37,6 @@ namespace Shaos.Sdk.UnitTests.Devices.Parameters
             _parameter = new BoolParameter(false,
                                            nameof(BoolParameter),
                                            Units,
-                                           "reference",
                                            ParameterType.Level);
         }
 

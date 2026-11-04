@@ -38,7 +38,6 @@ namespace Shaos.Sdk.Devices.Parameters
         /// <param name="step">The step value for the <see cref="IntParameter"/></param>
         /// <param name="name">The name of the parameter</param>
         /// <param name="units">The units of this parameter</param>
-        /// <param name="referenceId">The reference identifier for this parameter</param>
         /// <param name="parameterType">The <see cref="ParameterType"/> of this parameter</param>
         /// <param name="writeAsync">The function for writing the parameters value</param>
         public IntParameter(int value,
@@ -47,7 +46,6 @@ namespace Shaos.Sdk.Devices.Parameters
                             int step,
                             string name,
                             string units,
-                            string? referenceId = default,
                             ParameterType? parameterType = default,
                             Func<int, int, Task>? writeAsync = default) : base(value,
                                                                                min,
@@ -55,7 +53,6 @@ namespace Shaos.Sdk.Devices.Parameters
                                                                                step,
                                                                                name,
                                                                                units,
-                                                                               referenceId,
                                                                                parameterType,
                                                                                writeAsync)
         {

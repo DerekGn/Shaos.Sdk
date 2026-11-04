@@ -28,7 +28,7 @@ using Shaos.Sdk.Devices.Parameters;
 namespace Shaos.Sdk.Devices
 {
     /// <summary>
-    /// Represents a device
+    /// Represents a device that is created by a plugin instance
     /// </summary>
     public interface IDevice
     {
@@ -41,7 +41,7 @@ namespace Shaos.Sdk.Devices
         /// The device name
         /// </summary>
         /// <remarks>
-        /// An optional <see cref="Device"/> name
+        /// This name must be unique across all <see cref="IDevice"/> instances that a given <see cref="IPlugIn"/> instance creates
         /// </remarks>
         string Name { get; }
 
@@ -49,11 +49,6 @@ namespace Shaos.Sdk.Devices
         /// The set of <see cref="Device"/> <see cref="BaseParameter"/>
         /// </summary>
         IChildObservableList<IDevice, IBaseParameter> Parameters { get; }
-
-        /// <summary>
-        /// Optional reference identifier
-        /// </summary>
-        string? ReferenceId { get; }
 
         /// <summary>
         /// Assign the <see cref="IDevice"/> identifier
